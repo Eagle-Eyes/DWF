@@ -1,0 +1,33 @@
+/* Enter Your Custom CSS Here */
+body {
+  font-family:'Source Sans Pro', Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+pre { padding: 0; }
+
+.syntaxhighlighter .code {
+  font-size: smaller;
+}
+
+.nvx-product-box{
+  margin: 10px 0 10px 0;
+  padding: 30px 20px 30px;
+  float: left;
+  border-top:1px solid #dfdfdf;
+  border-bottom:1px solid #dfdfdf;
+  overflow:hidden;
+  width: 100%;
+}
+.nvx-product-box img{
+  float:left;
+  margin:0 20px 0 3px;
+ padding: 15px;
+ border:1px solid #dfdfdf;
+}
+.nvx-product-green {
+  background-color: #DDFFD6;
+}
+.nvx-product-pink {
+  background-color: #F9DEFF;
+}

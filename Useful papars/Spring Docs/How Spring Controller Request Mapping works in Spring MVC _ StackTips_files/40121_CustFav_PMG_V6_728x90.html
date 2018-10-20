@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!-- saved from url=(0102)https://s0.2mdn.net/8156209/1529595465853/40121_CustFav_PMG_V6_728x90/40121_CustFav_PMG_V6_728x90.html -->
+<html><style type="text/css" id="night-mode-pro-style"></style><link type="text/css" rel="stylesheet" id="night-mode-pro-link"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="ad.size" content="width=728,height=90">
+<title>40121_CustFav_PMG_V6_728x90</title>
+	<style>
+		body {width:728; height:90;margin:0;padding:0;}
+	</style>
+	<script type="text/javascript"> var clickTag = "{{PUB_CLICKTHROUGH}}"; </script>
+<script type="text/javascript">
+    
+      (function() {
+        var relegateNavigation = '';
+        var handleClickTagMessage = function(e) {
+          try {
+            var eventData = JSON.parse(e.data);
+          } catch (err) {
+            return;
+          }
+          if (eventData.isInitClickTag) {
+            if (eventData.clickTags) {
+              for (var i = 0; i < eventData.clickTags.length; i++) {
+                var clkTag = eventData.clickTags[i];
+                window[clkTag.name] = clkTag.url;
+              }
+            } else if (eventData.clickTag) {
+              window.clickTag = eventData.clickTag;
+            }
+            relegateNavigation = eventData.relegateNavigation;
+          }
+        };
+
+        if (open.call) {
+          window.open = function(open) {
+            return function(url, name, features) {
+              if (relegateNavigation === 'parent') {
+                var message = {'clickTag': url, 'isPostClickTag': true};
+                parent.postMessage(JSON.stringify(message), '*');
+              } else {
+                var args = [url, name];
+                if (features) {
+                  args.push(features);
+                }
+                open.apply(window, args);
+              }
+            };
+          }(window.open);
+        }
+
+        if (window.addEventListener) {
+          window.addEventListener(
+              'message', handleClickTagMessage, false);
+        } else {
+          window.attachEvent('onmessage', handleClickTagMessage);
+        }
+      })();
+    
+  </script></head>
+
+<body>
+	<a href="javascript:window.open(window.clickTag)">
+		
+			<img width="728px" height="90px" src="./40121_CustFav_PMG_V6_728x90at1x.jpg" srcset="40121_CustFav_PMG_V6_728x90at1x.jpg 1x, 
+							40121_CustFav_PMG_V6_728x90at2x.jpg 2x">
+                           <!-- 40121_CustFav_PMG_V6_728x90at3.jpg 3x">--> 
+                           <!-- Uncomment at3 if you exported that size too. Leave commented out if at3 is too large of a file -->
+	</a>
+<noscript>
+	<a href="{{PUB_CLICKTHROUGH}}" target="_blank">
+
+
+			<img width="728px" height="90px" src="40121_CustFav_PMG_V6_728x90at1x.jpg" srcset="40121_CustFav_PMG_V6_728x90at1x.jpg 1x, 
+							40121_CustFav_PMG_V6_728x90at2x.jpg 2x">
+                			<!--40121_CustFav_PMG_V6_728x90at3.jpg 3x">-->
+                			<!-- Uncomment at3 if you exported that size too. Leave commented out if at3 is too large of a file -->
+
+	</a>
+</noscript>
+
+
+
+
+
+<!-- **************** NOTE: if being produced for AdWords file name cannot have @ sybmbol, change to "at" in code and file name ***************** --></body></html>

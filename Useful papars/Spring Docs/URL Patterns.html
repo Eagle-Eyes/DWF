@@ -1,0 +1,116 @@
+
+<!-- saved from url=(0072)http://docs.roguewave.com/hydraexpress/3.5.0/html/rwsfservletug/4-3.html -->
+<html><style type="text/css" id="night-mode-pro-style"></style><link type="text/css" rel="stylesheet" id="night-mode-pro-link"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>URL Patterns</title>
+<link rel="StyleSheet" href="./URL Patterns_files/rw.css" type="text/css" title="Rogue Wave Standard Stylesheet">
+<script type="text/javascript" async="" src="./URL Patterns_files/ga.js.download"></script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1555406-2']);
+  _gaq.push(['_setDomainName', '.roguewave.com']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_setAllowHash', 'false']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+<body><bod <body="" bgcolor="#FFFFFF">
+<a href="http://docs.roguewave.com/hydraexpress/3.5.0/index.html"><img src="./URL Patterns_files/banner.gif" width="405" height="57" alt="Rogue Wave banner" border="0"></a><br>
+<a href="http://docs.roguewave.com/hydraexpress/3.5.0/html/rwsfservletug/4-2.html"><img src="./URL Patterns_files/prev.gif" width="20" height="21" alt="Previous file" border="O"></a><a href="http://docs.roguewave.com/hydraexpress/3.5.0/html/rwsfservletug/index.html"><img src="./URL Patterns_files/top.gif" width="56" height="21" alt="Top of Document" border="O"></a><a href="http://docs.roguewave.com/hydraexpress/3.5.0/html/rwsfservletug/booktoc.html"><img src="./URL Patterns_files/toc.gif" width="56" height="21" alt="Contents" border="O"></a><a href="http://docs.roguewave.com/hydraexpress/3.5.0/html/rwsfservletug/tindex.html"><img src="./URL Patterns_files/index.gif" width="56" height="21" alt="Index page" border="O"></a><a href="http://docs.roguewave.com/hydraexpress/3.5.0/html/rwsfservletug/4-4.html"><img src="./URL Patterns_files/next.gif" width="25" height="21" alt="Next file" border="O"></a><a href="http://docs.roguewave.com/hydraexpress/3.5.0/index.html"><img src="./URL Patterns_files/blank.gif" width="56" height="21" border="O"><img src="./URL Patterns_files/end.gif" width="136" height="21" border="O"></a>
+<div class="DOCUMENTNAME"><b>HydraExpress Servlet Development Guide<br>Rogue Wave web site:&nbsp;&nbsp;<a href="http://www.roguewave.com/">Home Page</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.roguewave.com/support/docs">Main Documentation Page</a></b></div>
+<h2>4.3 URL Patterns</h2>
+<a name="WbqBP53KG8BGfIFlFqsTHw"><!----></a>
+<p>The<samp> url-pattern</samp> element of a <samp>servlet-mapping</samp> or a <samp>filter-mapping</samp> associates a filter or servlet with a set of URLs. When a request arrives, the container uses a simple procedure for matching the URL in the request with a <samp>url-pattern</samp> in the <samp>web.xml</samp> file. <a href="http://docs.roguewave.com/hydraexpress/3.5.0/html/rwsfservletug/4-7.html#472">Section&nbsp;4.7.2</a> describes the <samp>servlet-mapping</samp> element. <a href="http://docs.roguewave.com/hydraexpress/3.5.0/html/rwsfservletug/4-8.html#482">Section&nbsp;4.8.2</a> describes the <samp>filter-mapping</samp> element.</p>
+<p>A URL pattern may contain a subset of US-ASCII characters. Other values must be escaped. RFC 2396 describes the legal values for a URL pattern.</p>
+<a name="WbqBP53KG8BGfIFlFqsTHw"><!----></a>
+<p>Note that HydraExpress matches a URL pattern as a sequence of bytes rather than a sequence of characters. HydraExpress considers URL-escaped and unescaped sequences to be identical. In other words, the URL pattern <samp>http://example.com/a/*</samp> is identical to the URL pattern <samp>http://example.com/%61/*</samp>. To represent a character pattern that may have more than one byte sequence, add a mapping for each byte sequence.</p>
+<a name="431"><h3>4.3.1 URL Pattern Syntax</h3></a>
+<p>URL patterns use an extremely simple syntax. Every character in a pattern must match the corresponding character in the URL path exactly, with two exceptions. At the end of a pattern, <samp>/*</samp> matches any sequence of characters from that point forward. The pattern <samp>*.</samp><samp><i>extension</i></samp> matches any file name ending with <samp><i>extension</i></samp>. No other wildcards are supported, and an asterisk at any other position in the pattern is not a wildcard.</p>
+<p>For example, a <samp>web.xml</samp> file for the <samp>examples</samp> context on the servlet container at <samp>example.com</samp> matches the pattern in <samp>&lt;url-pattern&gt;/status/*&lt;/url-pattern&gt;</samp> as follows:</p>
+<table border="0" cellpadding="3" cellspacing="3">
+<tbody><tr><td valign="top"><p class="TABLE"><samp>http://example.com/examples/status/synopsis</samp></p>
+</td><td valign="top"><p class="TABLE">Matches</p>
+</td></tr>
+<tr><td valign="top"><p class="TABLE"><samp>http://example.com/examples/status/complete?date=today</samp></p>
+</td><td valign="top"><p class="TABLE">Matches</p>
+</td></tr>
+<tr><td valign="top"><p class="TABLE"><samp>http://example.com/examples/status</samp></p>
+</td><td valign="top"><p class="TABLE">Matches</p>
+</td></tr>
+<tr><td valign="top"><p class="TABLE"><samp>http://example.com/examples/server/status</samp></p>
+</td><td valign="top"><p class="TABLE">Does not match</p>
+</td></tr>
+</tbody></table>
+<p>A context located at the path <samp>/examples</samp> on the Agent at example.com matches the pattern in <samp>&lt;url-pattern&gt;*.map&lt;/url-pattern&gt;</samp> as follows:</p>
+<table border="0" cellpadding="3" cellspacing="3">
+<tbody><tr><td valign="top"><p class="TABLE"><samp>http://example.com/examples/US/Oregon/Portland.map</samp></p>
+</td><td valign="top"><p class="TABLE">Matches</p>
+</td></tr>
+<tr><td valign="top"><p class="TABLE"><samp>http://example.com/examples/US/Washington/Seattle.map</samp></p>
+</td><td valign="top"><p class="TABLE">Matches</p>
+</td></tr>
+<tr><td valign="top"><p class="TABLE"><samp>http://example.com/examples/Paris.France.map</samp></p>
+</td><td valign="top"><p class="TABLE">Matches</p>
+</td></tr>
+<tr><td valign="top"><p class="TABLE"><samp>http://example.com/examples/US/Oregon/Portland.MAP</samp></p>
+</td><td valign="top"><p class="TABLE">Does not match, the extension is uppercase</p>
+</td></tr>
+<tr><td valign="top"><p class="TABLE"><samp>http://example.com/examples/interface/description/mail.mapi</samp></p>
+</td><td valign="top"><p class="TABLE">Does not match, the extension is <samp>mapi</samp> rather than <samp>map</samp></p>
+</td></tr>
+</tbody></table>
+<p>Different filters in a single context often use the same <samp>url-pattern</samp>. In this case, each filter that matches the request may process the request, as described in <a href="http://docs.roguewave.com/hydraexpress/3.5.0/html/rwsfservletug/4-8.html#482">Section&nbsp;4.8.2</a>.</p>
+<p>In contrast, no two <samp>servlet-mapping</samp> elements in the same application may use the same <samp>url-pattern</samp>. If the <samp>web.xml</samp> file contains two identical mappings to different servlets, the container makes no guarantees about which servlet the container calls for a given request. However, two servlets may use overlapping <samp>url-pattern</samp> elements. In that case, the matching procedure determines which servlet the container calls.</p>
+<a name="432"><h3>4.3.2 Servlet Matching Procedure</h3></a>
+<a name="PwfNwTI/s/JWVcPC+0jnnQ"><!----></a>
+<p>A request may match more than one <samp>servlet-mapping</samp> in a given context. The servlet container uses a straightforward matching procedure to determine the best match. The matching procedure has four simple rules. First, the container prefers an exact path match over a wildcard path match. Second, the container prefers to match the longest pattern. Third, the container prefers path matches over filetype matches. Finally, the pattern <samp>&lt;url-pattern&gt;/&lt;/url-pattern&gt;</samp> always matches any request that no other pattern matches (see <a href="http://docs.roguewave.com/hydraexpress/3.5.0/html/rwsfservletug/4-3.html#433">Section&nbsp;4.3.3</a>).</p>
+<p>For example, a context <samp>web.xml</samp> file can map the home page for an online catalog to one pattern and the search page for the catalog to a different pattern, as shown below:</p>
+
+<ul><pre>&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;catalogBrowse&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;/Catalog/*&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+
+&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;catalogSearch&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;/Catalog/search/*&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</pre></ul>
+<p><a href="http://docs.roguewave.com/hydraexpress/3.5.0/html/rwsfservletug/4-3.html#Figure%C2%A04">Figure&nbsp;4</a> illustrates the matching process for a context. Since the container prefers to match the longest pattern, a URL that includes <samp>/Catalog/search/</samp> always matches the mapping for <samp>catalogSearch</samp> rather than the mapping for <samp>catalogBrowse</samp>.</p>
+<h4><a name="Figure 4">Figure&nbsp;4: URL pattern matching</a></h4>
+
+<p><img src="./URL Patterns_files/path-match.gif" width="568" height="556"></p>
+<a name="433"><h3>4.3.3 Default Servlet</h3></a>
+<a name="7DdcAzqc5SypgEcGgHzmkg"><!----></a>
+<p>A mapping that contains the pattern <samp>&lt;url-pattern&gt;/&lt;/url-pattern&gt;</samp> matches a request if no other pattern matches. This is the <i>default mapping</i>. The servlet mapped to this pattern is called the <i>default servlet</i>.</p>
+<p>The default mapping is often directed to the first page of an application. Explicitly providing a default mapping also ensures that malformed URL requests into the application return are handled by the application rather than returning an error.</p>
+<p>The servlet-mapping element below maps the <samp>Welcome</samp> servlet instance to the default mapping.</p>
+
+<ul><pre>&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;Welcome&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</pre></ul>
+<p>For the context that contains this element, any request that is not handled by another mapping is forwarded to the <samp>Welcome</samp> servlet.</p>
+
+<br>
+<hr>
+<a href="http://docs.roguewave.com/hydraexpress/3.5.0/html/rwsfservletug/4-2.html"><img src="./URL Patterns_files/bprev.gif" width="20" height="21" alt="Previous file" border="O"></a><a href="http://docs.roguewave.com/hydraexpress/3.5.0/html/rwsfservletug/index.html"><img src="./URL Patterns_files/btop.gif" width="56" height="21" alt="Top of Document" border="O"></a><a href="http://docs.roguewave.com/hydraexpress/3.5.0/html/rwsfservletug/booktoc.html"><img src="./URL Patterns_files/btoc.gif" width="56" height="21" alt="Contents" border="O"></a><a href="http://docs.roguewave.com/hydraexpress/3.5.0/html/rwsfservletug/tindex.html"><img src="./URL Patterns_files/bindex.gif" width="56" height="21" alt="Index page" border="O"></a><a href="http://docs.roguewave.com/hydraexpress/3.5.0/html/rwsfservletug/4-4.html"><img src="./URL Patterns_files/bnext.gif" width="20" height="21" alt="Next file" border="O"></a><p>©2004-2007 Copyright Quovadx, Inc. All Rights Reserved.<br>Quovadx and Rogue Wave are registered trademarks of Quovadx, Inc. in the United States and other countries. All other trademarks are the property of their respective owners.<br><a href="http://docs.roguewave.com/hydraexpress/3.5.0/html/rwsfservletug/contact.html">Contact</a> Rogue Wave about documentation or support issues.</p>
+<script type="text/javascript">
+//var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+//document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+//var pageTracker = _gat._getTracker("UA-1555406-3");
+//pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+</bod></body></html>

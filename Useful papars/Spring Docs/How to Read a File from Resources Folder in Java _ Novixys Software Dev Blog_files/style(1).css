@@ -1,0 +1,23 @@
+/*
+ Theme Name:   Novixys Child Theme
+ Theme URI:    http://www.novixys.com/
+ Description:  A Twenty Sixteen child theme 
+ Author:       Jay Sridhar
+ Author URI:   http://www.novixys.com
+ Template:     twentysixteen
+ Version:      1.0.4
+*/
+
+.site-header {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.site-branding, .site-header-menu {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+ins {
+    background-color: white !important;
+}

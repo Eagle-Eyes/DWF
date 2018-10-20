@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<!-- saved from url=(0082)http://www.springboottutorial.com/spring-boot-crud-rest-service-with-jpa-hibernate -->
+<html><style type="text/css" id="night-mode-pro-style"></style><link type="text/css" rel="stylesheet" id="night-mode-pro-link"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Creating a CRUD REST API/Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial</title>
+    <link rel="dns-prefetch" href="http://maxcdn.bootstrapcdn.com/">
+    <link rel="dns-prefetch" href="http://cdn.mathjax.org/">
+    <link rel="dns-prefetch" href="http://cdnjs.cloudflare.com/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Creating a complete CRUD API with GET, POST, PUT and DELETE is the first step to developing RESTful Services, In this tutorial, let&#39;s learn to create an awesome CRUD REST API with Spring Boot, Spring MVC, JPA and Hibernate.">
+    <meta name="robots" content="all">
+    <meta name="author" content="Ranga Karanam">
+    
+    <meta name="keywords" content="Spring, Boot,, REST, Service">
+    <link rel="canonical" href="http://www.springboottutorial.com/spring-boot-crud-rest-service-with-jpa-hibernate">
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed for Spring Boot Tutorial" href="http://www.springboottutorial.com/feed.xml">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./Creating a CRUD REST API_Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial_files/pixyll.css" type="text/css">
+
+    <!-- Fonts -->
+    
+    <link href="./Creating a CRUD REST API_Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial_files/css" rel="stylesheet" type="text/css">
+    <link href="./Creating a CRUD REST API_Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial_files/css(1)" rel="stylesheet" type="text/css">
+    
+    
+      <link href="./Creating a CRUD REST API_Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial_files/font-awesome.min.css" rel="stylesheet">
+    
+
+    <!-- MathJax -->
+    
+
+    <!-- Verifications -->
+    
+    
+
+    <!-- Open Graph -->
+    <!-- From: https://github.com/mmistakes/hpstr-jekyll-theme/blob/master/_includes/head.html -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Creating a CRUD REST API/Service with Spring Boot, JPA and Hibernate">
+    <meta property="og:description" content="Spring Boot Tutorials. Hands-on examples. - Basics of Spring Boot. Covers Spring Boot Starter Projects, Spring Initializr, Creating REST Services, Unit and Integration tests, Profiles, Spring Boot Data JPA, Actuator and Security">
+    <meta property="og:url" content="http://www.springboottutorial.com/spring-boot-crud-rest-service-with-jpa-hibernate">
+    <meta property="og:site_name" content="Spring Boot Tutorial">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    
+        <meta name="twitter:site" content="@in28Minutes">
+    
+    <meta name="twitter:title" content="Creating a CRUD REST API/Service with Spring Boot, JPA and Hibernate">
+    <meta name="twitter:description" content="Creating a complete CRUD API with GET, POST, PUT and DELETE is the first step to developing RESTful Services, In this tutorial, let&#39;s learn to create an awesome CRUD REST API with Spring Boot, Spring MVC, JPA and Hibernate.">
+    <meta name="twitter:url" content="http://www.springboottutorial.com/spring-boot-crud-rest-service-with-jpa-hibernate">
+
+    <!-- Icons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="http://www.springboottutorial.com/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://www.springboottutorial.com/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://www.springboottutorial.com/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="http://www.springboottutorial.com/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="http://www.springboottutorial.com/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="http://www.springboottutorial.com/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="http://www.springboottutorial.com/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="http://www.springboottutorial.com/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="http://www.springboottutorial.com/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="http://www.springboottutorial.com/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="http://www.springboottutorial.com/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="http://www.springboottutorial.com/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="http://www.springboottutorial.com/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="http://www.springboottutorial.com/favicon-32x32.png" sizes="32x32">
+
+    
+    <script async="" src="./Creating a CRUD REST API_Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial_files/analytics.js.download"></script><script type="text/javascript">
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+       ga('create', 'UA-32942307-5', 'auto');
+       ga('send', 'pageview');
+    </script>
+    
+<script type="text/javascript" async="" src="./Creating a CRUD REST API_Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial_files/embed.js.download"></script><script async="" src="./Creating a CRUD REST API_Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial_files/modules-v26.js.download"></script><style type="text/css">#b76471ba0074abf77cd523ddf3da957739333666b-container{margin:0;padding:0;overflow:hidden;position:absolute;border:none;background-color:transparent}body.logged-in.admin-bar #b76471ba0074abf77cd523ddf3da957739333666b-container.HB-Bar.hb-bar-top,body.logged-in.admin-bar #b76471ba0074abf77cd523ddf3da957739333666b-container.HB-Slider.hb-top-left,body.logged-in.admin-bar #b76471ba0074abf77cd523ddf3da957739333666b-container.HB-Slider.hb-top-right,body.logged-in.admin-bar #pull-down.hb-bar-top,body.logged-in.admin-bar #pull-down.hb-top-left,body.logged-in.admin-bar #pull-down.hb-top-right{z-index:99998!important;top:32px!important}.hellobar#pull-down.hb-animated{animation-duration:1s;-o-animation-duration:1s;-ms-animation-duration:1s;-moz-animation-duration:1s;-webkit-animation-duration:1s;animation-fill-mode:forwards;-o-animation-fill-mode:forwards;-ms-animation-fill-mode:forwards;-moz-animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards}.hellobar#pull-down{top:-1px;right:10px;padding:3px;z-index:10000002;overflow:hidden;position:absolute;border-radius:0 0 5px 5px;transform:translateY(-40px);-o-transform:translateY(-40px);-ms-transform:translateY(-40px);-moz-transform:translateY(-40px);-webkit-transform:translateY(-40px)}.hellobar#pull-down .hellobar-arrow{cursor:pointer;display:flex;height:11px;opacity:.3;width:11px;filter:flipv;transform:scaleY(-1);-o-transform:scaleY(-1);-ms-transform:scaleY(-1);-moz-transform:scaleY(-1);-webkit-transform:scaleY(-1)}.hellobar#pull-down .hellobar-arrow:hover{opacity:.6}.hellobar#pull-down .hellobar-arrow svg{fill:#fff}.hellobar#pull-down.inverted .hellobar-arrow svg{fill:#3c3e3f}#b76471ba0074abf77cd523ddf3da957739333666b-container.hb-animated{animation-duration:.25s;-o-animation-duration:.25s;-ms-animation-duration:.25s;-moz-animation-duration:.25s;-webkit-animation-duration:.25s;animation-fill-mode:forwards;-o-animation-fill-mode:forwards;-ms-animation-fill-mode:forwards;-moz-animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards}@keyframes hb-bounceInDown{0%,60%,75%,90%,to{transition-timing-function:cubic-bezier(.215,.61,.355,1);-o-transition-timing-function:cubic-bezier(.215,.61,.355,1);-ms-transition-timing-function:cubic-bezier(.215,.61,.355,1);-moz-transition-timing-function:cubic-bezier(.215,.61,.355,1);-webkit-transition-timing-function:cubic-bezier(.215,.61,.355,1)}0%{transform:translate3d(0,-3000px,0);-o-transform:translate3d(0,-3000px,0);-ms-transform:translate3d(0,-3000px,0);-moz-transform:translate3d(0,-3000px,0);-webkit-transform:translate3d(0,-3000px,0)}60%{transform:translateZ(0);-o-transform:translateZ(0);-ms-transform:translateZ(0);-moz-transform:translateZ(0);-webkit-transform:translateZ(0)}75%{transform:translate3d(0,-40px,0);-o-transform:translate3d(0,-40px,0);-ms-transform:translate3d(0,-40px,0);-moz-transform:translate3d(0,-40px,0);-webkit-transform:translate3d(0,-40px,0)}90%{transform:translateZ(0);-o-transform:translateZ(0);-ms-transform:translateZ(0);-moz-transform:translateZ(0);-webkit-transform:translateZ(0)}to{transform:none;-o-transform:none;-ms-transform:none;-moz-transform:none;-webkit-transform:none}}@-moz-keyframes hb-bounceInDown{0%,60%,75%,90%,to{-moz-transition-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-moz-transform:translate3d(0,-3000px,0)}60%{-moz-transform:translateZ(0)}75%{-moz-transform:translate3d(0,-40px,0)}90%{-moz-transform:translateZ(0)}to{-moz-transform:none}}@-webkit-keyframes hb-bounceInDown{0%,60%,75%,90%,to{-webkit-transition-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:translate3d(0,-3000px,0)}60%{-webkit-transform:translateZ(0)}75%{-webkit-transform:translate3d(0,-40px,0)}90%{-webkit-transform:translateZ(0)}to{-webkit-transform:none}}@keyframes hb-bounceInUp{0%,60%,75%,90%,to{transition-timing-function:cubic-bezier(.215,.61,.355,1);-o-transition-timing-function:cubic-bezier(.215,.61,.355,1);-ms-transition-timing-function:cubic-bezier(.215,.61,.355,1);-moz-transition-timing-function:cubic-bezier(.215,.61,.355,1);-webkit-transition-timing-function:cubic-bezier(.215,.61,.355,1)}0%{transform:translate3d(0,3000px,0);-o-transform:translate3d(0,3000px,0);-ms-transform:translate3d(0,3000px,0);-moz-transform:translate3d(0,3000px,0);-webkit-transform:translate3d(0,3000px,0)}60%{transform:translateZ(0);-o-transform:translateZ(0);-ms-transform:translateZ(0);-moz-transform:translateZ(0);-webkit-transform:translateZ(0)}75%{transform:translate3d(0,40px,0);-o-transform:translate3d(0,40px,0);-ms-transform:translate3d(0,40px,0);-moz-transform:translate3d(0,40px,0);-webkit-transform:translate3d(0,40px,0)}90%{transform:translateZ(0);-o-transform:translateZ(0);-ms-transform:translateZ(0);-moz-transform:translateZ(0);-webkit-transform:translateZ(0)}to{transform:none;-o-transform:none;-ms-transform:none;-moz-transform:none;-webkit-transform:none}}@-moz-keyframes hb-bounceInUp{0%,60%,75%,90%,to{-moz-transition-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-moz-transform:translate3d(0,3000px,0)}60%{-moz-transform:translateZ(0)}75%{-moz-transform:translate3d(0,40px,0)}90%{-moz-transform:translateZ(0)}to{-moz-transform:none}}@-webkit-keyframes hb-bounceInUp{0%,60%,75%,90%,to{-webkit-transition-timing-function:cubic-bezier(.215,.61,.355,1)}0%{-webkit-transform:translate3d(0,3000px,0)}60%{-webkit-transform:translateZ(0)}75%{-webkit-transform:translate3d(0,40px,0)}90%{-webkit-transform:translateZ(0)}to{-webkit-transform:none}}@keyframes hb-bounceOutUp{0%,to{transition-timing-function:ease-in;-o-transition-timing-function:ease-in;-ms-transition-timing-function:ease-in;-moz-transition-timing-function:ease-in;-webkit-transition-timing-function:ease-in}0%{transform:none;-o-transform:none;-ms-transform:none;-moz-transform:none;-webkit-transform:none}to{transform:translate3d(0,-500px,0);-o-transform:translate3d(0,-500px,0);-ms-transform:translate3d(0,-500px,0);-moz-transform:translate3d(0,-500px,0);-webkit-transform:translate3d(0,-500px,0)}}@-moz-keyframes hb-bounceOutUp{0%,to{-moz-transition-timing-function:ease-in}0%{-moz-transform:none}to{-moz-transform:translate3d(0,-500px,0)}}@-webkit-keyframes hb-bounceOutUp{0%,to{-webkit-transition-timing-function:ease-in}0%{-webkit-transform:none}to{-webkit-transform:translate3d(0,-500px,0)}}@keyframes hb-bounceOutDown{0%,to{transition-timing-function:ease-in;-o-transition-timing-function:ease-in;-ms-transition-timing-function:ease-in;-moz-transition-timing-function:ease-in;-webkit-transition-timing-function:ease-in}0%{transform:none;-o-transform:none;-ms-transform:none;-moz-transform:none;-webkit-transform:none}to{transform:translate3d(0,500px,0);-o-transform:translate3d(0,500px,0);-ms-transform:translate3d(0,500px,0);-moz-transform:translate3d(0,500px,0);-webkit-transform:translate3d(0,500px,0)}}@-moz-keyframes hb-bounceOutDown{0%,to{-moz-transition-timing-function:ease-in}0%{-moz-transform:none}to{-moz-transform:translate3d(0,500px,0)}}@-webkit-keyframes hb-bounceOutDown{0%,to{-webkit-transition-timing-function:ease-in}0%{-webkit-transform:none}to{-webkit-transform:translate3d(0,500px,0)}}@keyframes hb-bounceInLeft{0%,75%,to{transition-timing-function:cubic-bezier(.65,-.25,.325,1.255);-o-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255);-ms-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255);-moz-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255);-webkit-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255)}0%{transform:translate3d(200%,0,0);-o-transform:translate3d(200%,0,0);-ms-transform:translate3d(200%,0,0);-moz-transform:translate3d(200%,0,0);-webkit-transform:translate3d(200%,0,0)}75%{transform:translate3d(-10%,0,0);-o-transform:translate3d(-10%,0,0);-ms-transform:translate3d(-10%,0,0);-moz-transform:translate3d(-10%,0,0);-webkit-transform:translate3d(-10%,0,0)}to{transform:none;-o-transform:none;-ms-transform:none;-moz-transform:none;-webkit-transform:none}}@-moz-keyframes hb-bounceInLeft{0%,75%,to{-moz-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255)}0%{-moz-transform:translate3d(200%,0,0)}75%{-moz-transform:translate3d(-10%,0,0)}to{-moz-transform:none}}@-webkit-keyframes hb-bounceInLeft{0%,75%,to{-webkit-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255)}0%{-webkit-transform:translate3d(200%,0,0)}75%{-webkit-transform:translate3d(-10%,0,0)}to{-webkit-transform:none}}@keyframes hb-bounceOutRight{0%,25%,to{transition-timing-function:cubic-bezier(.65,-.25,.325,1.255);-o-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255);-ms-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255);-moz-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255);-webkit-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255)}0%{transform:none;-o-transform:none;-ms-transform:none;-moz-transform:none;-webkit-transform:none}25%{transform:translate3d(-10%,0,0);-o-transform:translate3d(-10%,0,0);-ms-transform:translate3d(-10%,0,0);-moz-transform:translate3d(-10%,0,0);-webkit-transform:translate3d(-10%,0,0)}to{transform:translate3d(200%,0,0);-o-transform:translate3d(200%,0,0);-ms-transform:translate3d(200%,0,0);-moz-transform:translate3d(200%,0,0);-webkit-transform:translate3d(200%,0,0)}}@-moz-keyframes hb-bounceOutRight{0%,25%,to{-moz-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255)}0%{-moz-transform:none}25%{-moz-transform:translate3d(-10%,0,0)}to{-moz-transform:translate3d(200%,0,0)}}@-webkit-keyframes hb-bounceOutRight{0%,25%,to{-webkit-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255)}0%{-webkit-transform:none}25%{-webkit-transform:translate3d(-10%,0,0)}to{-webkit-transform:translate3d(200%,0,0)}}@keyframes hb-bounceInRight{0%,75%,to{transition-timing-function:cubic-bezier(.65,-.25,.325,1.255);-o-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255);-ms-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255);-moz-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255);-webkit-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255)}0%{transform:translate3d(-200%,0,0);-o-transform:translate3d(-200%,0,0);-ms-transform:translate3d(-200%,0,0);-moz-transform:translate3d(-200%,0,0);-webkit-transform:translate3d(-200%,0,0)}75%{transform:translate3d(10%,0,0);-o-transform:translate3d(10%,0,0);-ms-transform:translate3d(10%,0,0);-moz-transform:translate3d(10%,0,0);-webkit-transform:translate3d(10%,0,0)}to{transform:none;-o-transform:none;-ms-transform:none;-moz-transform:none;-webkit-transform:none}}@-moz-keyframes hb-bounceInRight{0%,75%,to{-moz-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255)}0%{-moz-transform:translate3d(-200%,0,0)}75%{-moz-transform:translate3d(10%,0,0)}to{-moz-transform:none}}@-webkit-keyframes hb-bounceInRight{0%,75%,to{-webkit-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255)}0%{-webkit-transform:translate3d(-200%,0,0)}75%{-webkit-transform:translate3d(10%,0,0)}to{-webkit-transform:none}}@keyframes hb-bounceOutLeft{0%,25%,to{transition-timing-function:cubic-bezier(.65,-.25,.325,1.255);-o-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255);-ms-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255);-moz-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255);-webkit-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255)}0%{transform:none;-o-transform:none;-ms-transform:none;-moz-transform:none;-webkit-transform:none}25%{transform:translate3d(10%,0,0);-o-transform:translate3d(10%,0,0);-ms-transform:translate3d(10%,0,0);-moz-transform:translate3d(10%,0,0);-webkit-transform:translate3d(10%,0,0)}to{transform:translate3d(-200%,0,0);-o-transform:translate3d(-200%,0,0);-ms-transform:translate3d(-200%,0,0);-moz-transform:translate3d(-200%,0,0);-webkit-transform:translate3d(-200%,0,0)}}@-moz-keyframes hb-bounceOutLeft{0%,25%,to{-moz-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255)}0%{-moz-transform:none}25%{-moz-transform:translate3d(10%,0,0)}to{-moz-transform:translate3d(-200%,0,0)}}@-webkit-keyframes hb-bounceOutLeft{0%,25%,to{-webkit-transition-timing-function:cubic-bezier(.65,-.25,.325,1.255)}0%{-webkit-transform:none}25%{-webkit-transform:translate3d(10%,0,0)}to{-webkit-transform:translate3d(-200%,0,0)}}@keyframes hb-fadeIn{0%,to{transition-timing-function:ease-in;-o-transition-timing-function:ease-in;-ms-transition-timing-function:ease-in;-moz-transition-timing-function:ease-in;-webkit-transition-timing-function:ease-in}0%{opacity:0}to{opacity:1}}@-moz-keyframes hb-fadeIn{0%,to{-moz-transition-timing-function:ease-in}0%{opacity:0}to{opacity:1}}@-webkit-keyframes hb-fadeIn{0%,to{-webkit-transition-timing-function:ease-in}0%{opacity:0}to{opacity:1}}@keyframes hb-fadeOut{0%,to{transition-timing-function:ease-in;-o-transition-timing-function:ease-in;-ms-transition-timing-function:ease-in;-moz-transition-timing-function:ease-in;-webkit-transition-timing-function:ease-in}0%{opacity:1}to{opacity:0}}@-moz-keyframes hb-fadeOut{0%,to{-moz-transition-timing-function:ease-in}0%{opacity:1}to{opacity:0}}@-webkit-keyframes hb-fadeOut{0%,to{-webkit-transition-timing-function:ease-in}0%{opacity:1}to{opacity:0}}@keyframes hb-fadeInDown{0%,to{transition-timing-function:ease-in;-o-transition-timing-function:ease-in;-ms-transition-timing-function:ease-in;-moz-transition-timing-function:ease-in;-webkit-transition-timing-function:ease-in}0%{opacity:0;height:110%;margin-top:-5%}to{opacity:1;height:100%;margin-top:0}}@-moz-keyframes hb-fadeInDown{0%,to{-moz-transition-timing-function:ease-in}0%{opacity:0;height:110%;margin-top:-5%}to{opacity:1;height:100%;margin-top:0}}@-webkit-keyframes hb-fadeInDown{0%,to{-webkit-transition-timing-function:ease-in}0%{opacity:0;height:110%;margin-top:-5%}to{opacity:1;height:100%;margin-top:0}}@keyframes hb-fadeOutUp{0%,to{transition-timing-function:ease-in;-o-transition-timing-function:ease-in;-ms-transition-timing-function:ease-in;-moz-transition-timing-function:ease-in;-webkit-transition-timing-function:ease-in}0%{opacity:1;height:100%;margin-top:0}to{opacity:0;height:110%;margin-top:-5%}}@-moz-keyframes hb-fadeOutUp{0%,to{-moz-transition-timing-function:ease-in}0%{opacity:1;height:100%;margin-top:0}to{opacity:0;height:110%;margin-top:-5%}}@-webkit-keyframes hb-fadeOutUp{0%,to{-webkit-transition-timing-function:ease-in}0%{opacity:1;height:100%;margin-top:0}to{opacity:0;height:110%;margin-top:-5%}}.hb-hidden{display:none}body .hb-cu-offer,html .hb-cu-offer{text-align:center!important;padding:2em!important}body .hb-cu-offer a,html .hb-cu-offer a{text-decoration:none!important;box-shadow:none!important}body .hb-cu-offer a:hover,html .hb-cu-offer a:hover{text-decoration:underline!important;box-shadow:none!important}.hb-cu-modal{display:block!important;width:90%!important;position:absolute!important;top:50%!important;left:50%!important;transform:translate(-50%,-50%)!important;font-family:Open Sans,Helvetica,Arial,sans-serif!important;padding:20px!important;text-align:center!important;font-size:13px!important;background-color:#fefefe!important;margin:0!important;border:1px solid #efefef!important;max-width:670px!important}.hb-cu-modal .progress{margin:10px auto 18px!important;width:95%!important}.hb-cu-modal .caption{color:#000!important;border-bottom:1px solid #ccc!important;font-size:10pt!important;padding:8px 0!important;width:85%!important;max-width:520px!important}.hb-cu-modal .caption,.hb-cu-modal .headline{font-family:Open Sans,Helvetica,Arial,sans-serif!important;margin:auto!important}.hb-cu-modal .headline{letter-spacing:0!important;color:#333!important;font-size:18pt!important;font-weight:700!important;padding:30px!important;max-width:500px!important}.hb-cu-modal .form{padding:0 30px!important}.hb-cu-modal input{display:block!important}.hb-cu-modal input,.hb-cu-modal input[type=checkbox]{padding:13px!important;width:100%!important;max-width:450px!important;margin:auto!important;margin-bottom:15px!important;font-size:1.2em!important;color:#201d1d!important;background:#fff!important;border:1pt solid #c9d7dd!important}.hb-cu-modal input[type=checkbox]{display:inline!important}.hb-cu-modal .hb-gdpr-checkboxes{padding:0 67px!important;margin-bottom:15px!important}.hb-cu-modal .hb-gdpr-checkboxes label{text-align:left;margin:0 0 10px;display:flex;align-items:flex-start}.hb-cu-modal .hb-gdpr-checkboxes span{flex:94%}.hb-cu-modal .hb-gdpr-checkboxes .hb-gdpr-checkbox{padding:0!important;width:auto!important;margin:2px 5px 0 0!important;font-size:1.2em!important;color:#201d1d!important;background:#fff!important;border:1pt solid #c9d7dd!important;display:inline!important}.hb-cu-modal .cta{padding:13px!important;width:100%!important;max-width:450px!important;margin:auto!important;margin-bottom:15px!important;font-size:1.2em!important;color:#201d1d!important;display:block!important;color:#fff!important;text-transform:uppercase!important;text-decoration:none!important;font-family:Open Sans,Helvetica,Arial,sans-serif!important;font-weight:700!important;cursor:pointer!important;padding:20px!important;font-size:18px!important;margin-top:5px!important;border:none!important;border-radius:0!important;-webkit-appearance:none!important}.hb-cu-modal .cta:focus{outline:none!important}.hb-cu-modal .spam-disclaimer{font-family:Open Sans,Helvetica,Arial,sans-serif!important;margin-top:8px!important;color:#9c9c9d!important;font-size:14px!important}.hb-cu-modal-container{display:none;position:fixed!important;z-index:9000000!important;padding:0!important;padding-top:100px!important;left:0!important;top:0!important;width:100%!important;height:100%!important;overflow:auto!important;background-color:#000!important;background-color:rgba(0,0,0,.4)!important;box-sizing:content-box!important}#hb-cu-close-button{margin-top:-35px!important;margin-right:-35px!important;float:right!important;width:auto!important;height:auto!important;background:#333!important;border:2px solid #fff!important;-webkit-border-radius:18px!important;-moz-border-radius:18px!important;border-radius:18px!important;box-shadow:none!important;box-sizing:border-box!important;letter-spacing:normal!important;word-spacing:0!important;text-size-adjust:100%!important;padding:7px!important;display:flex!important;justify-content:center!important;align-items:center!important}#hb-cu-close-button svg{fill:transparent!important;stroke:#fff!important;stroke-linecap:round!important;stroke-width:5px!important}#b76471ba0074abf77cd523ddf3da957739333666b-container.HB-Bar{top:0;left:0;width:100%;min-height:40px;z-index:10000001}#b76471ba0074abf77cd523ddf3da957739333666b-container.HB-Bar.hb-large{min-height:50px;max-height:50px}#hellobar-pusher{height:30px;overflow:hidden;position:relative;flex:none}#hellobar-pusher.hb-large{height:50px}.hellobar#pull-down.hb-bar-bottom{top:auto;bottom:-1px;position:fixed;border-radius:5px 5px 0 0;transform:translateY(40px);-o-transform:translateY(40px);-ms-transform:translateY(40px);-moz-transform:translateY(40px);-webkit-transform:translateY(40px)}.hellobar#pull-down.hb-bar-bottom .hellobar-arrow{filter:none;transform:none;-o-transform:none;-ms-transform:none;-moz-transform:none;-webkit-transform:none}#b76471ba0074abf77cd523ddf3da957739333666b-container.HB-Bar.remains-in-place{top:0;position:fixed;_position:absolute;_top:expression(eval(document.body.scrollTop))}#b76471ba0074abf77cd523ddf3da957739333666b-container.HB-Bar.hb-bar-bottom{top:auto;bottom:0;position:fixed;_position:absolute;_bottom:expression(eval(document.body.scrollTop))}#b76471ba0074abf77cd523ddf3da957739333666b-container.HB-Bar.hb-animated{animation-duration:1s;-o-animation-duration:1s;-ms-animation-duration:1s;-moz-animation-duration:1s;-webkit-animation-duration:1s}#b76471ba0074abf77cd523ddf3da957739333666b-container.HB-Bar.hb-animateIn,.hellobar#pull-down.hb-animateIn{animation-name:hb-bounceInDown;-o-animation-name:hb-bounceInDown;-ms-animation-name:hb-bounceInDown;-moz-animation-name:hb-bounceInDown;-webkit-animation-name:hb-bounceInDown}#b76471ba0074abf77cd523ddf3da957739333666b-container.HB-Bar.hb-animateOut,.hellobar#pull-down.hb-animateOut{animation-name:hb-bounceOutUp;-o-animation-name:hb-bounceOutUp;-ms-animation-name:hb-bounceOutUp;-moz-animation-name:hb-bounceOutUp;-webkit-animation-name:hb-bounceOutUp}#b76471ba0074abf77cd523ddf3da957739333666b-container.HB-Bar.hb-animateIn.hb-bar-bottom,.hellobar#pull-down.hb-animateIn.hb-bar-bottom{animation-name:hb-bounceInUp;-o-animation-name:hb-bounceInUp;-ms-animation-name:hb-bounceInUp;-moz-animation-name:hb-bounceInUp;-webkit-animation-name:hb-bounceInUp}#b76471ba0074abf77cd523ddf3da957739333666b-container.HB-Bar.hb-animateOut.hb-bar-bottom,.hellobar#pull-down.hb-animateOut.hb-bar-bottom{animation-name:hb-bounceOutDown;-o-animation-name:hb-bounceOutDown;-ms-animation-name:hb-bounceOutDown;-moz-animation-name:hb-bounceOutDown;-webkit-animation-name:hb-bounceOutDown}
+
+#b76471ba0074abf77cd523ddf3da957739333666b-container.HB-Modal{top:0;left:0;position:fixed;_position:absolute;_top:expression(eval(document.body.scrollTop));width:100%;height:100%;z-index:10000003}#b76471ba0074abf77cd523ddf3da957739333666b-container.HB-Modal.hb-animated{opacity:0;height:110%;margin-top:-5%}#b76471ba0074abf77cd523ddf3da957739333666b-container.HB-Modal.hb-animateIn{animation-name:hb-fadeInDown;-o-animation-name:hb-fadeInDown;-ms-animation-name:hb-fadeInDown;-moz-animation-name:hb-fadeInDown;-webkit-animation-name:hb-fadeInDown}#b76471ba0074abf77cd523ddf3da957739333666b-container.HB-Modal.hb-animateOut{animation-name:hb-fadeOutUp;-o-animation-name:hb-fadeOutUp;-ms-animation-name:hb-fadeOutUp;-moz-animation-name:hb-fadeOutUp;-webkit-animation-name:hb-fadeOutUp}
+
+</style></head>
+
+<body class="site">
+  
+	
+
+  <iframe src="./Creating a CRUD REST API_Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial_files/saved_resource.html" id="b76471ba0074abf77cd523ddf3da957739333666b-container" class="HB-Bar hb-animated classic hb-45 hb-bar-top remains-in-place introjs-target-iframe hellobar hb-animateIn" name="b76471ba0074abf77cd523ddf3da957739333666b-container-0" scrolling="no" frameborder="0" style="display: inline; max-height: 53px;"></iframe><div id="hellobar-pusher" class="hb-45" style="height: 45px;"></div><div class="site-wrap">
+    <header class="site-header px2 px-responsive">
+  <div class="mt2 wrap">
+    <div class="measure">
+      <!--  <a href="http://www.springboottutorial.com" class="site-title">Spring Boot Tutorial</a>-->
+      <a href="http://www.springboottutorial.com/"><span style="color:#4CCCDE">IN</span><span style="font-size:40px;color:#D5492E">28</span><span style="color:#36BF80">MINUTES</span></a>
+      <nav class="site-nav">
+        <a href="https://courses.in28minutes.com/p/spring-boot-for-beginners-in-10-steps" target="_blank">Free Course</a> <a href="http://www.in28minutes.com/p/in28minutes-udemy-courses-discount-codes.html" target="_blank">All Courses</a> <a href="https://docs.google.com/forms/d/e/1FAIpQLSfLP2aXvA6AjfLIIWSk8kh1i3Wwjc9IgJSwhebJ2eCnfZ_tfA/viewform?c=0&amp;w=1" target="_blank">Contact Us</a>
+
+<!--  
+
+    
+
+    
+        <a href="/about/">About Us</a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+        <a href="/contact/">Talk to Us</a>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+-->
+      </nav>
+      <div class="clearfix"></div>
+      
+        <div class="social-icons">
+  <div class="social-icons-right">
+    
+      <a class="fa fa-github" href="https://github.com/in28Minutes"></a>
+    
+    
+    
+    <a class="fa fa-rss" href="http://www.springboottutorial.com/feed.xml"></a>
+    
+      <a class="fa fa-twitter" href="https://twitter.com/in28Minutes"></a>
+    
+    
+    
+    
+    
+    
+      <a class="fa fa-linkedin" href="https://www.linkedin.com/in/rangakaranam"></a>
+    
+    
+    
+  </div>
+  <div class="right">
+    
+    
+    
+  </div>
+</div>
+<div class="clearfix"></div>
+
+      
+    </div>
+  </div>
+</header>
+
+
+    <div class="post p2 p-responsive wrap" role="main">
+      <div class="measure">
+        
+
+
+<div class="post-header mb2">
+  <h1>Creating a CRUD REST API/Service with Spring Boot, JPA and Hibernate</h1>
+  <span class="post-meta">Dec 25, 2017</span><br>
+  
+  <span class="post-meta small">
+  
+    13 minute read
+  
+  </span>
+</div>
+
+<article class="post-content">
+  <p>This guide will help you create a CRUD REST API/Service with Spring Boot, JPA and Hibernate. We will create a JPA Repository for a Student Entity and expose it using a Student Resource.</p>
+
+<h2 id="you-will-learn">You will learn</h2>
+<ul>
+  <li>What is a RESTful Service?</li>
+  <li>Basics of designing a REST API.</li>
+  <li>How to create a RESTful Service offering all CRUD operations?</li>
+  <li>How to use Spring Boot, Spring MVC, JPA and Hibernate to create a RESTful API?</li>
+  <li>How to execute different kinds of REST API with Postman?</li>
+  <li>What are the differences between GET, POST, PUT and DELETE request methods?</li>
+</ul>
+
+<h2 id="10-step-reference-courses">10 Step Reference Courses</h2>
+
+<ul>
+  <li><a href="https://courses.in28minutes.com/p/spring-framework-for-beginners" target="_blank">Spring Framework for Beginners in 10 Steps</a></li>
+  <li><a href="https://courses.in28minutes.com/p/spring-boot-for-beginners-in-10-steps" target="_blank">Spring Boot for Beginners in 10 Steps</a></li>
+  <li><a href="https://www.youtube.com/watch?v=BjNhGaZDr0Y" target="_blank">Spring MVC in 10 Steps</a></li>
+  <li><a href="https://courses.in28minutes.com/p/jpa-and-hibernate-tutorial-for-beginners-with-spring-boot" target="_blank">JPA and Hibernate in 10 Steps</a></li>
+  <li><a href="https://courses.in28minutes.com/p/eclipse-tutorial-for-beginners" target="_blank">Eclipse Tutorial for Beginners in 5 Steps</a></li>
+  <li><a href="https://courses.in28minutes.com/p/maven-tutorial-for-beginners-in-5-steps" target="_blank">Maven Tutorial for Beginners in 5 Steps</a></li>
+  <li><a href="https://courses.in28minutes.com/p/junit-tutorial-for-beginners" target="_blank">JUnit Tutorial for Beginners in 5 Steps</a></li>
+  <li><a href="https://courses.in28minutes.com/p/mockito-for-beginner-in-5-steps" target="_blank">Mockito Tutorial for Beginners in 5 Steps</a></li>
+  <li><a href="https://courses.in28minutes.com/p/in28minutes-course-guide" target="_blank">Complete in28Minutes Course Guide</a></li>
+</ul>
+
+<h2 id="resources-overview">Resources Overview</h2>
+
+<p>In this guide, we will create a Student Resource exposing three services using proper URIs and HTTP methods:</p>
+<ul>
+  <li>Retrieve all Students - @GetMapping(“/students”)</li>
+  <li>Get details of specific student - @GetMapping(“/students/{id}”)</li>
+  <li>Delete a student - @DeleteMapping(“/students/{id}”)</li>
+  <li>Create a new student - @PostMapping(“/students”)</li>
+  <li>Update student details - @PutMapping(“/students/{id}”)</li>
+</ul>
+
+<h2 id="project-code-structure">Project Code Structure</h2>
+
+<p>Following screenshot shows the structure of the project we will create.
+<img src="./Creating a CRUD REST API_Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial_files/CRUDServiceWithHibernate.png" alt="Image" title="CRUDServiceWithHibernate"></p>
+
+<p>A few details:</p>
+<ul>
+  <li>SpringBoot2RestServiceApplication.java - The Spring Boot Application class generated with Spring Initializer. This class acts as the launching point for application.</li>
+  <li><code class="highlighter-rouge">pom.xml</code> - Contains all the dependencies needed to build this project. We will use Spring Boot Starter AOP.</li>
+  <li><code class="highlighter-rouge">Student.java</code> - Student JPA Entity</li>
+  <li>StudentRepository.java - Student JPA Repository. This is created using Spring Data JpaRepository.</li>
+  <li>StudentResource.java - Spring Rest Controller exposing all services on the student resource.</li>
+  <li>data.sql - Initial data for the student table. Spring Boot would execute this script after the tables are created from the entities.</li>
+</ul>
+
+<h2 id="tools-you-will-need">Tools you will need</h2>
+<ul>
+  <li>Maven 3.0+ is your build tool</li>
+  <li>Your favorite IDE. We use Eclipse.</li>
+  <li>JDK 1.8+</li>
+</ul>
+
+<h2 id="complete-maven-project-with-code-examples">Complete Maven Project With Code Examples</h2>
+<blockquote>
+  <p>Our Github repository has all the code examples - https://github.com/in28minutes/spring-boot-examples/tree/master/spring-boot-2-rest-service-basic</p>
+</blockquote>
+
+<h2 id="types-of-web-services">Types of Web Services</h2>
+
+<p>Not really types but a broad classification</p>
+<ul>
+  <li>SOAP</li>
+  <li>REST</li>
+</ul>
+
+<p>These are not really mutually exclusive. Some SOAP services can actually be RESTful.</p>
+
+<h3 id="rest">REST</h3>
+
+<p>First of all, REST does not define a standard message exchange format. You can build REST services with both XML and JSON. However, JSON is a more popular format with REST.</p>
+
+<p>So, if it does not define a standard message exchange format, what is REST then?</p>
+
+<blockquote>
+  <p>REST is a style of software architecture for distributed hypermedia systems</p>
+</blockquote>
+
+<p>REST stands for REpresentational State Transfer. The definitions for REST can be vague. So, lets understand the important concepts.</p>
+
+<p>Key abstraction in REST is a Resource. There is no restriction on what can be a resource. A todo is a resource. A person on facebook is a resource.</p>
+
+<p>A resource has an URI (Uniform Resource Identifier):</p>
+<ul>
+  <li>/user/Ranga/todos/1</li>
+  <li>/person/Ranga</li>
+</ul>
+
+<p>A resource will have representations</p>
+<ul>
+  <li>XML</li>
+  <li>HTML</li>
+  <li>JSON</li>
+</ul>
+
+<p>A resource will have state. The representation of a resource should capture its current state.</p>
+
+<p>When a resource is requested, we provide the representation of the resource.</p>
+
+<h3 id="rest-and-http">REST and HTTP</h3>
+
+<p>REST builds on top of HTTP (Hypertext Transfer Protocol). HTTP is the language of the web.</p>
+
+<p>HTTP has a few important verbs.</p>
+<ul>
+  <li>POST - Create a new resource</li>
+  <li>GET - Read a resource</li>
+  <li>PUT - Update an existing resource</li>
+  <li>DELETE - Delete a resource</li>
+</ul>
+
+<p>HTTP also defines standard response codes.</p>
+<ul>
+  <li>200 - SUCESS</li>
+  <li>404 - RESOURCE NOT FOUND</li>
+  <li>400 - BAD REQUEST</li>
+  <li>201 - CREATED</li>
+  <li>401 - UNAUTHORIZED</li>
+  <li>415 - UNSUPPORTED TYPE - Representation not supported for the resource</li>
+  <li>500 - SERVER ERROR</li>
+</ul>
+
+<p>Restful Service Constraints</p>
+<ul>
+  <li>Client - Server : There should be a service producer and a service consumer.</li>
+  <li>The interface (URL) is uniform and exposing resources. Interface uses nouns (not actions)</li>
+  <li>The service is stateless. Even if the service is called 10 times, the result must be the same.</li>
+  <li>The service result should be Cacheable. HTTP cache, for example.</li>
+  <li>Service should assume a Layered architecture. Client should not assume direct connection to server - it might be getting info from a middle layer - cache.</li>
+</ul>
+
+<h3 id="designing-restful-apis">Designing RESTful APIs</h3>
+
+<p>Following are the important things to consider when designing RESTful API’s:</p>
+<ul>
+  <li>While designing any API, the most important thing is to think about the api consumer i.e. the client who is going to use the service. What are his needs? Does the service uri make sense to him? Does the request, response format make sense to him?</li>
+  <li>In Rest, we think Nouns (resources) and NOT Verbs (NOT actions). So, URI’s should represent resources. URI’s should be hierarchical and as self descriptive as possible. Prefer plurals.</li>
+  <li>Always use HTTP Methods.
+    <ul>
+      <li>GET : Should not update anything. Should be idempotent (same result in multiple calls). Possible Return Codes 200 (OK) + 404 (NOT FOUND) +400 (BAD REQUEST)</li>
+      <li>POST : Should create new resource. Ideally return JSON with link to newly created resource. Same return codes as get possible. In addition : Return code 201 (CREATED) is possible.</li>
+      <li>PUT : Update a known resource. ex: update client details. Possible Return Codes : 200(OK)</li>
+      <li>DELETE : Used to delete a resource.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="when-do-you-use-jpa">When do you use JPA?</h2>
+
+<ul>
+  <li>SQL Database</li>
+  <li>Static Domain Model</li>
+  <li>Mostly CRUD</li>
+  <li>Mostly Simple Queries/Mappings</li>
+</ul>
+
+<h2 id="bootstrapping-with-spring-initializr">Bootstrapping with Spring Initializr</h2>
+
+<p>Creating a REST service with Spring Initializr is a cake walk. We will use Spring Web MVC as our web framework.</p>
+
+<p>Spring Initializr <a href="http://start.spring.io/" target="_blank">http://start.spring.io/</a> is great tool to bootstrap your Spring Boot projects.</p>
+
+<p><img src="./Creating a CRUD REST API_Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial_files/Spring-Initializr-Web.png" alt="Image" title="Web, Actuator and Developer Tools"></p>
+
+<p><img src="./Creating a CRUD REST API_Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial_files/Spring-Initializr-Web-JPA.png" alt="Image" title="Web, JPA, Hibernate and Developer Tools"></p>
+
+<p>As shown in the image above, following steps have to be done</p>
+
+<ul>
+  <li>Launch Spring Initializr and choose the following
+    <ul>
+      <li>Choose <code class="highlighter-rouge">com.in28minutes.springboot.rest.example</code> as Group</li>
+      <li>Choose <code class="highlighter-rouge">spring-boot-2-rest-service-basic</code> as Artifact</li>
+      <li>Choose following dependencies
+        <ul>
+          <li>Web</li>
+          <li>JPA</li>
+          <li>H2</li>
+          <li>DevTools</li>
+          <li>TODO</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Click Generate Project.</li>
+  <li>Import the project into Eclipse. File -&gt; Import -&gt; Existing Maven Project.</li>
+</ul>
+
+<blockquote>
+  <p>Do not forget to add JPA and H2 as dependencies.</p>
+</blockquote>
+
+<h3 id="create-your-first-jpa-entity">Create Your First JPA Entity</h3>
+
+<p>The first step is to create a JPA Entity. Lets create a simple Student Entity with a primary key id.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Entity</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student</span> <span class="o">{</span>
+	<span class="nd">@Id</span>
+	<span class="nd">@GeneratedValue</span>
+	<span class="kd">private</span> <span class="n">Long</span> <span class="n">id</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">passportNumber</span><span class="o">;</span>
+</code></pre></div></div>
+<p>Important things to note:</p>
+<ul>
+  <li><code class="highlighter-rouge">@Entity</code>: Specifies that the class is an entity. This annotation is applied to the entity class.</li>
+  <li><code class="highlighter-rouge">@Id</code>: Specifies the primary key of an entity.</li>
+  <li><code class="highlighter-rouge">@GeneratedValue</code>: Provides for the specification of generation strategies for the values of primary keys.</li>
+  <li><code class="highlighter-rouge">public Student()</code>: Default constructor to make JPA Happy</li>
+</ul>
+
+<p>When the application reloads, you can launch H2 console at http://localhost:8080/h2-console.</p>
+
+<p>You will see that a new table called ‘student’ is created in H2 Console.</p>
+
+<p>How did the Student table get created?</p>
+
+<blockquote>
+  <p>Spring Boot Auto Configuration detects that we are using an in-memory database H2. It autoconfigures the property to create the database tables based on the Entities.</p>
+</blockquote>
+
+<p>Let’s now populate some data into the student table.</p>
+
+<p>/src/main/resources/data.sql</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>insert into student
+values(10001,'Ranga', 'E1234567');
+
+insert into student
+values(10002,'Ravi', 'A1234568');
+</code></pre></div></div>
+
+<p>When the application reloads you would see following statements in the log indicating that the sql files are picked up.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Executing SQL script from URL [file:/in28Minutes/git/spring-boot-examples/spring-boot-2-jdbc-with-h2/target/classes/data.sql]
+</code></pre></div></div>
+
+<p>After App Reload, When you login to H2 Console (http://localhost:8080/h2-console) you can see that the student table is created and the data is populated.</p>
+
+<p><img src="./Creating a CRUD REST API_Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial_files/H2-Console-With-Student.png" alt="Image" title="H2 Console With Student"></p>
+
+<h2 id="create-jpa-repository-class-to-read-student-from-database">Create JPA Repository class to Read Student from Database</h2>
+
+<p>/src/main/java/com/in28minutes/springboot/jpa/hibernate/h2/example/student/StudentRepository.java</p>
+
+<p>We create a simple interface StudentRepository extending JpaRepository.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Repository</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">StudentRepository</span> <span class="kd">extends</span> <span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Student</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;{</span>
+</code></pre></div></div>
+<p>Notes</p>
+<ul>
+  <li>We will talk about all the methods in the JpaRepository a little later.</li>
+  <li><code class="highlighter-rouge">public interface StudentRepository extends JpaRepository&lt;Student, Long&gt;</code> - We are extending JpaRepository using two generics - Student &amp; Long. Student is the entity that is being managed and the primary key of Student is Long.</li>
+</ul>
+
+<h3 id="jparepository">JpaRepository</h3>
+<p>JpaRepository (Defined in Spring Data JPA) is the JPA specific Repository interface.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">JpaRepository</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">ID</span> <span class="kd">extends</span> <span class="n">Serializable</span><span class="o">&gt;</span>
+		<span class="kd">extends</span> <span class="n">PagingAndSortingRepository</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">ID</span><span class="o">&gt;,</span> <span class="n">QueryByExampleExecutor</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+</code></pre></div></div>
+<blockquote>
+  <p>JpaRepository extends PagingAndSortingRepository which in turn extends CrudRepository interface. So, JpaRepository inherits all the methods from the two interfaces shown below.</p>
+</blockquote>
+
+<p>PagingAndSortingRepository</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">interface</span> <span class="nc">PagingAndSortingRepository</span> <span class="kd">extends</span> <span class="n">CrudRepository</span> <span class="o">{</span>
+  
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">Iterable</span> <span class="nf">findAll</span><span class="o">(</span><span class="n">Sort</span> <span class="n">arg0</span><span class="o">);</span>
+  
+  <span class="kd">public</span> <span class="kd">abstract</span> <span class="n">Page</span> <span class="nf">findAll</span><span class="o">(</span><span class="n">Pageable</span> <span class="n">arg0</span><span class="o">);</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>CrudRepository</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CrudRepository</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">ID</span> <span class="kd">extends</span> <span class="n">Serializable</span><span class="o">&gt;</span>
+    <span class="kd">extends</span> <span class="n">Repository</span><span class="o">&lt;</span><span class="n">T</span><span class="o">,</span> <span class="n">ID</span><span class="o">&gt;</span> <span class="o">{</span>
+
+    <span class="o">&lt;</span><span class="n">S</span> <span class="kd">extends</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">S</span> <span class="nf">save</span><span class="o">(</span><span class="n">S</span> <span class="n">entity</span><span class="o">);</span>
+
+    <span class="n">T</span> <span class="nf">findOne</span><span class="o">(</span><span class="n">ID</span> <span class="n">primaryKey</span><span class="o">);</span>       
+
+    <span class="n">Iterable</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="o">();</span>          
+
+    <span class="n">Long</span> <span class="nf">count</span><span class="o">();</span>                   
+
+    <span class="kt">void</span> <span class="nf">delete</span><span class="o">(</span><span class="n">T</span> <span class="n">entity</span><span class="o">);</span>          
+
+    <span class="kt">boolean</span> <span class="nf">exists</span><span class="o">(</span><span class="n">ID</span> <span class="n">primaryKey</span><span class="o">);</span>  
+
+    <span class="c1">// … more functionality omitted.</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="exposing-resources-using-studentresource">Exposing Resources using StudentResource</h2>
+
+<p>Lets start with setting up the StudentResource class and then move into creating methods to handle different kinds of request methods to the Student Resouce.</p>
+
+<h3 id="setting-up-student-resource">Setting up Student Resource</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@RestController
+public class StudentResource {
+
+	@Autowired
+	private StudentRepository studentRepository;
+</code></pre></div></div>
+
+<p>Notes</p>
+<ul>
+  <li><code class="highlighter-rouge">@RestController</code> : Combination of @Controller and @ResponseBody. Beans returned are converted to/from JSON/XML.</li>
+  <li><code class="highlighter-rouge">@Autowired private StudentRepository studentRepository</code> : Autowire the StudentRepository so that we can retrieve and save data to database.</li>
+</ul>
+
+<h3 id="exposing-get-methods-on-student-resource">Exposing GET methods on Student Resource</h3>
+
+<p>Let’s create the method to expose the details of all students.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@GetMapping("/students")
+public List&lt;Student&gt; retrieveAllStudents() {
+	return studentRepository.findAll();
+}
+</code></pre></div></div>
+
+<p>Below picture shows how we can execute a Get Request Method on a Resource using Postman - my favorite tool to run rest services.
+<img src="./Creating a CRUD REST API_Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial_files/POSTMAN_Executing_Get_Request.png" alt="Image" title="Executing Get Rest Service From Postman"></p>
+
+<ul>
+  <li>URL - http://localhost:8080/students</li>
+  <li>Request Method - GET</li>
+</ul>
+
+<p>Response</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10001</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ranga"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"passportNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E1234567"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10002</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ravi"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"passportNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A1234568"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>Let’s create a method to expose the details of a specific student.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@GetMapping("/students/{id}")
+public Student retrieveStudent(@PathVariable long id) {
+	Optional&lt;Student&gt; student = studentRepository.findById(id);
+
+	if (!student.isPresent())
+		throw new StudentNotFoundException("id-" + id);
+
+	return student.get();
+}
+</code></pre></div></div>
+
+<p>Let’s execute another GET request
+<img src="./Creating a CRUD REST API_Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial_files/POSTMAN_Executing_Get_Request.png" alt="Image" title="Executing Get Rest Service From Postman"></p>
+
+<ul>
+  <li>URL - http://localhost:8080/students/10002</li>
+  <li>Request Method - GET</li>
+</ul>
+
+<p>Response</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10002</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ravi"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"passportNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A1234568"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="expose-delete-method-on-student-resouce">Expose DELETE Method on Student Resouce</h3>
+
+<p>Delete method is simple. All you have to do is to call <code class="highlighter-rouge">studentRepository.deleteById(id)</code>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@DeleteMapping("/students/{id}")
+public void deleteStudent(@PathVariable long id) {
+	studentRepository.deleteById(id);
+}
+</code></pre></div></div>
+
+<p>Below picture shows how we can execute a DELETE Request method on a Resource from Postman - my favorite tool to run rest services.
+<img src="./Creating a CRUD REST API_Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial_files/POSTMAN_Executing_Delete_Request.png" alt="Image" title="Executing Delete Rest Service From Postman"></p>
+
+<ul>
+  <li>URL - http://localhost:8080/students/10002</li>
+  <li>Request Method - DELETE</li>
+</ul>
+
+<p>Request - Empty Body
+Response with status 200 - Successful</p>
+
+<h3 id="expose-post-method-to-create-a-new-student">Expose POST Method to create a new student</h3>
+
+<p>POST method is simple. All you have to do is to call <code class="highlighter-rouge">studentRepository.save(student)</code>. Note that we are using <code class="highlighter-rouge">@RequestBody</code> to map the student details from request to bean. We are also returning a ResponseEntity with a header containing the URL of the created resource.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PostMapping("/students")
+public ResponseEntity&lt;Object&gt; createStudent(@RequestBody Student student) {
+	Student savedStudent = studentRepository.save(student);
+
+	URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+			.buildAndExpand(savedStudent.getId()).toUri();
+
+	return ResponseEntity.created(location).build();
+
+}
+</code></pre></div></div>
+
+<p>Below picture shows how we can execute a POST Request method on a Resource from Postman - my favorite tool to run rest services.
+<img src="./Creating a CRUD REST API_Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial_files/POSTMAN_Executing_Post_Request.png" alt="Image" title="Executing Post Rest Service From Postman"></p>
+
+<ul>
+  <li>URL - http://localhost:8080/students</li>
+  <li>Request Method - POST</li>
+</ul>
+
+<p>Request</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tom"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"passportNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Z1234567"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Response</p>
+<ul>
+  <li>Status 201 - CREATED</li>
+  <li>Header Location →http://localhost:8080/students/2</li>
+</ul>
+
+<h3 id="expose-put-method-to-update-existing-student">Expose PUT Method to update existing student</h3>
+
+<p>Before updating the student we check if the student exists. If the student does not exist, we return a not found statur. Otherwise, we save the student details using <code class="highlighter-rouge">studentRepository.save</code> method.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@PutMapping("/students/{id}")
+public ResponseEntity&lt;Object&gt; updateStudent(@RequestBody Student student, @PathVariable long id) {
+
+	Optional&lt;Student&gt; studentOptional = studentRepository.findById(id);
+
+	if (!studentOptional.isPresent())
+		return ResponseEntity.notFound().build();
+
+	student.setId(id);
+	
+	studentRepository.save(student);
+
+	return ResponseEntity.noContent().build();
+}
+</code></pre></div></div>
+
+<p>Below picture shows how we can execute a PUT Request method on a Resource from Postman - my favorite tool to run rest services.
+<img src="./Creating a CRUD REST API_Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial_files/POSTMAN_Executing_Put_Request.png" alt="Image" title="Executing PUT Rest Service From Postman"></p>
+
+<ul>
+  <li>URL → http://localhost:8080/students/10002</li>
+  <li>Request
+    <ul>
+      <li>Method → PUT</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Request</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+	</span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tom"</span><span class="p">,</span><span class="w">
+	</span><span class="s2">"passportNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Z1234567"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Response with status 200 - Successful</p>
+
+<blockquote>
+  <p>Remember that you can check the updates in the database using H2 Console <code class="highlighter-rouge">http://localhost:8080/h2-console</code> after each of the requests.</p>
+</blockquote>
+
+<blockquote>
+  <p>Congratulations! You are reading an article from a series of 50+ articles on Spring Boot and Microservices. We also have 20+ projects on our Github repository. For the complete series of 50+ articles and code examples, <a href="http://www.springboottutorial.com/spring-boot-tutorials-for-beginners">click here</a>.</p>
+</blockquote>
+
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+  <li>Join 100,000 Learners and Become a Spring Boot Expert - <a href="https://in28minutes1.teachable.com/p/complete-spring-course-bundle/?coupon_code=HALFOFF&amp;preview=logged_out" target="_blank"> 5 Awesome Courses on Microservices, API’s, Web Services with Spring and Spring Boot. Start Learning Now</a></li>
+  <li>Learn Basics of Spring Boot - <a href="http://www.springboottutorial.com/spring-boot-vs-spring-mvc-vs-spring" target="_blank">Spring Boot vs Spring vs Spring MVC</a>, <a href="http://www.springboottutorial.com/spring-boot-auto-configuration" target="_blank">Auto Configuration</a>, <a href="http://www.springboottutorial.com/spring-boot-starter-projects" target="_blank">Spring Boot Starter Projects</a>, <a href="http://www.springboottutorial.com/spring-boot-starter-parent" target="_blank">Spring Boot Starter Parent</a>, <a href="http://www.springboottutorial.com/spring-initialzr-bootstrap-spring-boot-applications" target="_blank">Spring Boot Initializr</a></li>
+  <li><a href="https://www.udemy.com/spring-web-services-tutorial/?couponCode=SBTWEBSITE" target="_blank">Learn RESTful and SOAP Web Services with Spring Boot</a></li>
+  <li><a href="https://www.udemy.com/microservices-with-spring-boot-and-spring-cloud/?couponCode=SBTWEBSITE" target="_blank">Learn Microservices with Spring Boot and Spring Cloud</a></li>
+  <li><a href="https://www.udemy.com/spring-interview-questions-and-answers/?couponCode=SBTWEBSITE" target="_blank">Watch Spring Framework Interview Guide - 200+ Questions &amp; Answers</a></li>
+</ul>
+
+<p><a href="https://courses.in28minutes.com/p/spring-boot-for-beginners-in-10-steps" target="_blank"><img src="./Creating a CRUD REST API_Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial_files/SpringBootTutorialForBeginnersPlaylist.png" alt="Image" title="Spring Boot Tutorial For Beginners - 25 Videos"></a></p>
+
+<h2 id="complete-code-example">Complete Code Example</h2>
+
+<h3 id="pomxml">/pom.xml</h3>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+	<span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+
+	<span class="nt">&lt;groupId&gt;</span>com.in28minutes.springboot.rest.example<span class="nt">&lt;/groupId&gt;</span>
+	<span class="nt">&lt;artifactId&gt;</span>spring-boot-2-rest-service-basic<span class="nt">&lt;/artifactId&gt;</span>
+	<span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+	<span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
+
+	<span class="nt">&lt;name&gt;</span>spring-boot-2-rest-service<span class="nt">&lt;/name&gt;</span>
+	<span class="nt">&lt;description&gt;</span>Spring Boot 2 and REST - Example Project<span class="nt">&lt;/description&gt;</span>
+
+	<span class="nt">&lt;parent&gt;</span>
+		<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+		<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-parent<span class="nt">&lt;/artifactId&gt;</span>
+		<span class="nt">&lt;version&gt;</span>2.0.0.RELEASE<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;relativePath/&gt;</span> <span class="c">&lt;!-- lookup parent from repository --&gt;</span>
+	<span class="nt">&lt;/parent&gt;</span>
+
+	<span class="nt">&lt;properties&gt;</span>
+		<span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
+		<span class="nt">&lt;project.reporting.outputEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.reporting.outputEncoding&gt;</span>
+		<span class="nt">&lt;java.version&gt;</span>1.8<span class="nt">&lt;/java.version&gt;</span>
+	<span class="nt">&lt;/properties&gt;</span>
+
+	<span class="nt">&lt;dependencies&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-actuator<span class="nt">&lt;/artifactId&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-data-jpa<span class="nt">&lt;/artifactId&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>spring-boot-devtools<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;scope&gt;</span>runtime<span class="nt">&lt;/scope&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>com.h2database<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>h2<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;scope&gt;</span>runtime<span class="nt">&lt;/scope&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-test<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+	<span class="nt">&lt;/dependencies&gt;</span>
+
+	<span class="nt">&lt;build&gt;</span>
+		<span class="nt">&lt;plugins&gt;</span>
+			<span class="nt">&lt;plugin&gt;</span>
+				<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+				<span class="nt">&lt;artifactId&gt;</span>spring-boot-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;/plugin&gt;</span>
+		<span class="nt">&lt;/plugins&gt;</span>
+	<span class="nt">&lt;/build&gt;</span>
+
+	<span class="nt">&lt;repositories&gt;</span>
+		<span class="nt">&lt;repository&gt;</span>
+			<span class="nt">&lt;id&gt;</span>spring-snapshots<span class="nt">&lt;/id&gt;</span>
+			<span class="nt">&lt;name&gt;</span>Spring Snapshots<span class="nt">&lt;/name&gt;</span>
+			<span class="nt">&lt;url&gt;</span>https://repo.spring.io/snapshot<span class="nt">&lt;/url&gt;</span>
+			<span class="nt">&lt;snapshots&gt;</span>
+				<span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+			<span class="nt">&lt;/snapshots&gt;</span>
+		<span class="nt">&lt;/repository&gt;</span>
+		<span class="nt">&lt;repository&gt;</span>
+			<span class="nt">&lt;id&gt;</span>spring-milestones<span class="nt">&lt;/id&gt;</span>
+			<span class="nt">&lt;name&gt;</span>Spring Milestones<span class="nt">&lt;/name&gt;</span>
+			<span class="nt">&lt;url&gt;</span>https://repo.spring.io/milestone<span class="nt">&lt;/url&gt;</span>
+			<span class="nt">&lt;snapshots&gt;</span>
+				<span class="nt">&lt;enabled&gt;</span>false<span class="nt">&lt;/enabled&gt;</span>
+			<span class="nt">&lt;/snapshots&gt;</span>
+		<span class="nt">&lt;/repository&gt;</span>
+	<span class="nt">&lt;/repositories&gt;</span>
+
+	<span class="nt">&lt;pluginRepositories&gt;</span>
+		<span class="nt">&lt;pluginRepository&gt;</span>
+			<span class="nt">&lt;id&gt;</span>spring-snapshots<span class="nt">&lt;/id&gt;</span>
+			<span class="nt">&lt;name&gt;</span>Spring Snapshots<span class="nt">&lt;/name&gt;</span>
+			<span class="nt">&lt;url&gt;</span>https://repo.spring.io/snapshot<span class="nt">&lt;/url&gt;</span>
+			<span class="nt">&lt;snapshots&gt;</span>
+				<span class="nt">&lt;enabled&gt;</span>true<span class="nt">&lt;/enabled&gt;</span>
+			<span class="nt">&lt;/snapshots&gt;</span>
+		<span class="nt">&lt;/pluginRepository&gt;</span>
+		<span class="nt">&lt;pluginRepository&gt;</span>
+			<span class="nt">&lt;id&gt;</span>spring-milestones<span class="nt">&lt;/id&gt;</span>
+			<span class="nt">&lt;name&gt;</span>Spring Milestones<span class="nt">&lt;/name&gt;</span>
+			<span class="nt">&lt;url&gt;</span>https://repo.spring.io/milestone<span class="nt">&lt;/url&gt;</span>
+			<span class="nt">&lt;snapshots&gt;</span>
+				<span class="nt">&lt;enabled&gt;</span>false<span class="nt">&lt;/enabled&gt;</span>
+			<span class="nt">&lt;/snapshots&gt;</span>
+		<span class="nt">&lt;/pluginRepository&gt;</span>
+	<span class="nt">&lt;/pluginRepositories&gt;</span>
+
+
+<span class="nt">&lt;/project&gt;</span>
+</code></pre></div></div>
+<hr>
+
+<h3 id="srcmainjavacomin28minutesspringbootrestexamplespringboot2restserviceapplicationjava">/src/main/java/com/in28minutes/springboot/rest/example/SpringBoot2RestServiceApplication.java</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">in28minutes</span><span class="o">.</span><span class="na">springboot</span><span class="o">.</span><span class="na">rest</span><span class="o">.</span><span class="na">example</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.boot.SpringApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.autoconfigure.SpringBootApplication</span><span class="o">;</span>
+
+<span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SpringBoot2RestServiceApplication</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="n">SpringBoot2RestServiceApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<hr>
+
+<h3 id="srcmainjavacomin28minutesspringbootrestexamplestudentstudentjava">/src/main/java/com/in28minutes/springboot/rest/example/student/Student.java</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">in28minutes</span><span class="o">.</span><span class="na">springboot</span><span class="o">.</span><span class="na">rest</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">student</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.persistence.Entity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.GeneratedValue</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.persistence.Id</span><span class="o">;</span>
+
+<span class="nd">@Entity</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student</span> <span class="o">{</span>
+	<span class="nd">@Id</span>
+	<span class="nd">@GeneratedValue</span>
+	<span class="kd">private</span> <span class="n">Long</span> <span class="n">id</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">passportNumber</span><span class="o">;</span>
+	
+	<span class="kd">public</span> <span class="nf">Student</span><span class="o">()</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nf">Student</span><span class="o">(</span><span class="n">Long</span> <span class="n">id</span><span class="o">,</span> <span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="n">String</span> <span class="n">passportNumber</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">();</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">passportNumber</span> <span class="o">=</span> <span class="n">passportNumber</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="n">Long</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="n">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getPassportNumber</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">passportNumber</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPassportNumber</span><span class="o">(</span><span class="n">String</span> <span class="n">passportNumber</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">passportNumber</span> <span class="o">=</span> <span class="n">passportNumber</span><span class="o">;</span>
+	<span class="o">}</span>
+		
+<span class="o">}</span>
+</code></pre></div></div>
+<hr>
+
+<h3 id="srcmainjavacomin28minutesspringbootrestexamplestudentstudentrepositoryjava">/src/main/java/com/in28minutes/springboot/rest/example/student/StudentRepository.java</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">in28minutes</span><span class="o">.</span><span class="na">springboot</span><span class="o">.</span><span class="na">rest</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">student</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.data.jpa.repository.JpaRepository</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Repository</span><span class="o">;</span>
+
+<span class="nd">@Repository</span>
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">StudentRepository</span> <span class="kd">extends</span> <span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">Student</span><span class="o">,</span> <span class="n">Long</span><span class="o">&gt;{</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+<hr>
+
+<h3 id="srcmainjavacomin28minutesspringbootrestexamplestudentstudentresourcejava">/src/main/java/com/in28minutes/springboot/rest/example/student/StudentResource.java</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">in28minutes</span><span class="o">.</span><span class="na">springboot</span><span class="o">.</span><span class="na">rest</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">student</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.net.URI</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.DeleteMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.PathVariable</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.PostMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.PutMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestBody</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.servlet.support.ServletUriComponentsBuilder</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StudentResource</span> <span class="o">{</span>
+
+	<span class="nd">@Autowired</span>
+	<span class="kd">private</span> <span class="n">StudentRepository</span> <span class="n">studentRepository</span><span class="o">;</span>
+
+	<span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/students"</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Student</span><span class="o">&gt;</span> <span class="nf">retrieveAllStudents</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">studentRepository</span><span class="o">.</span><span class="na">findAll</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/students/{id}"</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="n">Student</span> <span class="nf">retrieveStudent</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="kt">long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">Optional</span><span class="o">&lt;</span><span class="n">Student</span><span class="o">&gt;</span> <span class="n">student</span> <span class="o">=</span> <span class="n">studentRepository</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+
+		<span class="k">if</span> <span class="o">(!</span><span class="n">student</span><span class="o">.</span><span class="na">isPresent</span><span class="o">())</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nf">StudentNotFoundException</span><span class="o">(</span><span class="s">"id-"</span> <span class="o">+</span> <span class="n">id</span><span class="o">);</span>
+
+		<span class="k">return</span> <span class="n">student</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="nd">@DeleteMapping</span><span class="o">(</span><span class="s">"/students/{id}"</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">deleteStudent</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="kt">long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">studentRepository</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/students"</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="nf">createStudent</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="n">Student</span> <span class="n">student</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">Student</span> <span class="n">savedStudent</span> <span class="o">=</span> <span class="n">studentRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">student</span><span class="o">);</span>
+
+		<span class="n">URI</span> <span class="n">location</span> <span class="o">=</span> <span class="n">ServletUriComponentsBuilder</span><span class="o">.</span><span class="na">fromCurrentRequest</span><span class="o">().</span><span class="na">path</span><span class="o">(</span><span class="s">"/{id}"</span><span class="o">)</span>
+				<span class="o">.</span><span class="na">buildAndExpand</span><span class="o">(</span><span class="n">savedStudent</span><span class="o">.</span><span class="na">getId</span><span class="o">()).</span><span class="na">toUri</span><span class="o">();</span>
+
+		<span class="k">return</span> <span class="n">ResponseEntity</span><span class="o">.</span><span class="na">created</span><span class="o">(</span><span class="n">location</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+
+	<span class="o">}</span>
+	
+	<span class="nd">@PutMapping</span><span class="o">(</span><span class="s">"/students/{id}"</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="nf">updateStudent</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="n">Student</span> <span class="n">student</span><span class="o">,</span> <span class="nd">@PathVariable</span> <span class="kt">long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+
+		<span class="n">Optional</span><span class="o">&lt;</span><span class="n">Student</span><span class="o">&gt;</span> <span class="n">studentOptional</span> <span class="o">=</span> <span class="n">studentRepository</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+
+		<span class="k">if</span> <span class="o">(!</span><span class="n">studentOptional</span><span class="o">.</span><span class="na">isPresent</span><span class="o">())</span>
+			<span class="k">return</span> <span class="n">ResponseEntity</span><span class="o">.</span><span class="na">notFound</span><span class="o">().</span><span class="na">build</span><span class="o">();</span>
+
+		<span class="n">student</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+		
+		<span class="n">studentRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">student</span><span class="o">);</span>
+
+		<span class="k">return</span> <span class="n">ResponseEntity</span><span class="o">.</span><span class="na">noContent</span><span class="o">().</span><span class="na">build</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<hr>
+
+<h3 id="srcmainresourcesapplicationproperties">/src/main/resources/application.properties</h3>
+
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<hr>
+
+<h3 id="srcmainresourcesdatasql">/src/main/resources/data.sql</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>insert into student
+values(10001,'Ranga', 'E1234567');
+
+insert into student
+values(10002,'Ravi', 'A1234568');
+</code></pre></div></div>
+<hr>
+
+<h3 id="srctestjavacomin28minutesspringbootrestexamplespringboot2restserviceapplicationtestsjava">/src/test/java/com/in28minutes/springboot/rest/example/SpringBoot2RestServiceApplicationTests.java</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">in28minutes</span><span class="o">.</span><span class="na">springboot</span><span class="o">.</span><span class="na">rest</span><span class="o">.</span><span class="na">example</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.runner.RunWith</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.test.context.SpringBootTest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.test.context.junit4.SpringRunner</span><span class="o">;</span>
+
+<span class="nd">@RunWith</span><span class="o">(</span><span class="n">SpringRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@SpringBootTest</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SpringBoot2RestServiceApplicationTests</span> <span class="o">{</span>
+
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">contextLoads</span><span class="o">()</span> <span class="o">{</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+<hr>
+
+</article>
+
+
+
+
+  <div class="py2 post-footer">
+
+	<blockquote>
+	  <p><a href="https://courses.in28minutes.com/p/spring-boot-for-beginners-in-10-steps" target="_blank">Join</a> our free Spring Boot in 10 Steps Course.</p>
+	</blockquote>
+
+	<blockquote>
+	  <p>Find out how in28Minutes reached 100,000 Learners on Udemy in 2 years. <a href="http://www.in28minutes.com/the-in28minutes-way">The in28minutes Way</a> - Our approach to creating awesome learning experiences.
+	</p>
+	</blockquote>
+</div>
+
+
+
+
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname  = 'spring-boot-tutorial';
+    var disqus_identifier = '/spring-boot-rest-service-with-jpa';
+    var disqus_title      = "Creating a CRUD REST API/Service with Spring Boot, JPA and Hibernate";
+
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+  <h3 class="related-post-title">Related Posts</h3>
+  
+    <div class="post ml2">
+      <a href="http://www.springboottutorial.com/spring-boot-tutorials-for-beginners" class="post-link">
+        <h4 class="post-title">Spring Boot Tutorials for Beginners</h4>
+        <p class="post-summary">At in28Minutes, we are creating a number of tutorials with videos, articles &amp; courses on Spring Boot for Beginners and Experienced Developers. This resources will help you learn and gain expertise at Spring Boot.</p>
+      </a>
+    </div>
+  
+    <div class="post ml2">
+      <a href="http://www.springboottutorial.com/spring-boot-projects-with-code-examples" class="post-link">
+        <h4 class="post-title">20+ Spring Boot Projects with Code Examples</h4>
+        <p class="post-summary">At in28Minutes, we have created more than 20 projects with code examples on Github. We have 50+ articles explaining these projects. These code examples will you learn and gain expertise at Spring Boot.</p>
+      </a>
+    </div>
+  
+    <div class="post ml2">
+      <a href="http://www.springboottutorial.com/microservices-with-spring-boot-part-5-eureka-naming-server" class="post-link">
+        <h4 class="post-title">Microservices with Spring Boot - Part 5 - Using Eureka Naming Server</h4>
+        <p class="post-summary">Let's learn the basics of microservices and microservices architectures. We will also start looking at a basic implementation of a microservice with Spring Boot. We will create a couple of microservices and get them to talk to each other using Eureka Naming Server and Ribbon for Client Side Load Balancing. In part 5 of this series, we will focus on enabling Eureka Naming Server and have the microservices communicate with it.</p>
+      </a>
+    </div>
+  
+    <div class="post ml2">
+      <a href="http://www.springboottutorial.com/microservices-with-spring-boot-part-4-ribbon-for-load-balancing" class="post-link">
+        <h4 class="post-title">Microservices with Spring Boot - Part 4 - Using Ribbon for Load Balancing</h4>
+        <p class="post-summary">Let's learn the basics of microservices and microservices architectures. We will also start looking at a basic implementation of a microservice with Spring Boot. We will create a couple of microservices and get them to talk to each other using Eureka Naming Server and Ribbon for Client Side Load Balancing. In part 4 of this series, we will focus on using Ribbon to do Load Balancing.</p>
+      </a>
+    </div>
+  
+    <div class="post ml2">
+      <a href="http://www.springboottutorial.com/creating-microservices-with-spring-boot-part-3-currency-conversion-microservice" class="post-link">
+        <h4 class="post-title">Microservices with Spring Boot - Part 3 - Creating Currency Conversion Microservice</h4>
+        <p class="post-summary">Let's learn the basics of microservices and microservices architectures. We will also start looking at a basic implementation of a microservice with Spring Boot. We will create a couple of microservices and get them to talk to each other using Eureka Naming Server and Ribbon for Client Side Load Balancing. In part 3 of this series, we will focus on Creating Currency Conversion Microservice.</p>
+      </a>
+    </div>
+  
+    <div class="post ml2">
+      <a href="http://www.springboottutorial.com/creating-microservices-with-spring-boot-part-2-forex-microservice" class="post-link">
+        <h4 class="post-title">Microservices with Spring Boot - Part 2 - Creating Forex Microservice</h4>
+        <p class="post-summary">Let's learn the basics of microservices and microservices architectures. We will also start looking at a basic implementation of a microservice with Spring Boot. We will create a couple of microservices and get them to talk to each other using Eureka Naming Server and Ribbon for Client Side Load Balancing. In part 2 of this series, we will focus on Creating Forex Microservice.</p>
+      </a>
+    </div>
+  
+    <div class="post ml2">
+      <a href="http://www.springboottutorial.com/creating-microservices-with-spring-boot-part-1-getting-started" class="post-link">
+        <h4 class="post-title">Microservices with Spring Boot - Part 1 - Getting Started</h4>
+        <p class="post-summary">Let's learn the basics of microservices and microservices architectures. We will also start looking at a basic implementation of a microservice with Spring Boot. We will create a couple of microservices and get them to talk to each other using Eureka Naming Server and Ribbon for Client Side Load Balancing. In part 1 of this series, lets get introduced to the concept of microservices and understand how to create great microservices with Spring Boot and Spring Cloud.</p>
+      </a>
+    </div>
+  
+    <div class="post ml2">
+      <a href="http://www.springboottutorial.com/introduction-to-spring-boot-for-beginners" class="post-link">
+        <h4 class="post-title">Getting Started with Spring Boot - 7 things a beginner should know!</h4>
+        <p class="post-summary">Spring Boot is a tricky framework to understand. In this tutorial for beginnners with Spring Boot, we will look at the basics of Spring Boot and help you understand the important concepts - Architecture, Starter Projects, Auto Configuration and Starter Parent. We will look at the architecture of Spring Boot and explore a variety of resources - tutorials, courses and videos - we created to help you get started with Spring Boot effectively.</p>
+      </a>
+    </div>
+  
+    <div class="post ml2">
+      <a href="http://www.springboottutorial.com/spring-boot-rest-api-projects-with-code-examples" class="post-link">
+        <h4 class="post-title">Spring Boot REST API Projects with Code Examples</h4>
+        <p class="post-summary">At in28Minutes, we have created 8 Spring Boot REST API projects with code examples on Github. We have 10+ tutorial articles explaining these projects.  These code examples will help beginners and experts to learn and gain expertise at developing RESTful Services with Spring Boot.</p>
+      </a>
+    </div>
+  
+    <div class="post ml2">
+      <a href="http://www.springboottutorial.com/creating-soap-web-service-with-spring-boot-web-services-starter" class="post-link">
+        <h4 class="post-title">Creating a SOAP Web Service with Spring Boot Starter Web Services</h4>
+        <p class="post-summary">Let's learn how to create a SOAP Web Service with Spring Boot Starter Web Services. We will take a Contract First approach by definining an XSD and exposing a WSDL from it.</p>
+      </a>
+    </div>
+  
+
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="center">
+  <div class="measure">
+    <small>
+     You can check out our courses at <a href="http://www.in28minutes.com/">in28minutes.com</a>. 
+    </small>
+  </div>
+</footer>
+
+
+
+<script src="./Creating a CRUD REST API_Service with Spring Boot, JPA and Hibernate – Spring Boot Tutorial_files/fa8e0fc9996032d4bfd478f4fda009126f1d4b72.js.download" type="text/javascript" charset="utf-8" async="async"></script> 
+
+<!--
+<script>
+  (function (w,i,d,g,e,t,s) {w[d] = w[d]||[];t= i.createElement(g);
+    t.async=1;t.src=e;s=i.getElementsByTagName(g)[0];s.parentNode.insertBefore(t, s);
+  })(window, document, '_gscq','script','//widgets.getsitecontrol.com/116528/script.js');
+</script>
+-->
+
+
+
+
+
+
+</body></html>

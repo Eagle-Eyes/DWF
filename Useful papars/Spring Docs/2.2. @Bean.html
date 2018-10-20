@@ -1,0 +1,359 @@
+
+<!-- saved from url=(0082)https://docs.spring.io/spring-javaconfig/docs/1.0.0.M4/reference/html/ch02s02.html -->
+<html><style type="text/css" id="night-mode-pro-style"></style><link type="text/css" rel="stylesheet" id="night-mode-pro-link"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<title>2.2.&nbsp;@Bean</title><link rel="stylesheet" href="./2.2. @Bean_files/stylesheet.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="https://docs.spring.io/spring-javaconfig/docs/1.0.0.M4/reference/html/index.html" title="Spring JavaConfig Reference Guide"><link rel="up" href="https://docs.spring.io/spring-javaconfig/docs/1.0.0.M4/reference/html/ch02.html" title="2. Authoring @Configuration classes"><link rel="prev" href="https://docs.spring.io/spring-javaconfig/docs/1.0.0.M4/reference/html/ch02.html" title="2. Authoring @Configuration classes"><link rel="next" href="https://docs.spring.io/spring-javaconfig/docs/1.0.0.M4/reference/html/ch03.html" title="3. Using @Configuration classes"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tbody><tr><th colspan="3" align="center">2.2.&nbsp;@Bean</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="https://docs.spring.io/spring-javaconfig/docs/1.0.0.M4/reference/html/ch02.html">Prev</a>&nbsp;</td><th width="60%" align="center">2.&nbsp;Authoring @Configuration classes</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="https://docs.spring.io/spring-javaconfig/docs/1.0.0.M4/reference/html/ch03.html">Next</a></td></tr></tbody></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="bean"></a>2.2.&nbsp;<code class="literal">@Bean</code></h2></div></div></div><p>
+<code class="literal">@Bean</code> is a method-level annotation and a direct analog of the XML
+<code class="code">&lt;bean/&gt;</code> element. The annotation supports most of the attributes
+offered by <code class="code">&lt;bean/&gt;</code>, such as:
+<code class="code"><a class="ulink" href="http://static.springframework.org/spring/docs/2.5.x/reference/beans.html#beans-factory-lifecycle-initializingbean" target="_top">
+init-method</a></code>,
+<code class="code"><a class="ulink" href="http://static.springframework.org/spring/docs/2.5.x/reference/beans.html#beans-factory-lifecycle-disposablebean" target="_top">
+destroy-method</a></code>,
+<code class="code"><a class="ulink" href="http://static.springframework.org/spring/docs/2.5.x/reference/beans.html#beans-factory-autowire" target="_top">
+autowiring</a></code>,
+<code class="code"><a class="ulink" href="http://static.springframework.org/spring/docs/2.5.x/reference/beans.html#beans-factory-lazy-init" target="_top">
+lazy-init</a></code>,
+<code class="code"><a class="ulink" href="http://static.springframework.org/spring/docs/2.5.x/reference/beans.html#beans-factory-dependencies" target="_top">
+dependency-check</a></code>,
+<code class="code"><a class="ulink" href="http://static.springframework.org/spring/docs/2.5.x/reference/beans.html#beans-factory-dependson" target="_top">
+depends-on</a></code>
+and <code class="code"><a class="ulink" href="http://static.springframework.org/spring/docs/2.5.x/reference/beans.html#beans-factory-scopes" target="_top">
+scope</a></code>.
+</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="declaring-a-bean"></a>2.2.1.&nbsp;Declaring a bean</h3></div></div></div><p>
+To declare a bean, simply annotate a method with the <code class="literal">@Bean</code> annotation. When
+JavaConfig encounters such a method, it will execute that method and register
+the return value as a bean within a <code class="code">BeanFactory</code>. By default, the
+bean name will be the same as the method name (see <a class="link" href="https://docs.spring.io/spring-javaconfig/docs/1.0.0.M4/reference/html/ch02s02.html">
+bean naming</a> for details on how to customize this behavior). The
+following is a simple example of a <code class="literal">@Bean</code> method declaration:
+</p><pre class="programlisting">@Configuration
+<span class="hl-keyword">public</span> <span class="hl-keyword">class</span> AppConfig {
+    @Bean
+    <span class="hl-keyword">public</span> TransferService transferService() {
+        <span class="hl-keyword">return</span> <span class="hl-keyword">new</span> TransferServiceImpl();
+    }
+}
+                </pre><p>
+</p><p>
+For comparison sake, the configuration above is exactly equivalent to the
+following Spring XML: </p><pre class="programlisting">&lt;<span class="hl-tag">beans</span>&gt;
+    &lt;<span class="hl-tag">bean</span> <span class="hl-attribute">name</span>=<span class="hl-value">"transferService"</span> <span class="hl-attribute">class</span>=<span class="hl-value">"com.acme.TransferServiceImpl"</span>/&gt;
+&lt;<span class="hl-tag">/beans</span>&gt;
+                </pre><p>
+</p><p>
+Both will result in a bean named <code class="code">transferService</code> being available
+in the <code class="code">BeanFactory</code> / <code class="code">ApplicationContext</code>, bound to an
+object instance of type <code class="code">TransferServiceImpl</code>:
+</p><pre class="programlisting">transferService -&gt; com.acme.TransferServiceImpl
+                </pre><p>
+</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="injecting-dependencies"></a>2.2.2.&nbsp;Injecting dependencies</h3></div></div></div><p>
+When <code class="literal">@Bean</code>s have dependencies on one another, expressing that dependency
+is as simple as having one bean method call another:
+</p><pre class="programlisting">@Configuration
+<span class="hl-keyword">public</span> <span class="hl-keyword">class</span> AppConfig {
+    @Bean
+    <span class="hl-keyword">public</span> Foo foo() {
+        <span class="hl-keyword">return</span> <span class="hl-keyword">new</span> Foo(bar());
+    }
+
+    @Bean
+    <span class="hl-keyword">public</span> Bar bar() {
+        <span class="hl-keyword">return</span> <span class="hl-keyword">new</span> Bar();
+    }
+}
+                </pre><p>
+</p><p>
+In the example above, the <code class="code">foo</code> bean recevies a reference to <code class="code">
+bar</code> via constructor injection.
+</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="lifecycle-callbacks"></a>2.2.3.&nbsp;Receiving lifecycle callbacks</h3></div></div></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="lifecycle-callback-jsr250"></a>2.2.3.1.&nbsp;Using JSR-250 annotations</h4></div></div></div><p>
+JavaConfig, like the core Spring Framework, supports use of JSR-250
+"Common Annotations". For example:
+</p><pre class="programlisting"><span class="hl-keyword">public</span> <span class="hl-keyword">class</span> FooService {
+    @PostConstruct
+    <span class="hl-keyword">public</span> <span class="hl-keyword">void</span> init() {
+        <span class="hl-comment">// custom initialization logic</span>
+    }
+}
+
+@Configuration
+@AnnotationDrivenConfig
+<span class="hl-keyword">public</span> <span class="hl-keyword">class</span> ApplicationConfig {
+    @Bean
+    <span class="hl-keyword">public</span> FooService fooService() {
+        <span class="hl-keyword">return</span> <span class="hl-keyword">new</span> FooService();
+    }
+}
+                    </pre><p>
+</p><p>
+In the above example, <code class="code">FooService</code> declares <code class="code">@PostConstruct
+</code>. By declaring JavaConfig's <code class="code">@AnnotationDrivenConfig</code>
+on The <code class="literal">@Configuration</code> class, this annotation will be respected by the
+container and called immediately after construction. See <a class="ulink" href="http://static.springframework.org/spring/docs/2.5.x/reference/beans.html#beans-factory-lifecycle-combined-effects" target="_top">The core
+framework documentation on support for JSR-250 annotations for further
+details.</a>
+</p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="lifecycle-callback-interfaces"></a>2.2.3.2.&nbsp;Using Spring interfaces</h4></div></div></div><p>
+Spring's <a class="ulink" href="http://static.springframework.org/spring/docs/2.5.x/reference/beans.html#beans-factory-nature" target="_top">lifecycle
+</a> callbacks are fully supported. If a bean implements <code class="code">
+InitializingBean</code>, <code class="code">DisposableBean</code>, or
+<code class="code">Lifecycle</code>, their respective methods will be called by the
+container in accordance with their Javadoc.
+</p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="lifecycle-callback-bean-attributes"></a>2.2.3.3.&nbsp;
+Using <code class="literal">@Bean</code> <code class="code">initMethodName</code> / <code class="code">destroyMethodName</code>
+attributes
+</h4></div></div></div><p>
+The <code class="literal">@Bean</code> annotation supports specifying arbitrary initialization and
+destruction callback methods, much like Spring XML's
+<code class="code">init-method</code> and <code class="code">destroy-method</code> attributes to
+the <code class="code">bean</code> element:
+</p><pre class="programlisting"><span class="hl-keyword">public</span> <span class="hl-keyword">class</span> Foo {
+    <span class="hl-keyword">public</span> <span class="hl-keyword">void</span> init() {
+        <span class="hl-comment">// initialization logic</span>
+    }
+}
+<span class="hl-keyword">public</span> <span class="hl-keyword">class</span> Bar {
+    <span class="hl-keyword">public</span> <span class="hl-keyword">void</span> cleanup() {
+        <span class="hl-comment">// destruction logic</span>
+    }
+}
+@Configuration
+<span class="hl-keyword">public</span> <span class="hl-keyword">class</span> AppConfig {
+    @Bean(initMethodName=<span class="hl-string">"init"</span>)
+    <span class="hl-keyword">public</span> Foo foo() {
+        <span class="hl-keyword">return</span> <span class="hl-keyword">new</span> Foo();
+    }
+    @Bean(destroyMethodName=<span class="hl-string">"cleanup"</span>)
+    <span class="hl-keyword">public</span> Bar bar() {
+        <span class="hl-keyword">return</span> <span class="hl-keyword">new</span> Bar();
+    }
+}
+                    </pre><p>
+</p><p>
+Of course, in the case of <code class="code">Foo</code> above, it would be equally as valid
+to call the <code class="code">init()</code> method directly during construction:
+</p><pre class="programlisting">@Configuration
+<span class="hl-keyword">public</span> <span class="hl-keyword">class</span> AppConfig {
+    @Bean
+    <span class="hl-keyword">public</span> Foo foo() {
+        Foo foo = <span class="hl-keyword">new</span> Foo();
+        foo.init();
+        <span class="hl-keyword">return</span> foo;
+    }
+
+    <span class="hl-comment">// ...</span>
+}
+                    </pre><p>
+</p><div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Tip"><tbody><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Tip]" src="./2.2. @Bean_files/tip.gif"></td><th align="left">Tip</th></tr><tr><td align="left" valign="top">
+Remember that because you are working directly in Java, you can do anything
+you like with your objects, and do not always need to rely on the
+container!
+</td></tr></tbody></table></div><p>
+</p></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="aware-interfaces"></a>2.2.4.&nbsp;Using <code class="code">*Aware</code> interfaces</h3></div></div></div><p>
+ The standard set of <code class="code">*Aware</code> interfaces such as
+<code class="code"><a class="ulink" href="http://static.springframework.org/spring/docs/2.5.x/reference/beans.html#beans-factory-aware-beanfactoryaware" target="_top">
+BeanFactoryAware</a></code>,
+<code class="code"><a class="ulink" href="http://static.springframework.org/spring/docs/2.5.x/reference/beans.html#beans-factory-aware-beannameaware" target="_top">
+BeanNameAware</a></code>,
+<code class="code"><a class="ulink" href="http://static.springframework.org/spring/docs/2.5.x/reference/beans.html#context-functionality-messagesource" target="_top">
+MessageSourceAware</a></code>,
+<code class="code"><a class="ulink" href="http://static.springframework.org/spring/docs/2.5.x/reference/beans.html#context-functionality-events" target="_top">
+ApplicationContextAware</a></code>,
+etc. are fully supported. Consider an example class that implements
+<code class="code">BeanFactoryAware</code>: </p><pre class="programlisting"><span class="hl-keyword">public</span> <span class="hl-keyword">class</span> AwareBean <span class="hl-keyword">implements</span> BeanFactoryAware {
+
+    <span class="hl-keyword">private</span> BeanFactory factory;
+
+    <span class="hl-comment">// BeanFactoryAware setter (called by Spring during bean instantiation)</span>
+    <span class="hl-keyword">public</span> <span class="hl-keyword">void</span> setBeanFactory(BeanFactory beanFactory) <span class="hl-keyword">throws</span> BeansException {
+        <span class="hl-keyword">this</span>.factory = beanFactory;
+    }
+
+    <span class="hl-keyword">public</span> <span class="hl-keyword">void</span> close(){
+        <span class="hl-comment">// do clean-up</span>
+    }
+}
+                </pre><p>
+</p><p>
+If the class above were declared as a bean as follows:
+</p><pre class="programlisting">@Configuration
+<span class="hl-keyword">public</span> <span class="hl-keyword">class</span> AppConfig {
+    @Bean
+    <span class="hl-keyword">public</span> AwareBean awareBean() {
+        <span class="hl-keyword">return</span> <span class="hl-keyword">new</span> AwareBean();
+    }
+}
+                </pre><p>
+</p><p>
+its <code class="code">setBeanFactory</code> method will be called during initialization,
+providing the bean with access to its enclosing <code class="code">BeanFactory</code>.
+</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="specifying-bean-scope"></a>2.2.5.&nbsp;Specifying bean scope</h3></div></div></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="available-scopes"></a>2.2.5.1.&nbsp;Using <code class="literal">@Bean</code>'s <code class="code">scope</code> attribute</h4></div></div></div><p>
+JavaConfig makes available each of the four standard scopes specified in
+<a class="ulink" href="http://static.springframework.org/spring/docs/2.5.x/reference/beans.html#beans-factory-scopes" target="_top">Section 3.4,
+"Bean Scopes"</a> of the Spring reference documentation.
+</p><p>
+The <code class="code">DefaultScopes</code> class provides string constants
+for each of these four scopes. SINGLETON is the default, and can be
+overridden by supplying the <code class="code">scope</code> attribute to <code class="literal">@Bean</code>
+annotation: </p><pre class="programlisting">@Configuration
+<span class="hl-keyword">public</span> <span class="hl-keyword">class</span> MyConfiguration {
+    @Bean(scope=DefaultScopes.PROTOTYPE)
+    <span class="hl-keyword">public</span> Encryptor encryptor() {
+        <span class="hl-comment">// ...</span>
+    }
+}
+                    </pre><p>
+</p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="scoped-proxy"></a>2.2.5.2.&nbsp;<code class="code">@ScopedProxy</code></h4></div></div></div><p>
+Spring offers a convenient way of working with scoped dependencies
+through <a class="ulink" href="http://static.springframework.org/spring/docs/2.5.x/reference/beans.html#beans-factory-scopes-other-injection" target="_top">scoped
+proxies</a>. The easiest way to create such a proxy when using the XML
+configuration is the <code class="code">&lt;aop:scoped-proxy/&gt;</code> element.
+JavaConfig offers equivalent support with the <code class="code">@ScopedProxy</code>
+annotation, which provides the same semantics and configuration options.
+</p><p>
+If we were to port the the XML reference documentation scoped proxy
+example (see link above) to JavaConfig, it would look like the following:
+</p><pre class="programlisting"><span class="hl-comment">// a HTTP Session-scoped bean exposed as a proxy</span>
+@Bean(scope = DefaultScopes.SESSION)
+@ScopedProxy
+<span class="hl-keyword">public</span> UserPreferences userPreferences() {
+   <span class="hl-keyword">return</span> <span class="hl-keyword">new</span> UserPreferences();
+}
+
+@Bean
+<span class="hl-keyword">public</span> Service userService() {
+   UserService service = <span class="hl-keyword">new</span> SimpleUserService();
+   <span class="hl-comment">// a reference to the proxied 'userPreferences' bean</span>
+   service.seUserPreferences(userPreferences());
+   <span class="hl-keyword">return</span> service;
+}
+                    </pre><p>
+</p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="method-injection"></a>2.2.5.3.&nbsp;Lookup method injection</h4></div></div></div><p>
+As noted in the core documentation,
+<a class="ulink" href="http://static.springframework.org/spring/docs/2.5.x/reference/beans.html#beans-factory-method-injection" target="_top">lookup
+method injection</a> is an advanced feature that should be
+comparatively rarely used. It is useful in cases where a singleton-scoped
+bean has a dependency on a prototype-scoped bean.
+JavaConfig provides a natural means for implementing this pattern.
+<span class="emphasis"><em>Note that the example below is adapted from the example classes
+and configuration in the core documentation linked above.</em></span>
+</p><pre class="programlisting"><span class="hl-keyword">package</span> fiona.apple; 
+
+<span class="hl-keyword">public</span> <span class="hl-keyword">abstract</span> <span class="hl-keyword">class</span> CommandManager { 
+    <span class="hl-keyword">public</span> Object process(Object commandState) { 
+        <span class="hl-comment">// grab a new instance of the appropriate Command interface </span>
+        Command command = createCommand(); 
+    
+        <span class="hl-comment">// set the state on the (hopefully brand new) Command instance </span>
+        command.setState(commandState); 
+        <span class="hl-keyword">return</span> command.execute(); 
+    } 
+    
+    <span class="hl-comment">// okay... but where is the implementation of this method? </span>
+    <span class="hl-keyword">protected</span> <span class="hl-keyword">abstract</span> Command createCommand(); 
+}
+                    </pre><p>
+</p><p>
+JavaConfig can easily create a subclass of <code class="code">CommandManager</code>
+where the abstract <code class="code">createCommand()</code> is overridden in such
+a way that it 'looks up' a brand new (prototype) command object:
+</p><pre class="programlisting">@Bean(scope=DefaultScopes.PROTOTYPE)
+<span class="hl-keyword">public</span> AsyncCommand asyncCommand() {
+    AsyncCommand command = <span class="hl-keyword">new</span> AsyncCommand();
+    <span class="hl-comment">// inject dependencies here as required</span>
+    <span class="hl-keyword">return</span> command;
+}
+
+@Bean
+<span class="hl-keyword">public</span> CommandManager commandManager() {
+    <span class="hl-comment">// return new anonymous implementation of CommandManager with command() overridden</span>
+    <span class="hl-comment">// to return a new prototype Command object</span>
+    <span class="hl-keyword">return</span> <span class="hl-keyword">new</span> CommandManager() {
+        <span class="hl-keyword">protected</span> Command command() {
+            <span class="hl-keyword">return</span> asyncCommand();
+        }
+    }
+}
+                    </pre><p>
+</p></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="customizing-bean-naming"></a>2.2.6.&nbsp;Customizing bean naming</h3></div></div></div><p>
+By default, JavaConfig uses a <code class="literal">@Bean</code> method's name as the name of the
+resulting bean. This functionality can be overridden, however, using the
+<code class="code">BeanNamingStrategy</code> extension point.
+</p><pre class="programlisting"><span class="hl-keyword">public</span> <span class="hl-keyword">class</span> Main {
+    <span class="hl-keyword">public</span> <span class="hl-keyword">static</span> <span class="hl-keyword">void</span> main(String[] args) {
+        JavaConfigApplicationContext ctx = <span class="hl-keyword">new</span> JavaConfigApplicationContext();
+        ctx.setBeanNamingStrategy(<span class="hl-keyword">new</span> CustomBeanNamingStrategy());
+        ctx.addConfigClass(MyConfig.<span class="hl-keyword">class</span>);
+        ctx.refresh();
+        ctx.getBean(<span class="hl-string">"customBeanName"</span>);
+    }
+}
+                </pre><p>
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><table border="0" summary="Note"><tbody><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="./2.2. @Bean_files/note.gif"></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>
+<code class="code">JavaConfigApplicationContext</code> will be covered in detail in
+<a class="xref" href="https://docs.spring.io/spring-javaconfig/docs/1.0.0.M4/reference/html/ch03.html" title="3. Using @Configuration classes">Chapter&nbsp;3, <i>Using @Configuration classes</i></a>
+</p><p>
+For more details, see the API documentation for
+<code class="code">BeanNamingStrategy</code>.
+</p></td></tr></tbody></table></div><p>
+</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="working-with-factory-beans"></a>2.2.7.&nbsp;Working with Spring <code class="code">FactoryBean</code> implementations</h3></div></div></div><p>
+Spring provides many implementations of the <code class="code">FactoryBean</code>
+interface. Usually these classes are used to support integrations with other
+frameworks. Take for example
+<code class="code">org.springframework.orm.hibernate3.LocalSessionFactoryBean</code>. This
+class is used to create a Hibernate SessionFactory and requires as dependencies
+the location of Hibernate mapping files and a DataSource. Here's how it is
+commonly used in XML:
+</p><p>
+</p><pre class="programlisting">&lt;<span class="hl-tag">beans</span>&gt;
+    &lt;<span class="hl-tag">bean</span> <span class="hl-attribute">id</span>=<span class="hl-value">"sessionFactory"</span>
+          <span class="hl-attribute">class</span>=<span class="hl-value">"org.springframework.orm.hibernate3.LocalSessionFactoryBean"</span>&gt;
+        &lt;<span class="hl-tag">property</span> <span class="hl-attribute">name</span>=<span class="hl-value">"dataSource"</span> <span class="hl-attribute">ref</span>=<span class="hl-value">"dataSource"</span>/&gt;
+        &lt;<span class="hl-tag">property</span> <span class="hl-attribute">name</span>=<span class="hl-value">"mappingResources"</span>&gt;
+             &lt;<span class="hl-tag">list</span>&gt;
+                 &lt;<span class="hl-tag">value</span>&gt;com/acme/Bank.hbm.xml&lt;<span class="hl-tag">/value</span>&gt;
+                 &lt;<span class="hl-tag">value</span>&gt;com/acme/Account.hbm.xml&lt;<span class="hl-tag">/value</span>&gt;
+                 &lt;<span class="hl-tag">value</span>&gt;com/acme/Customer.hbm.xml&lt;<span class="hl-tag">/value</span>&gt;
+             &lt;<span class="hl-tag">/list</span>&gt;
+        &lt;<span class="hl-tag">/property</span>&gt;
+    &lt;<span class="hl-tag">/bean</span>&gt;
+
+    &lt;<span class="hl-tag">bean</span> <span class="hl-attribute">id</span>=<span class="hl-value">"dataSource"</span> <span class="hl-attribute">class</span>=<span class="hl-value">"..."</span>&gt;
+        &lt;<span class="hl-comment">!-- ... --</span>&gt;
+    &lt;<span class="hl-tag">/bean</span>&gt;
+&lt;<span class="hl-tag">/beans</span>&gt;
+                </pre><p>
+</p><p>
+The Spring container recognizes that <code class="code">LocalSessionFactoryBean</code>
+implements the <code class="code">FactoryBean</code> interface, and thus treats this bean
+specially: An instance of <code class="code">LocalSessionFactoryBean</code> is
+instantiated, but instead of being directly returned, instead the
+<code class="code">getObject()</code> method is invoked. It is the object returned from
+this call <code class="code">getObject()</code> that is ultimately registered as the
+<code class="code">sessionFactory</code> bean.
+</p><p>
+How then would we use <code class="code">LocalSessionFactoryBean</code> in JavaConfig?
+The best approach is to extend the <code class="code">ConfigurationSupport</code> base
+class and use the <code class="code">getObject()</code> method:
+</p><pre class="programlisting">@Configuration
+<span class="hl-keyword">public</span> <span class="hl-keyword">class</span> DataAccessConfig <span class="hl-keyword">extends</span> ConfigurationSupport {
+    @Bean
+    <span class="hl-keyword">public</span> SessionFactory sessionFactory() {
+        LocalSessionFactoryBean factoryBean = <span class="hl-keyword">new</span> LocalSessionFactoryBean();
+        factoryBean.setDataSource(dataSource());
+        ArrayList&lt;String&gt; mappingFiles = <span class="hl-keyword">new</span> ArrayList&lt;String&gt;();
+        mappingFiles.add(<span class="hl-string">"com/acme/Bank.hbm.xml"</span>);
+        mappingFiles.add(<span class="hl-string">"com/acme/Account.hbm.xml"</span>);
+        mappingFiles.add(<span class="hl-string">"com/acme/Customer.hbm.xml"</span>);
+        factoryBean.setMappingResources(mappingFiles);
+        <span class="hl-keyword">return</span> <span class="hl-keyword">this</span>.getObject(SessionFactory.<span class="hl-keyword">class</span>, factoryBean);
+    }
+    <span class="hl-comment">// ... other beans, including dataSource() ...</span>
+}
+
+                </pre><p>
+</p><p>
+Notice the call to <code class="code">this.getObject(Class, FactoryBean)</code>? This call
+ensures that any container callbacks are invoked on the
+<code class="code">FactoryBean</code> object, and then returns the value from the
+FactoryBean's <code class="code">getObject()</code> in a type-safe fashion.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tbody><tr><td width="40%" align="left"><a accesskey="p" href="https://docs.spring.io/spring-javaconfig/docs/1.0.0.M4/reference/html/ch02.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="https://docs.spring.io/spring-javaconfig/docs/1.0.0.M4/reference/html/ch02.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="https://docs.spring.io/spring-javaconfig/docs/1.0.0.M4/reference/html/ch03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">2.&nbsp;Authoring @Configuration classes&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="https://docs.spring.io/spring-javaconfig/docs/1.0.0.M4/reference/html/index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;3.&nbsp;Using @Configuration classes</td></tr></tbody></table></div><script async="" src="./2.2. @Bean_files/analytics.js.download"></script><script>if(window.parent==window){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-2728886-23','auto',{'siteSpeedSampleRate':100});ga('send','pageview');}</script></body></html>

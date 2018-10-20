@@ -1,0 +1,662 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0061)https://logging.apache.org/log4j/2.0/manual/customconfig.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><style type="text/css" id="night-mode-pro-style"></style><link type="text/css" rel="stylesheet" id="night-mode-pro-link"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<title>Log4j – Extending Log4j 2 Configuration - Apache Log4j 2</title>
+		<link rel="stylesheet" href="./Log4j – Extending Log4j 2 Configuration - Apache Log4j 2_files/bootstrap.min.css" type="text/css">
+		<link rel="stylesheet" href="./Log4j – Extending Log4j 2 Configuration - Apache Log4j 2_files/site.css" type="text/css">
+		<script type="text/javascript" src="./Log4j – Extending Log4j 2 Configuration - Apache Log4j 2_files/jquery.min.js.download"></script>
+		<script type="text/javascript" src="./Log4j – Extending Log4j 2 Configuration - Apache Log4j 2_files/bootstrap.min.js.download"></script>
+		<script type="text/javascript" src="./Log4j – Extending Log4j 2 Configuration - Apache Log4j 2_files/prettify.min.js.download"></script>
+		<script type="text/javascript" src="./Log4j – Extending Log4j 2 Configuration - Apache Log4j 2_files/site.js.download"></script>
+			<meta name="author" content="Ralph Goers">
+		<meta name="Date-Revision-yyyymmdd" content="20180803">
+		<meta http-equiv="Content-Language" content="en">
+		
+				</head>
+	<body class="composite">
+		<a href="https://logging.apache.org/">
+			<img class="logo-left" src="./Log4j – Extending Log4j 2 Configuration - Apache Log4j 2_files/ls-logo.jpg" alt="Apache logging services logo">
+		</a>
+		<img class="logo-right" src="./Log4j – Extending Log4j 2 Configuration - Apache Log4j 2_files/logo.png" alt="Apache log4j logo">
+		<div class="clear"></div>
+
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="container-fluid">
+					<a class="brand" href="https://logging.apache.org/log4j/2.x/">Apache Log4j 2 ™</a>
+						<ul class="nav">
+						<li>
+					
+				
+				<a href="https://cwiki.apache.org/confluence/display/LOGGING/Log4j" class="external" target="_blank" title="Logging Wiki">Logging Wiki</a>
+			</li>
+					<li>
+					
+				
+				<a href="https://www.apache.org/" class="external" target="_blank" title="Apache">Apache</a>
+			</li>
+					<li>
+									<a href="https://logging.apache.org/" title="Logging Services">Logging Services</a>
+			</li>
+					<li>
+					
+				
+				<a href="https://analysis.apache.org/dashboard/index/org.apache.logging.log4j:log4j" class="external" target="_blank" title="Sonar">Sonar</a>
+			</li>
+					<li>
+					
+				
+				<a href="https://github.com/apache/logging-log4j2" class="external" target="_blank" title="GitHub">GitHub</a>
+			</li>
+		</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="container-fluid">
+			<table class="layout-table">
+				<tbody><tr>
+					<td class="sidebar">
+						<div class="well sidebar-nav">
+										<ul class="nav nav-list">
+		 											 <li class="nav-header"><i class="icon-home"></i>Apache Log4j™ 2</li>
+																						<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/index.html" title="About">About</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/download.html" title="Download">Download</a>
+					</li>
+ 																																																																				<li class="collapsed">
+									<a href="https://logging.apache.org/log4j/2.0/javadoc.html" title="Javadoc">Javadoc</a>
+										</li>
+ 																																																																																															<li class="collapsed">
+									<a href="https://logging.apache.org/log4j/2.0/maven-artifacts.html" title="Maven, Ivy, Gradle Artifacts">Maven, Ivy, Gradle Artifacts</a>
+										</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/runtime-dependencies.html" title="Runtime Dependencies">Runtime Dependencies</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/changelog.html" title="Changelog">Changelog</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/faq.html" title="FAQ">FAQ</a>
+					</li>
+ 																																																																																																																	<li class="collapsed">
+									<a href="https://logging.apache.org/log4j/2.0/performance.html" title="Performance">Performance</a>
+										</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/articles.html" title="Articles and Tutorials">Articles and Tutorials</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/thanks.html" title="Thanks">Thanks</a>
+					</li>
+ 								</ul>
+			<ul class="nav nav-list">
+		 											 <li class="nav-header"><i class="icon-pencil"></i>For Contributors</li>
+																						<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/build.html" title="Building Log4j from Source">Building Log4j from Source</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/guidelines.html" title="Guidelines">Guidelines</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/javastyle.html" title="Style Guide">Style Guide</a>
+					</li>
+ 								</ul>
+			<ul class="nav nav-list">
+		 											 <li class="nav-header"><i class="icon-book"></i>Manual</li>
+																						<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/manual/index.html" title="Introduction">Introduction</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/manual/architecture.html" title="Architecture">Architecture</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/manual/migration.html" title="Log4j 1.x Migration">Log4j 1.x Migration</a>
+					</li>
+ 																																																																													<li class="collapsed">
+									<a href="https://logging.apache.org/log4j/2.0/manual/api.html" title="Java API">Java API</a>
+										</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/manual/scala-api.html" title="Scala API">Scala API</a>
+					</li>
+ 																																																																																																																																																																																																																				<li class="collapsed">
+									<a href="https://logging.apache.org/log4j/2.0/manual/configuration.html" title="Configuration">Configuration</a>
+										</li>
+ 																																																		<li class="collapsed">
+									<a href="https://logging.apache.org/log4j/2.0/manual/usage.html" title="Usage">Usage</a>
+										</li>
+ 																																																																																						<li class="collapsed">
+									<a href="https://logging.apache.org/log4j/2.0/manual/webapp.html" title="Web Applications and JSPs">Web Applications and JSPs</a>
+										</li>
+ 																																																																																																																																												<li class="collapsed">
+									<a href="https://logging.apache.org/log4j/2.0/manual/lookups.html" title="Lookups">Lookups</a>
+										</li>
+ 																																																																																																																																																																																																																																																																																																					<li class="collapsed">
+									<a href="https://logging.apache.org/log4j/2.0/manual/appenders.html" title="Appenders">Appenders</a>
+										</li>
+ 																																																																																																																																			<li class="collapsed">
+									<a href="https://logging.apache.org/log4j/2.0/manual/layouts.html" title="Layouts">Layouts</a>
+										</li>
+ 																																																																																																																																			<li class="collapsed">
+									<a href="https://logging.apache.org/log4j/2.0/manual/filters.html" title="Filters">Filters</a>
+										</li>
+ 																																																																																						<li class="collapsed">
+									<a href="https://logging.apache.org/log4j/2.0/manual/async.html" title="Async Loggers">Async Loggers</a>
+										</li>
+ 																																																																																																								<li class="collapsed">
+									<a href="https://logging.apache.org/log4j/2.0/manual/garbagefree.html" title="Garbage-free Logging">Garbage-free Logging</a>
+										</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/manual/jmx.html" title="JMX">JMX</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/manual/logsep.html" title="Logging Separation">Logging Separation</a>
+					</li>
+ 																																																																																																																																																														<li class="collapsed">
+									<a href="https://logging.apache.org/log4j/2.0/manual/extending.html" title="Extending Log4j">Extending Log4j</a>
+										</li>
+ 																																																																																						<li class="collapsed">
+									<a href="https://logging.apache.org/log4j/2.0/manual/plugins.html" title="Plugins">Plugins</a>
+										</li>
+ 																																																																																																		<li class="expanded active">
+									<a href="https://logging.apache.org/log4j/2.0/manual/customconfig.html" title="Programmatic Log4j Configuration">Programmatic Log4j Configuration</a>
+										<ul>
+																			<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/manual/customconfig.html#ConfigurationBuilder" title="ConfigurationBuilder API">ConfigurationBuilder API</a>
+					</li>
+ 																				<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/manual/customconfig.html#ConfigurationFactory" title="Understanding ConfigurationFactory">Understanding ConfigurationFactory</a>
+					</li>
+ 																				<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/manual/customconfig.html#Example" title="Example">Example</a>
+					</li>
+ 																				<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/manual/customconfig.html#Configurator" title="Using Configurator">Using Configurator</a>
+					</li>
+ 																				<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/manual/customconfig.html#Hybrid" title="Config File and Code">Config File and Code</a>
+					</li>
+ 																				<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/manual/customconfig.html#AddingToCurrent" title="After Initialization">After Initialization</a>
+					</li>
+ 																				<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/manual/customconfig.html#AppendingToWritersAndOutputStreams" title="Appending to Writers &amp; OutputStreams">Appending to Writers &amp; OutputStreams</a>
+					</li>
+ 										</ul>
+							</li>
+ 																																																																																						<li class="collapsed">
+									<a href="https://logging.apache.org/log4j/2.0/manual/customloglevels.html" title="Custom Log Levels">Custom Log Levels</a>
+										</li>
+ 								</ul>
+			<ul class="nav nav-list">
+		 											 <li class="nav-header"><i class="icon-tags"></i>Related Projects</li>
+																						<li class="none">
+					
+				
+				<a href="http://logging.apache.org/log4j/scala/index.html" class="external" target="_blank" title="Log4j-Scala">Log4j-Scala</a>
+					</li>
+ 								</ul>
+			<ul class="nav nav-list">
+		 											 <li class="nav-header"><i class="icon-tags"></i>Legacy</li>
+																						<li class="none">
+					
+				
+				<a href="http://logging.apache.org/log4j/1.2/" class="external" target="_blank" title="Log4j 1.2">Log4j 1.2</a>
+					</li>
+ 																<li class="none">
+					
+				
+				<a href="http://logging.apache.org/log4j/log4j-2.3/" class="external" target="_blank" title="Log4j 2.3">Log4j 2.3</a>
+					</li>
+ 								</ul>
+			<ul class="nav nav-list">
+		 											 <li class="nav-header"><i class="icon-cog"></i>Components</li>
+																						<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/log4j-api/index.html" title="API">API</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/log4j-core/index.html" title="Implementation">Implementation</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/log4j-jcl/index.html" title="Commons Logging Bridge">Commons Logging Bridge</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/log4j-1.2-api/index.html" title="Log4j 1.2 API">Log4j 1.2 API</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/log4j-slf4j-impl/index.html" title="SLF4J Binding">SLF4J Binding</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/log4j-jul/index.html" title="JUL Adapter">JUL Adapter</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/log4j-to-slf4j/index.html" title="Log4j 2 to SLF4J Adapter">Log4j 2 to SLF4J Adapter</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/log4j-flume-ng/index.html" title="Apache Flume Appender">Apache Flume Appender</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/log4j-taglib/index.html" title="Log4j Tag Library">Log4j Tag Library</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/log4j-jmx-gui/index.html" title="Log4j JMX GUI">Log4j JMX GUI</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/log4j-web/index.html" title="Log4j Web Application Support">Log4j Web Application Support</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/log4j-appserver/index.html" title="Log4j Application Server Integration">Log4j Application Server Integration</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/log4j-couchdb/index.html" title="Log4j CouchDB appender">Log4j CouchDB appender</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/log4j-mongodb2/index.html" title="Log4j MongoDB2 appender">Log4j MongoDB2 appender</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/log4j-mongodb3/index.html" title="Log4j MongoDB3 appender">Log4j MongoDB3 appender</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/log4j-cassandra/index.html" title="Log4j Cassandra appender">Log4j Cassandra appender</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/log4j-iostreams/index.html" title="Log4j IO Streams">Log4j IO Streams</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/log4j-liquibase/index.html" title="Log4j Liquibase Binding">Log4j Liquibase Binding</a>
+					</li>
+ 								</ul>
+			<ul class="nav nav-list">
+		 											 <li class="nav-header"><i class="icon-info-sign"></i>Project Information</li>
+																						<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/dependency-convergence.html" title="Dependency Convergence">Dependency Convergence</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/dependency-management.html" title="Dependency Management">Dependency Management</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/team-list.html" title="Project Team">Project Team</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/mail-lists.html" title="Mailing Lists">Mailing Lists</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/issue-tracking.html" title="Issue Tracking">Issue Tracking</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/license.html" title="Project License">Project License</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/source-repository.html" title="Source Repository">Source Repository</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/project-summary.html" title="Project Summary">Project Summary</a>
+					</li>
+ 								</ul>
+			<ul class="nav nav-list">
+		 											 <li class="nav-header"><i class="icon-cog"></i>Project Reports</li>
+																						<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/changes-report.html" title="Changes Report">Changes Report</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/jira-report.html" title="JIRA Report">JIRA Report</a>
+					</li>
+ 																<li class="none">
+									<a href="https://logging.apache.org/log4j/2.0/rat-report.html" title="RAT Report">RAT Report</a>
+					</li>
+ 								</ul>
+							</div>
+						<div id="poweredBy">
+															<a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+				<img class="poweredBy" alt="Built by Maven" src="./Log4j – Extending Log4j 2 Configuration - Apache Log4j 2_files/maven-feather.png">
+			</a>
+									</div>
+					</td>
+					<td class="content">
+						<!-- Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License. -->
+    
+      <div class="section">
+<h2><a name="Programmatic_Configuration"></a>Programmatic Configuration</h2>
+        
+<p>
+          Log4j 2 provides a few ways for applications to create their own programmatic configuration:
+        </p>
+        
+<ul>
+          
+<li>Specify a custom ConfigurationFactory to start Log4j with a programmatic configuration</li>
+          
+<li>Use the Configurator to replace the configuration after Log4j started</li>
+          
+<li>Initialize Log4j with a combination of a configuration file and programmatic configuration</li>
+          
+<li>Modify the current Configuration after initialization</li>
+        </ul>
+        <a name="ConfigurationBuilder"></a>
+          
+<div class="section">
+<h3><a name="The_ConfigurationBuilder_API"></a>The ConfigurationBuilder API</h3>
+            
+<p>
+              Starting with release 2.4, Log4j provides a ConfigurationBuilder and a set of component builders that
+              allow a Configuration to be created fairly easily.
+              Actual configuration objects like LoggerConfig or Appender can be unwieldy; they require a lot
+              of knowledge about Log4j internals which makes them difficult to work with if all you want is to
+              create a Configuration.
+            </p>
+            
+<p>
+              The new ConfigurationBuilder API (in the <tt>org.apache.logging.log4j.core.config.builder.api</tt> package)
+              allows users to create Configurations in code by constructing component <i>definitions</i>.
+              There is no need to work directly with actual configuration objects.
+              Component definitions are added to the ConfigurationBuilder, and once all the definitions have
+              been collected all the actual configuration objects (like Loggers and Appenders) are constructed.
+            </p>
+            
+<p>
+              ConfigurationBuilder has convenience methods for the base components that can be configured such as
+              Loggers, Appenders, Filter, Properties, etc. 
+              However, Log4j 2's plugin mechanism means that users can create any number of custom components.
+              As a trade-off, the ConfigurationBuilder API provides only a limited number of "strongly typed"
+              convenience methods like <tt>newLogger()</tt>, <tt>newLayout()</tt> etc.
+              The generic <tt>builder.newComponent()</tt> method can be used if no convenience method exists
+              for the component you want to configure.
+            </p>
+            
+<p>
+              For example, the builder does not know what sub-components can be configured on specific components
+              such as the RollingFileAppender vs. the RoutingAppender. To specify a triggering policy on a 
+              RollingFileAppender you would use builder.newComponent().
+            </p>
+            
+<p>
+              Examples of using the ConfigurationBuilder API are in the sections that follow.
+            </p>
+          </div>
+          <a name="ConfigurationFactory"></a>
+          
+<div class="section">
+<h3><a name="Understanding_ConfigurationFactory"></a>Understanding ConfigurationFactory</h3>
+            
+<p>
+              During initialization, Log4j 2 will search for available <a href="https://logging.apache.org/log4j/2.0/manual/extending.html#ConfigurationFactory">ConfigurationFactories</a>
+              and then select the one to use. The
+              selected ConfigurationFactory creates the Configuration that Log4j will use. Here is how Log4j finds
+              the available ConfigurationFactories:
+            </p>
+            
+<ol style="list-style-type: decimal">
+              
+<li>A system property named <tt>log4j2.configurationFactory</tt> can be set with the name of the ConfigurationFactory to be used.</li>
+              
+<li><tt>ConfigurationFactory.setConfigurationFactory(ConfigurationFactory)</tt> can be called with the instance of the
+              ConfigurationFactory to be used. This must be called before any other calls to Log4j.</li>
+              
+<li>A ConfigurationFactory implementation can be added to the classpath and configured as a plugin
+                in the "ConfigurationFactory" category.
+                The Order annotation can be used to specify the relative priority when multiple applicable 
+                ConfigurationFactories are found.</li>
+            </ol>
+            
+<p>
+              ConfigurationFactories have the concept of "supported types", which basically maps to the
+              file extension of the configuration file that the ConfigurationFactory can handle. 
+              If a configuration file location is specified, ConfigurationFactories whose supported type
+              does not include "*" or the matching file extension will not be used.
+            </p>
+          </div>
+          <a name="Example"></a>
+          
+<div class="section">
+<h3><a name="Initialize_Log4j_Using_ConfigurationBuilder_with_a_Custom_ConfigurationFactory"></a>Initialize Log4j Using ConfigurationBuilder with a Custom ConfigurationFactory</h3>
+            
+<p>
+              One way to programmatically configure Log4j 2 is to create a custom ConfigurationFactory
+              that uses the <a href="https://logging.apache.org/log4j/2.0/manual/customconfig.html#ConfigurationBuilder">ConfigurationBuilder</a> to create a Configuration.
+              The below example overrides the <tt>getConfiguration()</tt> method to return a
+              Configuration created by the ConfigurationBuilder.
+              This will cause the Configuration to automatically be hooked into Log4j when the LoggerContext is created.
+              In the example below, because it specifies a supported type of "*" it will override any configuration files provided.
+            </p>
+            
+<div>
+<pre class="prettyprint linenum"><span class="lit">@Plugin</span><span class="pun">(</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> </span><span class="str">"CustomConfigurationFactory"</span><span class="pun">,</span><span class="pln"> category </span><span class="pun">=</span><span class="pln"> </span><span class="typ">ConfigurationFactory</span><span class="pun">.</span><span class="pln">CATEGORY</span><span class="pun">)</span><span class="pln">
+</span><span class="lit">@Order</span><span class="pun">(</span><span class="lit">50</span><span class="pun">)</span><span class="pln">
+</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">CustomConfigurationFactory</span><span class="pln"> </span><span class="kwd">extends</span><span class="pln"> </span><span class="typ">ConfigurationFactory</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+
+    </span><span class="kwd">static</span><span class="pln"> </span><span class="typ">Configuration</span><span class="pln"> createConfiguration</span><span class="pun">(</span><span class="kwd">final</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> name</span><span class="pun">,</span><span class="pln"> </span><span class="typ">ConfigurationBuilder</span><span class="pun">&lt;</span><span class="typ">BuiltConfiguration</span><span class="pun">&gt;</span><span class="pln"> builder</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        builder</span><span class="pun">.</span><span class="pln">setConfigurationName</span><span class="pun">(</span><span class="pln">name</span><span class="pun">);</span><span class="pln">
+        builder</span><span class="pun">.</span><span class="pln">setStatusLevel</span><span class="pun">(</span><span class="typ">Level</span><span class="pun">.</span><span class="pln">ERROR</span><span class="pun">);</span><span class="pln">
+        builder</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">builder</span><span class="pun">.</span><span class="pln">newFilter</span><span class="pun">(</span><span class="str">"ThresholdFilter"</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Filter</span><span class="pun">.</span><span class="typ">Result</span><span class="pun">.</span><span class="pln">ACCEPT</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Filter</span><span class="pun">.</span><span class="typ">Result</span><span class="pun">.</span><span class="pln">NEUTRAL</span><span class="pun">).</span><span class="pln">
+            addAttribute</span><span class="pun">(</span><span class="str">"level"</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Level</span><span class="pun">.</span><span class="pln">DEBUG</span><span class="pun">));</span><span class="pln">
+        </span><span class="typ">AppenderComponentBuilder</span><span class="pln"> appenderBuilder </span><span class="pun">=</span><span class="pln"> builder</span><span class="pun">.</span><span class="pln">newAppender</span><span class="pun">(</span><span class="str">"Stdout"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"CONSOLE"</span><span class="pun">).</span><span class="pln">
+            addAttribute</span><span class="pun">(</span><span class="str">"target"</span><span class="pun">,</span><span class="pln"> </span><span class="typ">ConsoleAppender</span><span class="pun">.</span><span class="typ">Target</span><span class="pun">.</span><span class="pln">SYSTEM_OUT</span><span class="pun">);</span><span class="pln">
+        appenderBuilder</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">builder</span><span class="pun">.</span><span class="pln">newLayout</span><span class="pun">(</span><span class="str">"PatternLayout"</span><span class="pun">).</span><span class="pln">
+            addAttribute</span><span class="pun">(</span><span class="str">"pattern"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"%d [%t] %-5level: %msg%n%throwable"</span><span class="pun">));</span><span class="pln">
+        appenderBuilder</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">builder</span><span class="pun">.</span><span class="pln">newFilter</span><span class="pun">(</span><span class="str">"MarkerFilter"</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Filter</span><span class="pun">.</span><span class="typ">Result</span><span class="pun">.</span><span class="pln">DENY</span><span class="pun">,</span><span class="pln">
+            </span><span class="typ">Filter</span><span class="pun">.</span><span class="typ">Result</span><span class="pun">.</span><span class="pln">NEUTRAL</span><span class="pun">).</span><span class="pln">addAttribute</span><span class="pun">(</span><span class="str">"marker"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"FLOW"</span><span class="pun">));</span><span class="pln">
+        builder</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">appenderBuilder</span><span class="pun">);</span><span class="pln">
+        builder</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">builder</span><span class="pun">.</span><span class="pln">newLogger</span><span class="pun">(</span><span class="str">"org.apache.logging.log4j"</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Level</span><span class="pun">.</span><span class="pln">DEBUG</span><span class="pun">).</span><span class="pln">
+            add</span><span class="pun">(</span><span class="pln">builder</span><span class="pun">.</span><span class="pln">newAppenderRef</span><span class="pun">(</span><span class="str">"Stdout"</span><span class="pun">)).</span><span class="pln">
+            addAttribute</span><span class="pun">(</span><span class="str">"additivity"</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">));</span><span class="pln">
+        builder</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">builder</span><span class="pun">.</span><span class="pln">newRootLogger</span><span class="pun">(</span><span class="typ">Level</span><span class="pun">.</span><span class="pln">ERROR</span><span class="pun">).</span><span class="pln">add</span><span class="pun">(</span><span class="pln">builder</span><span class="pun">.</span><span class="pln">newAppenderRef</span><span class="pun">(</span><span class="str">"Stdout"</span><span class="pun">)));</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> builder</span><span class="pun">.</span><span class="pln">build</span><span class="pun">();</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="lit">@Override</span><span class="pln">
+    </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">Configuration</span><span class="pln"> getConfiguration</span><span class="pun">(</span><span class="kwd">final</span><span class="pln"> </span><span class="typ">LoggerContext</span><span class="pln"> loggerContext</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">ConfigurationSource</span><span class="pln"> source</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> getConfiguration</span><span class="pun">(</span><span class="pln">loggerContext</span><span class="pun">,</span><span class="pln"> source</span><span class="pun">.</span><span class="pln">toString</span><span class="pun">(),</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="lit">@Override</span><span class="pln">
+    </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">Configuration</span><span class="pln"> getConfiguration</span><span class="pun">(</span><span class="kwd">final</span><span class="pln"> </span><span class="typ">LoggerContext</span><span class="pln"> loggerContext</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> name</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> URI configLocation</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="typ">ConfigurationBuilder</span><span class="pun">&lt;</span><span class="typ">BuiltConfiguration</span><span class="pun">&gt;</span><span class="pln"> builder </span><span class="pun">=</span><span class="pln"> newConfigurationBuilder</span><span class="pun">();</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> createConfiguration</span><span class="pun">(</span><span class="pln">name</span><span class="pun">,</span><span class="pln"> builder</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="lit">@Override</span><span class="pln">
+    </span><span class="kwd">protected</span><span class="pln"> </span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> getSupportedTypes</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> </span><span class="pun">{</span><span class="str">"*"</span><span class="pun">};</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre></div>
+            
+<p>
+              As of version 2.7, the <tt>ConfigurationFactory.getConfiguration()</tt> methods take an 
+              additional <tt>LoggerContext</tt> parameter.
+            </p>
+          </div>
+        <a name="Configurator"></a>
+          
+<div class="section">
+<h3><a name="Reconfigure_Log4j_Using_ConfigurationBuilder_with_the_Configurator"></a>Reconfigure Log4j Using ConfigurationBuilder with the Configurator</h3>
+            
+<p>
+              An alternative to a custom ConfigurationFactory is to configure with the <tt>Configurator</tt>.
+              Once a Configuration object has been constructed, it can be passed to one of the 
+              <tt>Configurator.initialize</tt> methods to set up the Log4j configuration.
+            </p>
+            
+<p>
+              Using the Configurator in this manner allows the application control over when Log4j is initialized.
+              However, should any logging be attempted before Configurator.initialize() is called then the
+              default configuration will be used for those log events.
+            </p>
+            
+<div>
+<pre class="prettyprint linenum"><span class="typ">ConfigurationBuilder</span><span class="pun">&lt;</span><span class="typ">BuiltConfiguration</span><span class="pun">&gt;</span><span class="pln"> builder </span><span class="pun">=</span><span class="pln"> </span><span class="typ">ConfigurationBuilderFactory</span><span class="pun">.</span><span class="pln">newConfigurationBuilder</span><span class="pun">();</span><span class="pln">
+builder</span><span class="pun">.</span><span class="pln">setStatusLevel</span><span class="pun">(</span><span class="typ">Level</span><span class="pun">.</span><span class="pln">ERROR</span><span class="pun">);</span><span class="pln">
+builder</span><span class="pun">.</span><span class="pln">setConfigurationName</span><span class="pun">(</span><span class="str">"BuilderTest"</span><span class="pun">);</span><span class="pln">
+builder</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">builder</span><span class="pun">.</span><span class="pln">newFilter</span><span class="pun">(</span><span class="str">"ThresholdFilter"</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Filter</span><span class="pun">.</span><span class="typ">Result</span><span class="pun">.</span><span class="pln">ACCEPT</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Filter</span><span class="pun">.</span><span class="typ">Result</span><span class="pun">.</span><span class="pln">NEUTRAL</span><span class="pun">)</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">addAttribute</span><span class="pun">(</span><span class="str">"level"</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Level</span><span class="pun">.</span><span class="pln">DEBUG</span><span class="pun">));</span><span class="pln">
+</span><span class="typ">AppenderComponentBuilder</span><span class="pln"> appenderBuilder </span><span class="pun">=</span><span class="pln"> builder</span><span class="pun">.</span><span class="pln">newAppender</span><span class="pun">(</span><span class="str">"Stdout"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"CONSOLE"</span><span class="pun">).</span><span class="pln">addAttribute</span><span class="pun">(</span><span class="str">"target"</span><span class="pun">,</span><span class="pln">
+    </span><span class="typ">ConsoleAppender</span><span class="pun">.</span><span class="typ">Target</span><span class="pun">.</span><span class="pln">SYSTEM_OUT</span><span class="pun">);</span><span class="pln">
+appenderBuilder</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">builder</span><span class="pun">.</span><span class="pln">newLayout</span><span class="pun">(</span><span class="str">"PatternLayout"</span><span class="pun">)</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">addAttribute</span><span class="pun">(</span><span class="str">"pattern"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"%d [%t] %-5level: %msg%n%throwable"</span><span class="pun">));</span><span class="pln">
+appenderBuilder</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">builder</span><span class="pun">.</span><span class="pln">newFilter</span><span class="pun">(</span><span class="str">"MarkerFilter"</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Filter</span><span class="pun">.</span><span class="typ">Result</span><span class="pun">.</span><span class="pln">DENY</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Filter</span><span class="pun">.</span><span class="typ">Result</span><span class="pun">.</span><span class="pln">NEUTRAL</span><span class="pun">)</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">addAttribute</span><span class="pun">(</span><span class="str">"marker"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"FLOW"</span><span class="pun">));</span><span class="pln">
+builder</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">appenderBuilder</span><span class="pun">);</span><span class="pln">
+builder</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">builder</span><span class="pun">.</span><span class="pln">newLogger</span><span class="pun">(</span><span class="str">"org.apache.logging.log4j"</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Level</span><span class="pun">.</span><span class="pln">DEBUG</span><span class="pun">)</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">builder</span><span class="pun">.</span><span class="pln">newAppenderRef</span><span class="pun">(</span><span class="str">"Stdout"</span><span class="pun">)).</span><span class="pln">addAttribute</span><span class="pun">(</span><span class="str">"additivity"</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">));</span><span class="pln">
+builder</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">builder</span><span class="pun">.</span><span class="pln">newRootLogger</span><span class="pun">(</span><span class="typ">Level</span><span class="pun">.</span><span class="pln">ERROR</span><span class="pun">).</span><span class="pln">add</span><span class="pun">(</span><span class="pln">builder</span><span class="pun">.</span><span class="pln">newAppenderRef</span><span class="pun">(</span><span class="str">"Stdout"</span><span class="pun">)));</span><span class="pln">
+ctx </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Configurator</span><span class="pun">.</span><span class="pln">initialize</span><span class="pun">(</span><span class="pln">builder</span><span class="pun">.</span><span class="pln">build</span><span class="pun">());</span></pre></div>
+            
+<p>This example shows how to create a configuration that includes a RollingFileAppender.</p>
+            
+<div>
+<pre class="prettyprint linenum"><span class="typ">ConfigurationBuilder</span><span class="pun">&lt;</span><span class="pln"> </span><span class="typ">BuiltConfiguration</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> builder </span><span class="pun">=</span><span class="pln"> </span><span class="typ">ConfigurationBuilderFactory</span><span class="pun">.</span><span class="pln">newConfigurationBuilder</span><span class="pun">();</span><span class="pln">
+
+builder</span><span class="pun">.</span><span class="pln">setStatusLevel</span><span class="pun">(</span><span class="pln"> </span><span class="typ">Level</span><span class="pun">.</span><span class="pln">ERROR</span><span class="pun">);</span><span class="pln">
+builder</span><span class="pun">.</span><span class="pln">setConfigurationName</span><span class="pun">(</span><span class="str">"RollingBuilder"</span><span class="pun">);</span><span class="pln">
+</span><span class="com">// create a console appender</span><span class="pln">
+</span><span class="typ">AppenderComponentBuilder</span><span class="pln"> appenderBuilder </span><span class="pun">=</span><span class="pln"> builder</span><span class="pun">.</span><span class="pln">newAppender</span><span class="pun">(</span><span class="str">"Stdout"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"CONSOLE"</span><span class="pun">).</span><span class="pln">addAttribute</span><span class="pun">(</span><span class="str">"target"</span><span class="pun">,</span><span class="pln">
+    </span><span class="typ">ConsoleAppender</span><span class="pun">.</span><span class="typ">Target</span><span class="pun">.</span><span class="pln">SYSTEM_OUT</span><span class="pun">);</span><span class="pln">
+appenderBuilder</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">builder</span><span class="pun">.</span><span class="pln">newLayout</span><span class="pun">(</span><span class="str">"PatternLayout"</span><span class="pun">)</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">addAttribute</span><span class="pun">(</span><span class="str">"pattern"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"%d [%t] %-5level: %msg%n%throwable"</span><span class="pun">));</span><span class="pln">
+builder</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln"> appenderBuilder </span><span class="pun">);</span><span class="pln">
+</span><span class="com">// create a rolling file appender</span><span class="pln">
+</span><span class="typ">LayoutComponentBuilder</span><span class="pln"> layoutBuilder </span><span class="pun">=</span><span class="pln"> builder</span><span class="pun">.</span><span class="pln">newLayout</span><span class="pun">(</span><span class="str">"PatternLayout"</span><span class="pun">)</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">addAttribute</span><span class="pun">(</span><span class="str">"pattern"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"%d [%t] %-5level: %msg%n"</span><span class="pun">);</span><span class="pln">
+</span><span class="typ">ComponentBuilder</span><span class="pln"> triggeringPolicy </span><span class="pun">=</span><span class="pln"> builder</span><span class="pun">.</span><span class="pln">newComponent</span><span class="pun">(</span><span class="str">"Policies"</span><span class="pun">)</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">addComponent</span><span class="pun">(</span><span class="pln">builder</span><span class="pun">.</span><span class="pln">newComponent</span><span class="pun">(</span><span class="str">"CronTriggeringPolicy"</span><span class="pun">).</span><span class="pln">addAttribute</span><span class="pun">(</span><span class="str">"schedule"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"0 0 0 * * ?"</span><span class="pun">))</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">addComponent</span><span class="pun">(</span><span class="pln">builder</span><span class="pun">.</span><span class="pln">newComponent</span><span class="pun">(</span><span class="str">"SizeBasedTriggeringPolicy"</span><span class="pun">).</span><span class="pln">addAttribute</span><span class="pun">(</span><span class="str">"size"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"100M"</span><span class="pun">));</span><span class="pln">
+appenderBuilder </span><span class="pun">=</span><span class="pln"> builder</span><span class="pun">.</span><span class="pln">newAppender</span><span class="pun">(</span><span class="str">"rolling"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"RollingFile"</span><span class="pun">)</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">addAttribute</span><span class="pun">(</span><span class="str">"fileName"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"target/rolling.log"</span><span class="pun">)</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">addAttribute</span><span class="pun">(</span><span class="str">"filePattern"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"target/archive/rolling-%d{MM-dd-yy}.log.gz"</span><span class="pun">)</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">layoutBuilder</span><span class="pun">)</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">addComponent</span><span class="pun">(</span><span class="pln">triggeringPolicy</span><span class="pun">);</span><span class="pln">
+builder</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">appenderBuilder</span><span class="pun">);</span><span class="pln">
+
+</span><span class="com">// create the new logger</span><span class="pln">
+builder</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln"> builder</span><span class="pun">.</span><span class="pln">newLogger</span><span class="pun">(</span><span class="pln"> </span><span class="str">"TestLogger"</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Level</span><span class="pun">.</span><span class="pln">DEBUG </span><span class="pun">)</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln"> builder</span><span class="pun">.</span><span class="pln">newAppenderRef</span><span class="pun">(</span><span class="pln"> </span><span class="str">"rolling"</span><span class="pln"> </span><span class="pun">)</span><span class="pln"> </span><span class="pun">)</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">addAttribute</span><span class="pun">(</span><span class="pln"> </span><span class="str">"additivity"</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">false</span><span class="pln"> </span><span class="pun">)</span><span class="pln"> </span><span class="pun">);</span><span class="pln">
+
+builder</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln"> builder</span><span class="pun">.</span><span class="pln">newRootLogger</span><span class="pun">(</span><span class="pln"> </span><span class="typ">Level</span><span class="pun">.</span><span class="pln">DEBUG </span><span class="pun">)</span><span class="pln">
+    </span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln"> builder</span><span class="pun">.</span><span class="pln">newAppenderRef</span><span class="pun">(</span><span class="pln"> </span><span class="str">"rolling"</span><span class="pln"> </span><span class="pun">)</span><span class="pln"> </span><span class="pun">)</span><span class="pln"> </span><span class="pun">);</span><span class="pln">
+</span><span class="typ">LoggerContext</span><span class="pln"> ctx </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Configurator</span><span class="pun">.</span><span class="pln">initialize</span><span class="pun">(</span><span class="pln">builder</span><span class="pun">.</span><span class="pln">build</span><span class="pun">());</span></pre></div>
+        </div>
+
+          <a name="Hybrid"></a>
+          
+<div class="section">
+<h3><a name="Initialize_Log4j_by_Combining_Configuration_File_with_Programmatic_Configuration"></a>Initialize Log4j by Combining Configuration File with Programmatic Configuration</h3>
+            
+<p>
+              Sometimes you want to configure with a configuration file but do some additional programmatic
+              configuration. A possible use case might be that you want to allow for a flexible configuration using XML 
+              but at the same time make sure there are a few configuration elements that are always present that can't be removed.
+            </p>
+            
+<p>
+              The easiest way to achieve this is to extend one of the standard Configuration classes
+              (XMLConfiguration, JSONConfiguration) and then create a new ConfigurationFactory for the extended class.
+              After the standard configuration completes the custom configuration can be added to it.
+            </p>
+            
+<p>
+              The example below shows how to extend XMLConfiguration to manually add an Appender and a LoggerConfig
+              to the configuration.
+            </p>
+            
+<div>
+<pre class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="lit">@Plugin</span><span class="pun">(</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> </span><span class="str">"MyXMLConfigurationFactory"</span><span class="pun">,</span><span class="pln"> category </span><span class="pun">=</span><span class="pln"> </span><span class="str">"ConfigurationFactory"</span><span class="pun">)</span></li><li class="L1"><span class="lit">@Order</span><span class="pun">(</span><span class="lit">10</span><span class="pun">)</span></li><li class="L2"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">MyXMLConfigurationFactory</span><span class="pln"> </span><span class="kwd">extends</span><span class="pln"> </span><span class="typ">ConfigurationFactory</span><span class="pln"> </span><span class="pun">{</span></li><li class="L3"><span class="pln">&nbsp;</span></li><li class="L4"><span class="pln">    </span><span class="com">/**</span></li><li class="L5"><span class="com">     * Valid file extensions for XML files.</span></li><li class="L6"><span class="com">     */</span></li><li class="L7"><span class="pln">    </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> SUFFIXES </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> </span><span class="pun">{</span><span class="str">".xml"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"*"</span><span class="pun">};</span></li><li class="L8"><span class="pln">&nbsp;</span></li><li class="L9"><span class="pln">    </span><span class="com">/**</span></li><li class="L0"><span class="com">     * Return the Configuration.</span></li><li class="L1"><span class="com">     * @param source The InputSource.</span></li><li class="L2"><span class="com">     * @return The Configuration.</span></li><li class="L3"><span class="com">     */</span></li><li class="L4"><span class="pln">    </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">Configuration</span><span class="pln"> getConfiguration</span><span class="pun">(</span><span class="typ">InputSource</span><span class="pln"> source</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></li><li class="L5"><span class="pln">        </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">MyXMLConfiguration</span><span class="pun">(</span><span class="pln">source</span><span class="pun">,</span><span class="pln"> configFile</span><span class="pun">);</span></li><li class="L6"><span class="pln">    </span><span class="pun">}</span></li><li class="L7"><span class="pln">&nbsp;</span></li><li class="L8"><span class="pln">    </span><span class="com">/**</span></li><li class="L9"><span class="com">     * Returns the file suffixes for XML files.</span></li><li class="L0"><span class="com">     * @return An array of File extensions.</span></li><li class="L1"><span class="com">     */</span></li><li class="L2"><span class="pln">    </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> getSupportedTypes</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span></li><li class="L3"><span class="pln">        </span><span class="kwd">return</span><span class="pln"> SUFFIXES</span><span class="pun">;</span></li><li class="L4"><span class="pln">    </span><span class="pun">}</span></li><li class="L5"><span class="pun">}</span></li><li class="L6"><span class="pln">&nbsp;</span></li><li class="L7"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">MyXMLConfiguration</span><span class="pln"> </span><span class="kwd">extends</span><span class="pln"> </span><span class="typ">XMLConfiguration</span><span class="pln"> </span><span class="pun">{</span></li><li class="L8"><span class="pln">    </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">MyXMLConfiguration</span><span class="pun">(</span><span class="kwd">final</span><span class="pln"> </span><span class="typ">ConfigurationFactory</span><span class="pun">.</span><span class="typ">ConfigurationSource</span><span class="pln"> configSource</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></li><li class="L9"><span class="pln">      </span><span class="kwd">super</span><span class="pun">(</span><span class="pln">configSource</span><span class="pun">);</span></li><li class="L0"><span class="pln">    </span><span class="pun">}</span></li><li class="L1"><span class="pln">&nbsp;</span></li><li class="L2"><span class="pln">    </span><span class="lit">@Override</span></li><li class="L3"><span class="pln">    </span><span class="kwd">protected</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> doConfigure</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span></li><li class="L4"><span class="pln">        </span><span class="kwd">super</span><span class="pun">.</span><span class="pln">doConfigure</span><span class="pun">();</span></li><li class="L5"><span class="pln">        </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">LoggerContext</span><span class="pln"> ctx </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="typ">LoggerContext</span><span class="pun">)</span><span class="pln"> </span><span class="typ">LogManager</span><span class="pun">.</span><span class="pln">getContext</span><span class="pun">(</span><span class="kwd">false</span><span class="pun">);</span></li><li class="L6"><span class="pln">        </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Layout</span><span class="pln"> layout </span><span class="pun">=</span><span class="pln"> </span><span class="typ">PatternLayout</span><span class="pun">.</span><span class="pln">createLayout</span><span class="pun">(</span><span class="typ">PatternLayout</span><span class="pun">.</span><span class="pln">SIMPLE_CONVERSION_PATTERN</span><span class="pun">,</span><span class="pln"> config</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span></li><li class="L7"><span class="pln">              </span><span class="kwd">null</span><span class="pun">,</span><span class="kwd">null</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">);</span></li><li class="L8"><span class="pln">        </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Appender</span><span class="pln"> appender </span><span class="pun">=</span><span class="pln"> </span><span class="typ">FileAppender</span><span class="pun">.</span><span class="pln">createAppender</span><span class="pun">(</span><span class="str">"target/test.log"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"false"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"false"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"File"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"true"</span><span class="pun">,</span></li><li class="L9"><span class="pln">              </span><span class="str">"false"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"false"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"4000"</span><span class="pun">,</span><span class="pln"> layout</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln"> </span><span class="str">"false"</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln"> config</span><span class="pun">);</span></li><li class="L0"><span class="pln">        appender</span><span class="pun">.</span><span class="pln">start</span><span class="pun">();</span></li><li class="L1"><span class="pln">        addAppender</span><span class="pun">(</span><span class="pln">appender</span><span class="pun">);</span></li><li class="L2"><span class="pln">        </span><span class="typ">LoggerConfig</span><span class="pln"> loggerConfig </span><span class="pun">=</span><span class="pln"> </span><span class="typ">LoggerConfig</span><span class="pun">.</span><span class="pln">createLogger</span><span class="pun">(</span><span class="str">"false"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"info"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"org.apache.logging.log4j"</span><span class="pun">,</span></li><li class="L3"><span class="pln">              </span><span class="str">"true"</span><span class="pun">,</span><span class="pln"> refs</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln"> config</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pln"> </span><span class="pun">);</span></li><li class="L4"><span class="pln">        loggerConfig</span><span class="pun">.</span><span class="pln">addAppender</span><span class="pun">(</span><span class="pln">appender</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">);</span></li><li class="L5"><span class="pln">        addLogger</span><span class="pun">(</span><span class="str">"org.apache.logging.log4j"</span><span class="pun">,</span><span class="pln"> loggerConfig</span><span class="pun">);</span></li><li class="L6"><span class="pln">    </span><span class="pun">}</span></li><li class="L7"><span class="pun">}</span></li></ol></pre></div>
+          </div>
+        <a name="AddingToCurrent"></a>
+        
+<div class="section">
+<h3><a name="Programmatically_Modifying_the_Current_Configuration_after_Initialization"></a>Programmatically Modifying the Current Configuration after Initialization</h3>
+            
+<p>
+              Applications sometimes have the need to customize logging separate from the actual configuration.
+              Log4j allows this although it suffers from a few limitations:
+            </p>
+              
+<ol style="list-style-type: decimal">
+                
+<li>If the configuration file is changed the configuration will be reloaded and the manual changes
+                will be lost.</li>
+                
+<li>Modification to the running configuration requires that all the methods being called (addAppender
+                  and addLogger) be synchronized.</li>
+              </ol>
+            
+<p>
+              As such, the recommended approach for customizing a configuration is to extend one of the standard
+              Configuration classes, override the setup method to first do super.setup() and then add the custom
+              Appenders, Filters and LoggerConfigs to the configuration before it is registered for use.
+            </p>
+            
+<p>
+              The following example adds an Appender and a new LoggerConfig using that Appender to the current
+              configuration.
+            </p>
+            <!-- TODO: update code example below with new plugin API -->
+            
+<div>
+<pre class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="pln">        </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">LoggerContext</span><span class="pln"> ctx </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="typ">LoggerContext</span><span class="pun">)</span><span class="pln"> </span><span class="typ">LogManager</span><span class="pun">.</span><span class="pln">getContext</span><span class="pun">(</span><span class="kwd">false</span><span class="pun">);</span></li><li class="L1"><span class="pln">        </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Configuration</span><span class="pln"> config </span><span class="pun">=</span><span class="pln"> ctx</span><span class="pun">.</span><span class="pln">getConfiguration</span><span class="pun">();</span></li><li class="L2"><span class="pln">        </span><span class="typ">Layout</span><span class="pln"> layout </span><span class="pun">=</span><span class="pln"> </span><span class="typ">PatternLayout</span><span class="pun">.</span><span class="pln">createLayout</span><span class="pun">(</span><span class="typ">PatternLayout</span><span class="pun">.</span><span class="pln">SIMPLE_CONVERSION_PATTERN</span><span class="pun">,</span><span class="pln"> config</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span></li><li class="L3"><span class="pln">            </span><span class="kwd">null</span><span class="pun">,</span><span class="kwd">null</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">);</span></li><li class="L4"><span class="pln">        </span><span class="typ">Appender</span><span class="pln"> appender </span><span class="pun">=</span><span class="pln"> </span><span class="typ">FileAppender</span><span class="pun">.</span><span class="pln">createAppender</span><span class="pun">(</span><span class="str">"target/test.log"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"false"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"false"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"File"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"true"</span><span class="pun">,</span></li><li class="L5"><span class="pln">            </span><span class="str">"false"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"false"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"4000"</span><span class="pun">,</span><span class="pln"> layout</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln"> </span><span class="str">"false"</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln"> config</span><span class="pun">);</span></li><li class="L6"><span class="pln">        appender</span><span class="pun">.</span><span class="pln">start</span><span class="pun">();</span></li><li class="L7"><span class="pln">        config</span><span class="pun">.</span><span class="pln">addAppender</span><span class="pun">(</span><span class="pln">appender</span><span class="pun">);</span></li><li class="L8"><span class="pln">        </span><span class="typ">AppenderRef</span><span class="pln"> </span><span class="kwd">ref</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">AppenderRef</span><span class="pun">.</span><span class="pln">createAppenderRef</span><span class="pun">(</span><span class="str">"File"</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">);</span></li><li class="L9"><span class="pln">        </span><span class="typ">AppenderRef</span><span class="pun">[]</span><span class="pln"> refs </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">AppenderRef</span><span class="pun">[]</span><span class="pln"> </span><span class="pun">{</span><span class="kwd">ref</span><span class="pun">};</span></li><li class="L0"><span class="pln">        </span><span class="typ">LoggerConfig</span><span class="pln"> loggerConfig </span><span class="pun">=</span><span class="pln"> </span><span class="typ">LoggerConfig</span><span class="pun">.</span><span class="pln">createLogger</span><span class="pun">(</span><span class="str">"false"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"info"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"org.apache.logging.log4j"</span><span class="pun">,</span></li><li class="L1"><span class="pln">            </span><span class="str">"true"</span><span class="pun">,</span><span class="pln"> refs</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln"> config</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pln"> </span><span class="pun">);</span></li><li class="L2"><span class="pln">        loggerConfig</span><span class="pun">.</span><span class="pln">addAppender</span><span class="pun">(</span><span class="pln">appender</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">);</span></li><li class="L3"><span class="pln">        config</span><span class="pun">.</span><span class="pln">addLogger</span><span class="pun">(</span><span class="str">"org.apache.logging.log4j"</span><span class="pun">,</span><span class="pln"> loggerConfig</span><span class="pun">);</span></li><li class="L4"><span class="pln">        ctx</span><span class="pun">.</span><span class="pln">updateLoggers</span><span class="pun">();</span></li><li class="L5"><span class="pun">}</span></li></ol></pre></div>
+          </div>
+        <a name="AppendingToWritersAndOutputStreams"></a>
+        
+<div class="section">
+<h3><a name="Appending_Log_Events_to_Writers_and_OutputStreams_Programmatically"></a>Appending Log Events to Writers and OutputStreams Programmatically</h3>
+            
+<p>
+              Log4j 2.5 provides facilities to append log events to Writers and OutputStreams. For example, this 
+              provides simple integration for JDBC Driver implementors that use Log4j internally and still want 
+              to support the JDBC APIs <tt>CommonDataSource.setLogWriter(PrintWriter)</tt>, 
+              <tt>java.sql.DriverManager.setLogWriter(PrintWriter)</tt>, and 
+              <tt>java.sql.DriverManager.setLogStream(PrintStream)</tt>.              
+            </p>
+            
+<p>
+              Given any <tt>Writer</tt>, like a <tt>PrintWriter</tt>, you tell Log4j to append events to 
+              that writer by creating a <tt>WriterAppender</tt> and updating the Log4j configuration:
+            </p>
+            
+<div>
+<pre class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="kwd">void</span><span class="pln"> addAppender</span><span class="pun">(</span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Writer</span><span class="pln"> writer</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> writerName</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></li><li class="L1"><span class="pln">    </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">LoggerContext</span><span class="pln"> context </span><span class="pun">=</span><span class="pln"> </span><span class="typ">LoggerContext</span><span class="pun">.</span><span class="pln">getContext</span><span class="pun">(</span><span class="kwd">false</span><span class="pun">);</span></li><li class="L2"><span class="pln">    </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Configuration</span><span class="pln"> config </span><span class="pun">=</span><span class="pln"> context</span><span class="pun">.</span><span class="pln">getConfiguration</span><span class="pun">();</span></li><li class="L3"><span class="pln">    </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">PatternLayout</span><span class="pln"> layout </span><span class="pun">=</span><span class="pln"> </span><span class="typ">PatternLayout</span><span class="pun">.</span><span class="pln">createDefaultLayout</span><span class="pun">(</span><span class="pln">config</span><span class="pun">);</span></li><li class="L4"><span class="pln">    </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Appender</span><span class="pln"> appender </span><span class="pun">=</span><span class="pln"> </span><span class="typ">WriterAppender</span><span class="pun">.</span><span class="pln">createAppender</span><span class="pun">(</span><span class="pln">layout</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln"> writer</span><span class="pun">,</span><span class="pln"> writerName</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">);</span></li><li class="L5"><span class="pln">    appender</span><span class="pun">.</span><span class="pln">start</span><span class="pun">();</span></li><li class="L6"><span class="pln">    config</span><span class="pun">.</span><span class="pln">addAppender</span><span class="pun">(</span><span class="pln">appender</span><span class="pun">);</span></li><li class="L7"><span class="pln">    updateLoggers</span><span class="pun">(</span><span class="pln">appender</span><span class="pun">,</span><span class="pln"> config</span><span class="pun">);</span></li><li class="L8"><span class="pun">}</span></li><li class="L9"><span class="pln">&nbsp;</span></li><li class="L0"><span class="kwd">private</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> updateLoggers</span><span class="pun">(</span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Appender</span><span class="pln"> appender</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Configuration</span><span class="pln"> config</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></li><li class="L1"><span class="pln">    </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Level</span><span class="pln"> level </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">;</span></li><li class="L2"><span class="pln">    </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Filter</span><span class="pln"> filter </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">;</span></li><li class="L3"><span class="pln">    </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">final</span><span class="pln"> </span><span class="typ">LoggerConfig</span><span class="pln"> loggerConfig </span><span class="pun">:</span><span class="pln"> config</span><span class="pun">.</span><span class="pln">getLoggers</span><span class="pun">().</span><span class="pln">values</span><span class="pun">())</span><span class="pln"> </span><span class="pun">{</span></li><li class="L4"><span class="pln">        loggerConfig</span><span class="pun">.</span><span class="pln">addAppender</span><span class="pun">(</span><span class="pln">appender</span><span class="pun">,</span><span class="pln"> level</span><span class="pun">,</span><span class="pln"> filter</span><span class="pun">);</span></li><li class="L5"><span class="pln">    </span><span class="pun">}</span></li><li class="L6"><span class="pln">    config</span><span class="pun">.</span><span class="pln">getRootLogger</span><span class="pun">().</span><span class="pln">addAppender</span><span class="pun">(</span><span class="pln">appender</span><span class="pun">,</span><span class="pln"> level</span><span class="pun">,</span><span class="pln"> filter</span><span class="pun">);</span></li><li class="L7"><span class="pun">}</span></li></ol></pre></div>
+            
+<p>
+              You can achieve the same effect with an <tt>OutputStream</tt>, like a <tt>PrintStream</tt>:
+            </p>            
+            
+<div>
+<pre class="prettyprint linenums"><ol class="linenums"><li class="L0"><span class="kwd">void</span><span class="pln"> addAppender</span><span class="pun">(</span><span class="kwd">final</span><span class="pln"> </span><span class="typ">OutputStream</span><span class="pln"> outputStream</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> outputStreamName</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></li><li class="L1"><span class="pln">    </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">LoggerContext</span><span class="pln"> context </span><span class="pun">=</span><span class="pln"> </span><span class="typ">LoggerContext</span><span class="pun">.</span><span class="pln">getContext</span><span class="pun">(</span><span class="kwd">false</span><span class="pun">);</span></li><li class="L2"><span class="pln">    </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Configuration</span><span class="pln"> config </span><span class="pun">=</span><span class="pln"> context</span><span class="pun">.</span><span class="pln">getConfiguration</span><span class="pun">();</span></li><li class="L3"><span class="pln">    </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">PatternLayout</span><span class="pln"> layout </span><span class="pun">=</span><span class="pln"> </span><span class="typ">PatternLayout</span><span class="pun">.</span><span class="pln">createDefaultLayout</span><span class="pun">(</span><span class="pln">config</span><span class="pun">);</span></li><li class="L4"><span class="pln">    </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Appender</span><span class="pln"> appender </span><span class="pun">=</span><span class="pln"> </span><span class="typ">OutputStreamAppender</span><span class="pun">.</span><span class="pln">createAppender</span><span class="pun">(</span><span class="pln">layout</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln"> outputStream</span><span class="pun">,</span><span class="pln"> outputStreamName</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">);</span></li><li class="L5"><span class="pln">    appender</span><span class="pun">.</span><span class="pln">start</span><span class="pun">();</span></li><li class="L6"><span class="pln">    config</span><span class="pun">.</span><span class="pln">addAppender</span><span class="pun">(</span><span class="pln">appender</span><span class="pun">);</span></li><li class="L7"><span class="pln">    updateLoggers</span><span class="pun">(</span><span class="pln">appender</span><span class="pun">,</span><span class="pln"> config</span><span class="pun">);</span></li><li class="L8"><span class="pun">}</span></li></ol></pre></div>
+        </div>
+            
+<p>
+              The difference is the use of <tt>OutputStreamAppender</tt> instead of <tt>WriterAppender</tt>.
+            </p>            
+      </div>
+
+    
+
+					</td>
+				</tr>
+			</tbody></table>
+		</div>
+
+		<div class="footer">
+							<p>Copyright © 1999-2018 <a class="external" href="https://www.apache.org/" target="_blank">The Apache Software Foundation</a>. All Rights Reserved.</p>
+				<p>Apache Logging, Apache Log4j, Log4j, Apache, the Apache feather logo, and the Apache Logging project logo are trademarks of The Apache Software Foundation.</p>
+				<p>Site powered by <a class="external" href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Icons from <a class="external" href="http://glyphicons.com/" target="_blank">Glyphicons Free</a>.</p>
+			</div>
+		
+	
+
+</body></html>

@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<!-- saved from url=(0118)https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers -->
+<html itemscope="" itemtype="http://schema.org/QAPage" class="html__responsive"><style type="text/css" id="night-mode-pro-style"></style><link type="text/css" rel="stylesheet" id="night-mode-pro-link"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <title>java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow</title>
+        <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/stackoverflow/img/favicon.ico?v=4f32ecc8f43d">
+        <link rel="apple-touch-icon image_src" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+        <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="https://stackoverflow.com/opensearch.xml">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers">
+        <meta property="og:site_name" content="Stack Overflow">
+        <meta property="og:image" itemprop="image primaryImageOfPage" content="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon@2.png?v=73d79a89bded">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:domain" content="stackoverflow.com">
+        <meta name="twitter:title" property="og:title" itemprop="title name" content="Spring Controller to handle all requests not matched by other Controllers">
+        <meta name="twitter:description" property="og:description" itemprop="description" content="I have a series of Controllers with Request Mappings that match certain URL&#39;s. I also want a Controller that will match any other URL not matched by the other Controllers.
+Is there a way to do this...">
+        <script src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/f.txt"></script><script src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/pubads_impl_rendering_235.js.download"></script><script src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/rules-p-c1rF4kxgLUzNc.js.download" async=""></script><script async="" src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/quant.js.download"></script><script async="" src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/beacon.js.download"></script><script async="" src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/analytics.js.download"></script><script src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/jquery.min.js.download"></script>
+        <script src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/stub.en.js.download"></script>
+    
+    <link rel="stylesheet" type="text/css" href="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/stacks.css">
+        <link rel="stylesheet" type="text/css" href="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/primary-unified.css">
+    
+            <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Spring Controller to handle all requests not matched by other Controllers&#39;" href="https://stackoverflow.com/feeds/question/36594644">
+            <meta name="twitter:app:country" content="US">
+            <meta name="twitter:app:name:iphone" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:iphone" content="871299723">
+            <meta name="twitter:app:url:iphone" content="se-zaphod://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers">
+            <meta name="twitter:app:name:ipad" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:ipad" content="871299723">
+            <meta name="twitter:app:url:ipad" content="se-zaphod://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers">
+            <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+            <meta name="twitter:app:url:googleplay" content="http://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers">
+            <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+        <script>
+
+            StackExchange.ready(function () {
+                                    
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.initSnippetRenderer();
+                    });
+                    
+
+                StackExchange.using("postValidation", function () {
+                    StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+                });
+
+                
+                StackExchange.question.init({votesCast:[],autoShowCommentHelp:true,showAnswerHelp:true,totalCommentCount:5,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:36594644});
+
+                styleCode();
+
+                    StackExchange.realtime.subscribeToQuestion('1', '36594644');
+                                                    StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text'); });
+
+            });
+        </script>
+
+        
+        
+        
+        
+        
+        
+                <script>
+        StackExchange.init({"locale":"en","serverTime":1533128662,"routeName":"Questions/Show","stackAuthUrl":"https://stackauth.com","networkMetaHostname":"meta.stackexchange.com","site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"enableNewTagCreationWarning":true,"insertSpaceAfterNameTabCompletion":false,"id":1,"childUrl":"https://meta.stackoverflow.com","enableSocialMediaInSharePopup":true,"protocol":"https"},"user":{"fkey":"ee1712797467907b201a5f4811501ceb2a7794733c2f8f0db78b12e74d9b5871","tid":"32db0cd5-8368-653b-f504-a8e2c597cab9","rep":1,"isRegistered":true,"userType":3,"userId":5030685,"accountId":6499250,"gravatar":"<div class=\"gravatar-wrapper-32\"><img src=\"https://www.gravatar.com/avatar/4ff2fe5d0c4de5393d171addae7a6f12?s=32&amp;d=identicon&amp;r=PG&amp;f=1\" alt=\"\" width=\"32\" height=\"32\"></div>","profileUrl":"https://stackoverflow.com/users/5030685/bahman-heydarinejad","canSeeDeletedPosts":false,"ab":{"hero_signup_button":{"v":"team_create_cta_a","g":1}}},"events":{"postType":{"question":1},"postEditionSection":{"title":1,"body":2,"tags":3}},"story":{"minCompleteBodyLength":75,"likedTagsMaxLength":300,"dislikedTagsMaxLength":300},"jobPreferences":{"maxNumDeveloperRoles":2,"maxNumIndustries":4}}, {"site":{"allowImageUploads":true,"enableUserHovercards":true,"styleCode":true,"enableImgurHttps":true,"forceHttpsImages":true},"userMessaging":{"showNewFeatureNotice":true},"comments":{},"userProfile":{"openGraphAPIKey":"58740831ad23540e00c58987"},"tags":{},"accounts":{"currentPasswordRequiredForChangingStackIdPassword":true},"flags":{"allowRetractingFlags":true},"snippets":{"snippetsEnabled":true,"renderDomain":"stacksnippets.net"},"paths":{},"markdown":{"asteriskIntraWordEmphasis":true},"monitoring":{"clientTimingsAbsoluteTimeout":30000,"clientTimingsDebounceTimeout":1000},"channels":{"removeExtraBillingAndShippingFields":true},"slack":{"sidebarAdDismissCookie":"slack-sidebar-ad"}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"8d52b4f0d5a1","js/moderator.en.js":"de868d8951e7","js/full-anon.en.js":"02e4d69744fb","js/full.en.js":"bc7c222fe6d6","js/wmd.en.js":"72dcb98326aa","js/mobile.en.js":"b2ba616274c8","js/help.en.js":"118cb359bcc6","js/tageditor.en.js":"6242abffb05f","js/tageditornew.en.js":"47c5d08cf8c8","js/inline-tag-editing.en.js":"e7aa31e8eba1","js/revisions.en.js":"2faaeaae2529","js/review.en.js":"d4a7935f9815","js/tagsuggestions.en.js":"d1ff9b84abe5","js/post-validation.en.js":"af81d439442c","js/explore-qlist.en.js":"726bf7958c2a","js/events.en.js":"76d27bd4bb92","js/keyboard-shortcuts.en.js":"b8f3366a50f4","js/external-editor.en.js":"e8011e0cde57","js/adops.en.js":"22a9bd59b1e9","js/external-editor.en.js":"e8011e0cde57","js/snippet-javascript.en.js":"bd5d92fbfeda","js/snippet-javascript-codemirror.en.js":"72911372c9a1"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    <noscript id="noscript-css"><style>body,.top-bar{margin-top:1.9em}</style></noscript>
+    <script async="" src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/full.en.js.download"></script><link rel="preload" href="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/f(1).txt" as="script"><script type="text/javascript" src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/f(1).txt"></script><link rel="preload" href="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/f(2).txt" as="script"><script type="text/javascript" src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/f(2).txt"></script><script src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/pubads_impl_235.js.download" async=""></script><link rel="stylesheet" href="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/clc.min.css" type="text/css"><script async="" src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/snippet-javascript.en.js.download"></script><script async="" src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/post-validation.en.js.download"></script><script async="" src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/prettify-full.en.js.download"></script><script async="" src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/external-editor.en.js.download"></script><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-29/html/container.html"><script async="" src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/wmd.en.js.download"></script><style type="text/css"> .wmd-snippet-button span { background-position: 0 0; } .wmd-snippet-button:hover span { background-position: 0 -40px; }</style></head>
+        <body class="question-page unified-theme new-topbar">
+    <div id="notify-container"></div>
+    <div id="custom-header"></div>
+
+
+
+
+<header class="top-bar js-top-bar _fixed top-bar__network">
+    <div class="-container">
+        <div class="-main">
+                <a href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#" class="left-sidebar-toggle p0 ai-center jc-center js-left-sidebar-toggle"><span class="ps-relative"></span></a>
+                                <a href="https://stackoverflow.com/" class="-logo js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:8})">
+                        <span class="-img _glyph">Stack Overflow</span>
+                    </a>
+
+
+
+        </div>
+
+            <form id="search" action="https://stackoverflow.com/search" method="get" class="searchbar js-searchbar " autocomplete="off" role="search">
+                    <div class="ps-relative">
+                        <input name="q" type="text" placeholder="Search…" value="" autocomplete="off" maxlength="240" class="f-input js-search-field ">
+                        <button type="submit" aria-label="Search..." class="s-btn s-btn__primary btn-topbar-primary js-search-submit"><svg aria-hidden="true" class="svg-icon mx0 iconSearch" width="18" height="18" viewBox="0 0 18 18"><path d="M12.86 11.32L18 16.5 16.5 18l-5.18-5.14v-.35a7 7 0 1 1 1.19-1.19h.35zM7 12A5 5 0 1 0 7 2a5 5 0 0 0 0 10z"></path></svg></button>
+                    </div>
+            </form>
+
+        
+
+
+
+
+
+<ol class="-secondary js-secondary-topbar-links drop-icons-responsively the-js-is-handling-responsiveness">
+        <li class="-item searchbar-trigger js-searchbar-trigger"><a href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#" class="-link"><svg aria-hidden="true" class="svg-icon iconSearch" width="18" height="18" viewBox="0 0 18 18"><path d="M12.86 11.32L18 16.5 16.5 18l-5.18-5.14v-.35a7 7 0 1 1 1.19-1.19h.35zM7 12A5 5 0 1 0 7 2a5 5 0 0 0 0 10z"></path></svg></a></li>
+                <li class="-item">
+                <a href="https://stackoverflow.com/users/5030685/bahman-heydarinejad" class="my-profile js-gps-track" data-gps-track="profile_summary.click()">
+                <div class="gravatar-wrapper-24" title="Bahman Heydarinejad"><img src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/4ff2fe5d0c4de5393d171addae7a6f12" alt="" width="24" height="24" class="-avatar js-avatar-me"></div>
+                    <div class="-rep js-header-rep" title="your reputation: 1">1</div>
+                        <div class="-badges">
+<span title="1 bronze badge"><span class="badge3">●</span><span class="badgecount">1</span></span>                        </div>
+                </a>
+            </li>
+        <li class="-item">
+        <a href="https://stackexchange.com/users/6499250?tab=inbox" class="-link js-inbox-button" title="Recent inbox messages">
+            <svg aria-hidden="true" class="svg-icon iconInbox" width="20" height="18" viewBox="0 0 20 18"><path d="M15.19 1H4.63c-.85 0-1.6.54-1.85 1.35L0 10.79V15c0 1.1.9 2 2 2h16a2 2 0 0 0 2-2v-4.21l-2.87-8.44A2 2 0 0 0 15.19 1zm-.28 10l-2 2h-6l-2-2H1.96L4.4 3.68A1 1 0 0 1 5.35 3h9.12a1 1 0 0 1 .95.68L17.86 11h-2.95z"></path></svg>
+            <span class="indicator-badge js-unread-count _important" style="display: none;"></span>
+        </a>
+    </li>
+    <li class="-item">
+        <a href="https://stackexchange.com/users/6499250?tab=reputation" class="-link js-achievements-button _highlighted-positive" title="You have new achievements" data-unread-class="_highlighted-positive">
+            <svg aria-hidden="true" class="svg-icon iconAchievements" width="18" height="18" viewBox="0 0 18 18"><path d="M15 2V1H3v1H0v4c0 1.6 1.4 3 3 3v1c.4 1.5 3 2.6 5 3v2H5s-1 1.5-1 2h10c0-.4-1-2-1-2h-3v-2c2-.4 4.6-1.5 5-3V9c1.6-.2 3-1.4 3-3V2h-3zM3 7c-.5 0-1-.5-1-1V4h1v3zm8.4 2.5L9 8 6.6 9.4l1-2.7L5 5h3l1-2.7L10 5h2.8l-2.3 1.8 1 2.7h-.1zM16 6c0 .5-.5 1-1 1V4h1v2z"></path></svg>
+            <span class="indicator-badge js-unread-count _positive" style="display: none;"></span>
+        </a>
+    </li>
+
+    <li class="-item help-button-item" data-remove-order="1"><a href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#" class="-link js-help-button" title="Help Center and other resources">
+        <svg aria-hidden="true" class="svg-icon iconHelp" width="18" height="18" viewBox="0 0 18 18"><path d="M9 1a8 8 0 1 0 0 16A8 8 0 0 0 9 1zm.81 12.13c-.02.71-.55 1.15-1.24 1.13-.66-.02-1.17-.49-1.15-1.2.02-.72.56-1.18 1.22-1.16.7.03 1.2.51 1.17 1.23zM11.77 8a5.8 5.8 0 0 1-1.02.91l-.53.37c-.26.2-.42.43-.5.69a4 4 0 0 0-.09.75c0 .05-.03.16-.18.16H7.88c-.16 0-.18-.1-.18-.15.03-.66.12-1.21.4-1.66a5.29 5.29 0 0 1 1.43-1.22c.16-.12.28-.25.38-.39a1.34 1.34 0 0 0 .02-1.71c-.24-.31-.51-.46-1.03-.46-.51 0-.8.26-1.02.6-.21.33-.18.73-.18 1.1H5.75c0-1.38.35-2.25 1.1-2.76.52-.35 1.17-.5 1.93-.5 1 0 1.79.18 2.49.71.64.5.98 1.18.98 2.12 0 .57-.2 1.05-.48 1.44z"></path></svg>
+    </a></li>
+
+    <li class="-item">
+        <a href="https://stackexchange.com/" class="-link js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 174 Stack Exchange sites">
+            <svg aria-hidden="true" class="svg-icon iconStackExchange" width="18" height="18" viewBox="0 0 18 18"><path d="M1 13c0 1.1.9 2 2 2h8v3l3-3h1a2 2 0 0 0 2-2v-2H1v2zM15 1H3a2 2 0 0 0-2 2v2h16V3a2 2 0 0 0-2-2zM1 6h16v4H1V6z"></path></svg>
+        </a>
+    </li>
+
+
+    <li class="-dialog-container js-topbar-dialog-corral">
+
+
+    <div class="topbar-dialog siteSwitcher-dialog dno">
+        <div class="header">
+            <h3><a href="https://stackoverflow.com/">current community</a>
+            </h3>
+        </div>
+        <div class="modal-content current-site-container">
+            <ul class="current-site">
+                    <li class="grid">
+                            <div class="fl1">
+            <a href="https://stackoverflow.com/" class="current-site-link site-link js-gps-track grid gs8 gsx" data-id="1" data-gps-track="site_switcher.click({ item_type:3 })">
+        <div class="favicon favicon-stackoverflow site-icon grid--cell" title="Stack Overflow"></div>
+        <span class="grid--cell fl1">
+            Stack Overflow
+        </span>
+    </a>
+
+    </div>
+    <div class="related-links">
+            <a href="https://stackoverflow.com/help" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:14 })">help</a>
+                    <a href="https://chat.stackoverflow.com/" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:6 })">chat</a>
+                    <a href="https://stackoverflow.com/users/logout" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:8 })">log out</a>
+    </div>
+
+                    </li>
+                    <li class="related-site grid">
+                            <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                            <a href="https://meta.stackoverflow.com/" class="site-link js-gps-track grid gs8 gsx" data-id="552" data-gps-track="site.switch({ target_site:552, item_type:3 }),site_switcher.click({ item_type:4 })">
+        <div class="favicon favicon-stackoverflowmeta site-icon grid--cell" title="Meta Stack Overflow"></div>
+        <span class="grid--cell fl1">
+            Meta Stack Overflow
+        </span>
+    </a>
+
+                    </li>
+            </ul>
+        </div>
+
+        <div class="header" id="your-communities-header">
+            <h3>
+                    <a href="https://stackexchange.com/users/6499250/?tab=accounts">your communities</a>
+            </h3>
+
+                <a href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#" id="edit-pinned-sites">edit</a>
+                <a href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#" id="cancel-pinned-sites" style="display: none;">cancel</a>
+        </div>
+        <div class="modal-content" id="your-communities-section">
+
+                <ul class="my-sites">
+                        <li>
+                                <a href="https://stackoverflow.com/" class="site-link js-gps-track grid gs8 gsx" data-id="1" data-gps-track="site.switch({ target_site:1, item_type:3 }),site_switcher.click({ item_type:1 })">
+        <div class="favicon favicon-stackoverflow site-icon grid--cell" title="Stack Overflow"></div>
+        <span class="grid--cell fl1">
+            Stack Overflow
+        </span>
+            <span class="rep-score grid--cell">1</span>
+    </a>
+
+                        </li>
+                </ul>
+                    <div class="pinned-site-editor-container" style="display: none;">
+                        <input type="hidden" name="fkey" value="ee1712797467907b201a5f4811501ceb2a7794733c2f8f0db78b12e74d9b5871">
+                        <input id="js-site-search-txt" type="text" class="site-filter-input" value="" placeholder="Add a Stack Exchange community">
+                        <input type="submit" id="pin-site-btn" value="Add" disabled="disabled">
+                        <ul class="js-found-sites found-sites"></ul>
+                        <ul class="pinned-site-list sortable" data-custom-list="False">
+                        </ul>
+                        <input type="submit" value="Save" id="save-pinned-sites-btn" disabled="disabled">
+                        <a href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#" id="reset-pinned-sites">reset to default list</a>
+                    </div>
+        </div>
+
+        <div class="header">
+            <h3><a href="https://stackexchange.com/sites">more stack exchange communities</a>
+            </h3>
+            <a href="https://stackoverflow.blog/" class="fr">company blog</a>
+        </div>
+        <div class="modal-content">
+                <div class="child-content"></div>
+        </div>        
+    </div>
+            <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="https://stackoverflow.com/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                            Tour
+                            <span class="item-summary">
+                                Start here for a quick overview of the site
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="https://stackoverflow.com/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                        <li>
+                            <a href="https://meta.stackoverflow.com/" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                                Meta
+                                <span class="item-summary">
+                                    Discuss the workings and policies of this site
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://stackoverflow.com/company/about" class="js-gps-track" data-gps-track="help_popup.click({ item_type:6 })">
+                                About Us
+                                <span class="item-summary">
+                                    Learn more about Stack Overflow the company
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.stackoverflowbusiness.com/?ref=topbar_help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:7 })">
+                                Business
+                                <span class="item-summary">
+                                    Learn more about hiring developers or posting ads with us
+                                </span>
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+                    <div class="topbar-dialog leftnav-dialog js-leftnav-dialog dno">
+                <div class="left-sidebar js-unpinned-left-sidebar" data-can-be="left-sidebar" data-is-here-when="sm"></div>
+            </div>
+    </li>
+</ol>
+
+    </div>
+</header>
+
+    <script>
+        StackExchange.ready(function () { StackExchange.topbar.init({ observeSize: true }); });
+        StackExchange.scrollPadding.setPaddingTop(50, 10);     </script>
+
+
+    
+
+
+    <div class="container  ">
+                
+
+
+
+<div id="left-sidebar" data-is-here-when="md lg" class="left-sidebar js-pinned-left-sidebar">
+    <div class="left-sidebar--sticky-container js-sticky-leftnav">
+        <nav role="navigation">
+            <ol class="nav-links">
+                <li>    </li><li>
+        <a href="https://stackoverflow.com/" class="pl8 js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:8})">
+Home        </a>
+    </li>
+
+                <li>
+                    <ol class="nav-links">
+                            <li class="fs-fine tt-uppercase ml8 mt16 mb4 fc-light">Public</li>
+                            <li class=" youarehere">
+        <a id="nav-questions" href="https://stackoverflow.com/questions" class="pl8 js-gps-track nav-links--link -link__with-icon" data-gps-track="top_nav.click({is_current:true, location:2, destination:1})">
+<svg aria-hidden="true" class="svg-icon iconGlobe" width="18" height="18" viewBox="0 0 18 18"><path d="M9 1a8 8 0 1 0 0 16A8 8 0 0 0 9 1zM8 15.32a6.4 6.4 0 0 1-5.23-7.75L7 11.68v.8c0 .88.12 1.32 1 1.32v1.52zm5.72-2c-.2-.66-1-1.32-1.72-1.32h-1v-2c0-.44-.56-1-1-1H6V7h1c.44 0 1-.56 1-1V5h2c.88 0 1.4-.72 1.4-1.6v-.33a6.4 6.4 0 0 1 2.32 10.24z"></path></svg>                <span class="-link--channel-name">Stack Overflow</span>
+        </a>
+    </li>
+
+    <li>
+        <a id="nav-tags" href="https://stackoverflow.com/tags" class=" js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:2})">
+Tags        </a>
+    </li>
+    <li>
+        <a id="nav-users" href="https://stackoverflow.com/users" class=" js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:3})">
+Users        </a>
+    </li>
+    <li>
+        <a id="nav-jobs" href="https://stackoverflow.com/jobs?med=site-ui&amp;ref=jobs-tab" class=" js-gps-track nav-links--link" data-gps-track="top_nav.click({is_current:false, location:2, destination:6})">
+Jobs        </a>
+    </li>
+                                            </ol>
+                </li>
+                    <li>
+                        <ol class="nav-links">
+                                    <li class="p6">
+                                        <div class="ba bc-black-2 bar-sm p16 grid fd-column ps-relative overflow-hidden">
+                                            <strong class="grid--cell">Teams</strong>
+                                            <span class="grid--cell mt2 fs-caption fc-medium">Private Q&amp;A</span>
+                                            <a href="https://stackoverflow.com/teams" class="js-gps-track s-btn s-btn__outlined ta-center grid--cell mt12" data-gps-track="teams.create.left-sidenav.click">Create Team</a>
+
+                                            <div class="ps-absolute t4 rn6">
+                                                <svg width="53" height="49" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M49 11l.2 31H18.9L9 49v-7H4V8h31" fill="#CCEAFF"></path><path d="M44.5 19v-.3l-.2-.1-18-13-.1-.1H.5v33h4V46l.8-.6 9.9-6.9h29.3V19z" stroke="#1060E1" stroke-miterlimit="10"></path><path d="M31 2l6-1.5 7 2V38H14.9L5 45v-7H1V6h25l5-4z" fill="#fff"></path><path d="M7 16.5h13m-13 6h14m-14 6h18" stroke="#1060E1" stroke-miterlimit="10"></path><path d="M39 30a14 14 0 1 0 0-28 14 14 0 0 0 0 28z" fill="#FFB935"></path><path d="M50.5 14a13.5 13.5 0 1 1-27 0 13.5 13.5 0 0 1 27 0z" stroke="#F48024" stroke-miterlimit="10"></path><path d="M32.5 21.5v-8h9v8h-9zm2-9.5V9.3A2.5 2.5 0 0 1 37 6.8a2.5 2.5 0 0 1 2.5 2.5V12h-5zm2 3v2m1-2v2" stroke="#fff" stroke-miterlimit="10"></path></svg>
+                                            </div>
+                                        </div>
+                                    </li>
+                        </ol>
+                    </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+        <div id="content" class="snippet-hidden">
+
+
+            
+
+
+<div itemscope="" itemtype="http://schema.org/Question">
+    <link itemprop="image" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+
+    <div class="inner-content clearfix">
+<style>.everyoneloves__top-leaderboard:empty,.everyoneloves__mid-leaderboard:empty{                height:90px;width:728px;box-sizing:border-box;
+}</style>
+        <div id="dfp-tlb" class="everyonelovesstackoverflow everyoneloves__top-leaderboard" data-google-query-id="CKuo39yDzNwCFQmEmgodLNEATQ" data-clc-prefilled="true" data-clc-ready="true"><div id="google_ads_iframe_/248424177/stackoverflow.com/lb/question-pages_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/248424177/stackoverflow.com/lb/question-pages_0" title="3rd party ad content" name="google_ads_iframe_/248424177/stackoverflow.com/lb/question-pages_0" width="728" height="90" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border: 0px; vertical-align: bottom;" src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/saved_resource.html"></iframe></div></div>            <div id="question-header" class="grid">
+                    <h1 itemprop="name" class="grid--cell fs-headline1 fl1"><a href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers" class="question-hyperlink">Spring Controller to handle all requests not matched by other Controllers</a></h1>
+
+            
+
+
+
+<div class="pl8 aside-cta grid--cell" role="navigation" aria-label="ask new question">
+            <a href="https://stackoverflow.com/questions/ask" class="d-inline-flex ai-center ws-nowrap s-btn s-btn__primary">Ask Question</a>
+</div>
+
+        </div>
+            <div id="mainbar" role="main" aria-label="question and answers">
+
+            
+
+<div class="question" data-questionid="36594644" id="question">
+
+    
+    <div class="post-layout">
+            <div class="votecell post-layout--left">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="36594644">
+        <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">5</span>
+        <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+
+        <a class="star-off" href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#" title="Click to mark as favorite question (click again to undo)">favorite</a>
+        <div class="favoritecount"><b>2</b></div>
+
+
+
+</div>
+
+            </div>
+
+            
+<div class="postcell post-layout--right">
+    <div class="post-text" itemprop="text">
+
+<p>I have a series of Controllers with Request Mappings that match certain URL's. I also want a Controller that will match any other URL not matched by the other Controllers.
+Is there a way to do this in Spring MVC? For example, could i have a controller with @RequestMapping(value="**") and change the order in which Spring Controllers are processed so this Controller is processed last to catch all unmatched requests? Or is there another way to achieve this behaviour? </p>
+    </div>
+    <div class="post-taglist">
+        <a href="https://stackoverflow.com/questions/tagged/java" class="post-tag js-gps-track" title="show questions tagged &#39;java&#39;" rel="tag">java</a> <a href="https://stackoverflow.com/questions/tagged/spring" class="post-tag js-gps-track" title="show questions tagged &#39;spring&#39;" rel="tag">spring</a> <a href="https://stackoverflow.com/questions/tagged/model-view-controller" class="post-tag js-gps-track" title="show questions tagged &#39;model-view-controller&#39;" rel="tag">model-view-controller</a> <a href="https://stackoverflow.com/questions/tagged/controller" class="post-tag js-gps-track" title="show questions tagged &#39;controller&#39;" rel="tag">controller</a> <a href="https://stackoverflow.com/questions/tagged/mapping" class="post-tag js-gps-track" title="show questions tagged &#39;mapping&#39;" rel="tag">mapping</a> 
+    </div>
+    <div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
+    <div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a href="https://stackoverflow.com/q/36594644/5030685" title="short permalink to this question" class="short-link" id="link-post-36594644">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/36594644/edit" class="suggest-edit-post" title="revise and improve this post">edit</a></div>        
+    </div>
+
+    <div class="post-signature owner grid--cell fl0">
+        <div class="user-info ">
+    <div class="user-action-time">
+        asked <span title="2016-04-13 09:48:42Z" class="relativetime">Apr 13 '16 at 9:48</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/5158079/rurounisuikoden"><div class="gravatar-wrapper-32"><img src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/c3cd6b8c4bd3601ffae13ab12c394b0e" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stackoverflow.com/users/5158079/rurounisuikoden">rurounisuikoden</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">59</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="9 bronze badges"><span class="badge3"></span><span class="badgecount">9</span></span>
+        </div>
+    </div>
+</div>
+    </div>
+    </div>
+</div>
+
+                
+    <div class="post-layout--right">
+	    <div id="comments-36594644" class="comments js-comments-container ">
+            <ul class="comments-list js-comments-list" data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <li id="comment-60786260" class="comment js-comment " data-comment-id="60786260">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div class="comment-body d-block">
+                <span class="comment-copy">If I understand correctly, you want to handle all 404s? But possibly do something useful, rather than return 'not found'?</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/1226744/leon" title="8,130 reputation" class="comment-user">Leon</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#comment60786260_36594644"><span title="2016-04-13 09:50:27Z" class="relativetime-clean">Apr 13 '16 at 9:50</span></a></span>
+                                                                            </div>
+        </div>
+    </li>
+    <li id="comment-60786339" class="comment js-comment " data-comment-id="60786339">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score">
+                    <span title="number of &#39;useful comment&#39; votes received" class="cool">1</span>
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div class="comment-body d-block">
+                <span class="comment-copy">Yes your idea would work. Have you tried it? See <a href="https://github.com/stormpath/spring-mvc-rest-exhandler/blob/master/example/src/main/java/com/stormpath/blog/spring/mvc/rest/exhandler/DefaultController.java" rel="nofollow noreferrer">github.com/stormpath/spring-mvc-rest-exhandler/blob/master/…</a> for example</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/133645/reto" title="6,556 reputation" class="comment-user">reto</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#comment60786339_36594644"><span title="2016-04-13 09:52:06Z" class="relativetime-clean">Apr 13 '16 at 9:52</span></a></span>
+                                                                            </div>
+        </div>
+    </li>
+    <li id="comment-60786485" class="comment js-comment " data-comment-id="60786485">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div class="comment-body d-block">
+                <span class="comment-copy">Yes, i want a way to process URL's not matched by any other Controller i have made.</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/5158079/rurounisuikoden" title="59 reputation" class="comment-user owner">rurounisuikoden</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#comment60786485_36594644"><span title="2016-04-13 09:55:18Z" class="relativetime-clean">Apr 13 '16 at 9:55</span></a></span>
+                                                                            </div>
+        </div>
+    </li>
+    <li id="comment-60786550" class="comment js-comment " data-comment-id="60786550">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div class="comment-body d-block">
+                <span class="comment-copy">Wouldn't the default controller you have provided in that link be matched before other requestMappings?</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/5158079/rurounisuikoden" title="59 reputation" class="comment-user owner">rurounisuikoden</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#comment60786550_36594644"><span title="2016-04-13 09:56:43Z" class="relativetime-clean">Apr 13 '16 at 9:56</span></a></span>
+                                                                            </div>
+        </div>
+    </li>
+    <li id="comment-89695964" class="comment js-comment " data-comment-id="89695964">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div class="comment-body d-block">
+                <span class="comment-copy"><a href="https://stackoverflow.com/questions/7276989/how-to-set-the-context-path-of-a-web-application-in-tomcat-7-0/51167549#51167549" title="how to set the context path of a web application in tomcat 7 0">stackoverflow.com/questions/7276989/…</a></span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/912319/kanagavelu-sugumar" title="8,095 reputation" class="comment-user">Kanagavelu Sugumar</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#comment89695964_36594644"><span title="2018-07-16 12:33:33Z" class="relativetime-clean">Jul 16 at 12:33</span></a></span>
+                                                                            </div>
+        </div>
+    </li>
+            </ul>
+	    </div>
+
+        <div id="comments-link-36594644" data-rep="50" data-reg="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#" onclick=""></a>
+        </div>         
+    </div>        </div>
+</div>
+
+
+
+        <div id="answers">
+
+                <a name="tab-top"></a>
+                <div id="answers-header">
+                    <div class="subheader answers-subheader">
+                        <h2 data-answercount="2">
+                                2 Answers
+                                <span style="display:none;" itemprop="answerCount">2</span>
+                        </h2>
+                        <div>
+                            
+<div id="tabs">
+        <a href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers?answertab=active#tab-top" data-nav-xhref="" title="Answers with the latest activity first" data-value="active" data-shortcut="A">
+            active</a>
+        <a href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers?answertab=oldest#tab-top" data-nav-xhref="" title="Answers in the order they were provided" data-value="oldest" data-shortcut="O">
+            oldest</a>
+        <a class="youarehere is-selected " href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers?answertab=votes#tab-top" data-nav-xhref="" title="Answers with the highest score first" data-value="votes" data-shortcut="V">
+            votes</a>
+    </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+  
+<a name="36595448"></a>
+<div id="answer-36595448" class="answer accepted-answer" data-answerid="36595448" itemscope="" itemtype="http://schema.org/Answer" itemprop="acceptedAnswer">
+    <div class="post-layout">
+            <div class="votecell post-layout--left">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="36595448">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">7</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+
+
+</div>
+
+            </div>
+            
+
+
+<div class="answercell post-layout--right">
+    <div class="post-text" itemprop="text">
+<p>If your base url is like that= <a href="http://localhost/myapp/" rel="noreferrer">http://localhost/myapp/</a> where myapp is your context then myapp/a.html, myapp/b.html myapp/c.html will get mapped to the first 3 method in the following controller. But anything else will reach the last method which matches **. Please note that , if you put ** mapped method at the top of your controller then all request will reach this method.</p>
+
+<p>Then this controller servrs your requirement:</p>
+
+<pre class="lang-java prettyprint prettyprinted" style=""><code><span class="lit">@Controller</span><span class="pln">
+</span><span class="lit">@RequestMapping</span><span class="pun">(</span><span class="str">"/"</span><span class="pun">)</span><span class="pln">
+</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">ImportController</span><span class="pun">{</span><span class="pln">
+
+    </span><span class="lit">@RequestMapping</span><span class="pun">(</span><span class="pln">value </span><span class="pun">=</span><span class="pln"> </span><span class="str">"a.html"</span><span class="pun">,</span><span class="pln"> method </span><span class="pun">=</span><span class="pln"> </span><span class="typ">RequestMethod</span><span class="pun">.</span><span class="pln">GET</span><span class="pun">)</span><span class="pln">
+    </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">ModelAndView</span><span class="pln"> getA</span><span class="pun">(</span><span class="typ">HttpServletRequest</span><span class="pln"> req</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="typ">ModelAndView</span><span class="pln"> mv</span><span class="pun">;</span><span class="pln">
+        mv </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ModelAndView</span><span class="pun">(</span><span class="str">"a"</span><span class="pun">);</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> mv</span><span class="pun">;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="lit">@RequestMapping</span><span class="pun">(</span><span class="pln">value </span><span class="pun">=</span><span class="pln"> </span><span class="str">"b.html"</span><span class="pun">,</span><span class="pln"> method </span><span class="pun">=</span><span class="pln"> </span><span class="typ">RequestMethod</span><span class="pun">.</span><span class="pln">GET</span><span class="pun">)</span><span class="pln">
+    </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">ModelAndView</span><span class="pln"> getB</span><span class="pun">(</span><span class="typ">HttpServletRequest</span><span class="pln"> req</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="typ">ModelAndView</span><span class="pln"> mv</span><span class="pun">;</span><span class="pln">
+        mv </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ModelAndView</span><span class="pun">(</span><span class="str">"b"</span><span class="pun">);</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> mv</span><span class="pun">;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="lit">@RequestMapping</span><span class="pun">(</span><span class="pln">value </span><span class="pun">=</span><span class="pln"> </span><span class="str">"c.html"</span><span class="pun">,</span><span class="pln"> method </span><span class="pun">=</span><span class="pln"> </span><span class="typ">RequestMethod</span><span class="pun">.</span><span class="pln">GET</span><span class="pun">)</span><span class="pln">
+    </span><span class="kwd">public</span><span class="pln"> </span><span class="typ">ModelAndView</span><span class="pln"> getC</span><span class="pun">(</span><span class="typ">HttpServletRequest</span><span class="pln"> req</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="typ">ModelAndView</span><span class="pln"> mv</span><span class="pun">;</span><span class="pln">
+        mv </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ModelAndView</span><span class="pun">(</span><span class="str">"c"</span><span class="pun">);</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> mv</span><span class="pun">;</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+</span><span class="lit">@RequestMapping</span><span class="pun">(</span><span class="pln">value</span><span class="pun">=</span><span class="str">"**"</span><span class="pun">,</span><span class="pln">method </span><span class="pun">=</span><span class="pln"> </span><span class="typ">RequestMethod</span><span class="pun">.</span><span class="pln">GET</span><span class="pun">)</span><span class="pln">
+</span><span class="kwd">public</span><span class="pln"> </span><span class="typ">String</span><span class="pln"> getAnythingelse</span><span class="pun">(){</span><span class="pln">
+</span><span class="kwd">return</span><span class="pln"> </span><span class="str">"redirect:/404.html"</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+    </div>
+    <div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
+    <div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a href="https://stackoverflow.com/a/36595448/5030685" title="short permalink to this answer" class="short-link" id="link-post-36595448">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/36595448/edit" class="suggest-edit-post" title="revise and improve this post">edit</a></div>                    </div>
+            
+
+
+    <div class="post-signature grid--cell fl0">
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2016-04-13 10:20:49Z" class="relativetime">Apr 13 '16 at 10:20</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/761132/rizwan-m-tuman"><div class="gravatar-wrapper-32"><img src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/fa462ba2bc6318a8b2e7662bb8e91aa1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stackoverflow.com/users/761132/rizwan-m-tuman">Rizwan M.Tuman</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">7,800</span><span title="2 gold badges"><span class="badge1"></span><span class="badgecount">2</span></span><span title="16 silver badges"><span class="badge2"></span><span class="badgecount">16</span></span><span title="32 bronze badges"><span class="badge3"></span><span class="badgecount">32</span></span>
+        </div>
+    </div>
+</div>
+    </div>
+    </div>
+</div>
+    
+    <div class="post-layout--right">
+	    <div id="comments-36595448" class="comments js-comments-container ">
+            <ul class="comments-list js-comments-list" data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <li id="comment-89315977" class="comment js-comment " data-comment-id="89315977">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div class="comment-body d-block">
+                <span class="comment-copy">After this configuration my swagger stopped working. <a href="https://github.com/springfox/springfox/issues/2532" rel="nofollow noreferrer">github.com/springfox/springfox/issues/2532</a></span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/912319/kanagavelu-sugumar" title="8,095 reputation" class="comment-user">Kanagavelu Sugumar</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#comment89315977_36595448"><span title="2018-07-04 05:40:17Z" class="relativetime-clean">Jul 4 at 5:40</span></a></span>
+                        <span title="this comment was edited 1 time">
+                            <svg aria-hidden="true" class="svg-icon va-text-bottom o50 iconPencilSm" width="14" height="15" viewBox="0 0 14 15"><path d="M8.37 4.7L2 11.11V13h1.88l6.37-6.43zM12.23 3.83L11.1 2.71a.5.5 0 0 0-.7 0L9.2 3.86l1.88 1.84 1.14-1.16a.5.5 0 0 0 0-.71z"></path></svg>
+                        </span>
+                                                                            </div>
+        </div>
+    </li>
+    <li id="comment-89316081" class="comment js-comment " data-comment-id="89316081">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div class="comment-body d-block">
+                <span class="comment-copy">use @RequestMapping("/anything/")  instead of @RequestMapping("/") for this configuraration</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/761132/rizwan-m-tuman" title="7,800 reputation" class="comment-user">Rizwan M.Tuman</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#comment89316081_36595448"><span title="2018-07-04 05:44:52Z" class="relativetime-clean">Jul 4 at 5:44</span></a></span>
+                                                                            </div>
+        </div>
+    </li>
+    <li id="comment-89316172" class="comment js-comment " data-comment-id="89316172">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div class="comment-body d-block">
+                <span class="comment-copy">But that will handle only non mapped requests under <code>/anything</code></span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/912319/kanagavelu-sugumar" title="8,095 reputation" class="comment-user">Kanagavelu Sugumar</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#comment89316172_36595448"><span title="2018-07-04 05:48:20Z" class="relativetime-clean">Jul 4 at 5:48</span></a></span>
+                                                                            </div>
+        </div>
+    </li>
+    <li id="comment-89316194" class="comment js-comment " data-comment-id="89316194">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div class="comment-body d-block">
+                <span class="comment-copy">then remove the last method from this class value="**", and use custom exception handler... which will make sure that any non mapped request goes to a certain 404 page</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/761132/rizwan-m-tuman" title="7,800 reputation" class="comment-user">Rizwan M.Tuman</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#comment89316194_36595448"><span title="2018-07-04 05:49:29Z" class="relativetime-clean">Jul 4 at 5:49</span></a></span>
+                        <span title="this comment was edited 1 time">
+                            <svg aria-hidden="true" class="svg-icon va-text-bottom o50 iconPencilSm" width="14" height="15" viewBox="0 0 14 15"><path d="M8.37 4.7L2 11.11V13h1.88l6.37-6.43zM12.23 3.83L11.1 2.71a.5.5 0 0 0-.7 0L9.2 3.86l1.88 1.84 1.14-1.16a.5.5 0 0 0 0-.71z"></path></svg>
+                        </span>
+                                                                            </div>
+        </div>
+    </li>
+    <li id="comment-89316345" class="comment js-comment " data-comment-id="89316345">
+        <div class="js-comment-actions comment-actions">
+            <div class="comment-score">
+            </div>
+                    </div>
+        <div class="comment-text js-comment-text-and-form">
+            <div class="comment-body d-block">
+                <span class="comment-copy">Exception handler wont solve my problem, want to handle it inside @RequestMapping method. Anyhow Thanks &amp; plus1.</span>
+                    –&nbsp;<a href="https://stackoverflow.com/users/912319/kanagavelu-sugumar" title="8,095 reputation" class="comment-user">Kanagavelu Sugumar</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#comment89316345_36595448"><span title="2018-07-04 05:55:37Z" class="relativetime-clean">Jul 4 at 5:55</span></a></span>
+                                                                            </div>
+        </div>
+    </li>
+            </ul>
+	    </div>
+
+        <div id="comments-link-36595448" data-rep="50" data-reg="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#" onclick=""></a>
+        </div>         
+    </div>    </div>
+</div>
+<div id="dfp-mlb" class="everyonelovesstackoverflow everyoneloves__mid-leaderboard" data-google-query-id="CKyo39yDzNwCFQmEmgodLNEATQ" data-clc-prefilled="true" data-clc-ready="true"><div id="google_ads_iframe_/248424177/stackoverflow.com/mlb/question-pages_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/248424177/stackoverflow.com/mlb/question-pages_0" title="3rd party ad content" name="google_ads_iframe_/248424177/stackoverflow.com/mlb/question-pages_0" width="728" height="90" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border: 0px; vertical-align: bottom;" src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/saved_resource(1).html"></iframe></div></div>
+  
+<a name="36595180"></a>
+<div id="answer-36595180" class="answer" data-answerid="36595180" itemscope="" itemtype="http://schema.org/Answer">
+    <div class="post-layout">
+            <div class="votecell post-layout--left">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="36595180">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">3</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+
+</div>
+
+            </div>
+            
+
+
+<div class="answercell post-layout--right">
+    <div class="post-text" itemprop="text">
+<pre class="lang-java prettyprint prettyprinted" style=""><code><span class="lit">@RequestMapping</span><span class="pln"> </span><span class="pun">(</span><span class="pln">value </span><span class="pun">=</span><span class="pln"> </span><span class="str">"/**"</span><span class="pun">,</span><span class="pln"> method </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="typ">RequestMethod</span><span class="pun">.</span><span class="pln">GET</span><span class="pun">,</span><span class="pln"> </span><span class="typ">RequestMethod</span><span class="pun">.</span><span class="pln">POST</span><span class="pun">})</span><span class="pln">
+</span><span class="kwd">public</span><span class="pln"> </span><span class="typ">ResponseEntity</span><span class="pun">&lt;</span><span class="typ">String</span><span class="pun">&gt;</span><span class="pln"> defaultPath</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    LOGGER</span><span class="pun">.</span><span class="pln">info</span><span class="pun">(</span><span class="str">"Unmapped request handling!"</span><span class="pun">);</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ResponseEntity</span><span class="pun">&lt;</span><span class="typ">String</span><span class="pun">&gt;(</span><span class="str">"Unmapped request"</span><span class="pun">,</span><span class="pln"> </span><span class="typ">HttpStatus</span><span class="pun">.</span><span class="pln">OK</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+
+<p>This will do the work with proper order of controller matching. It will be used when nothing is matched.</p>
+    </div>
+    <div class="grid mb0 fw-wrap ai-start jc-end gs8 gsy">
+    <div class="grid--cell mr16" style="flex: 1 1 100px;">
+<div class="post-menu"><a href="https://stackoverflow.com/a/36595180/5030685" title="short permalink to this answer" class="short-link" id="link-post-36595180">share</a><span class="lsep">|</span><a href="https://stackoverflow.com/posts/36595180/edit" class="suggest-edit-post" title="revise and improve this post">edit</a></div>                    </div>
+            
+
+
+    <div class="post-signature grid--cell fl0">
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2016-04-13 10:09:20Z" class="relativetime">Apr 13 '16 at 10:09</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://stackoverflow.com/users/2630520/patrykos91"><div class="gravatar-wrapper-32"><img src="https://i.stack.imgur.com/YbBsY.jpg?s=32&amp;g=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://stackoverflow.com/users/2630520/patrykos91">patrykos91</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1,234</span><span title="12 silver badges"><span class="badge2"></span><span class="badgecount">12</span></span><span title="22 bronze badges"><span class="badge3"></span><span class="badgecount">22</span></span>
+        </div>
+    </div>
+</div>
+    </div>
+    </div>
+</div>
+    
+    <div class="post-layout--right">
+	    <div id="comments-36595180" class="comments js-comments-container  dno">
+            <ul class="comments-list js-comments-list" data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+            </ul>
+	    </div>
+
+        <div id="comments-link-36595180" data-rep="50" data-reg="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#" onclick=""></a>
+        </div>         
+    </div>    </div>
+</div>
+                                    <a name="new-answer"></a>
+                        <form id="post-form" action="https://stackoverflow.com/questions/36594644/answer/submit" method="post" class="post-form">
+                            <input type="hidden" id="post-id" value="36594644">
+                            <input type="hidden" id="qualityBanWarningShown" name="qualityBanWarningShown" value="false">
+                            <input type="hidden" name="referrer" value="https://www.google.com/">
+                            <h2 class="space">Your Answer</h2>
+
+
+            <script>
+            StackExchange.ifUsing("editor", function () {
+                StackExchange.using("externalEditor", function () {
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.init();
+                    });
+                });
+            }, "code-snippets");
+        </script>
+    
+
+<script>
+    StackExchange.ready(function() {
+        var channelOptions = {
+            tags: "".split(" "),
+            id: "1"
+        };
+        initTagRenderer("".split(" "), "".split(" "), channelOptions);
+       
+        StackExchange.using("externalEditor", function() {
+                // Have to fire editor after snippets, if snippets enabled
+                if (StackExchange.settings.snippets.snippetsEnabled) {
+                    StackExchange.using("snippets", function() {
+                        createEditor();
+                    });
+                }
+                else {
+                    createEditor();
+                }
+            });
+
+            function createEditor() {
+                StackExchange.prepareEditor({
+                    heartbeatType: 'answer',
+                convertImagesToLinks: true,
+                noModals: false,
+                showLowRepImageUploadWarning: true,
+                reputationToPostImages: 10,
+                bindNavPrevention: true,
+                postfix: "",
+                    onDemand: false,
+                    discardSelector: ".discard-answer"
+                    ,immediatelyShowMarkdownHelp:true,userId:5030685
+                    });
+                
+
+        }
+    });
+</script>
+
+
+<div id="post-editor" class="post-editor js-post-editor wz-element" data-wz-state="3,4,5,6,7,8">
+
+    <div style="position: relative;"> 
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar btr-sm"><ul id="wmd-button-row" class="wmd-button-row"><li class="wmd-button" id="wmd-bold-button" title="Strong &lt;strong&gt; Ctrl+B"><span style="background-position: 0px 0px;"></span></li><li class="wmd-button" id="wmd-italic-button" title="Emphasis &lt;em&gt; Ctrl+I"><span style="background-position: -20px 0px;"></span></li><li class="wmd-spacer wmd-spacer1" id="wmd-spacer1"></li><li class="wmd-button" id="wmd-link-button" title="Hyperlink &lt;a&gt; Ctrl+L"><span style="background-position: -40px 0px;"></span></li><li class="wmd-button" id="wmd-quote-button" title="Blockquote &lt;blockquote&gt; Ctrl+Q"><span style="background-position: -60px 0px;"></span></li><li class="wmd-button" id="wmd-code-button" title="Code Sample &lt;pre&gt;&lt;code&gt; Ctrl+K"><span style="background-position: -80px 0px;"></span></li><li class="wmd-button" id="wmd-image-button" title="Image &lt;img&gt; Ctrl+G"><span style="background-position: -100px 0px;"></span></li><li class="wmd-button wmd-snippet-button" id="wmd-snippet-button" title="JavaScript/HTML/CSS snippet Ctrl-M"><span style="background-image: url(&quot;/content/Shared/balsamiq/wmd-mockup-button.png&quot;);"></span></li><li class="wmd-spacer wmd-spacer2" id="wmd-spacer2"></li><li class="wmd-button" id="wmd-olist-button" title="Numbered List &lt;ol&gt; Ctrl+O"><span style="background-position: -120px 0px;"></span></li><li class="wmd-button" id="wmd-ulist-button" title="Bulleted List &lt;ul&gt; Ctrl+U"><span style="background-position: -140px 0px;"></span></li><li class="wmd-button" id="wmd-heading-button" title="Heading &lt;h1&gt;/&lt;h2&gt; Ctrl+H"><span style="background-position: -160px 0px;"></span></li><li class="wmd-button" id="wmd-hr-button" title="Horizontal Rule &lt;hr&gt; Ctrl+R"><span style="background-position: -180px 0px;"></span></li><li class="wmd-spacer wmd-spacer3" id="wmd-spacer3"></li><li class="wmd-button" id="wmd-undo-button" title="Undo - Ctrl+Z"><span style="background-position: -200px -20px;"></span></li><li class="wmd-button" id="wmd-redo-button" title="Redo - Ctrl+Y"><span style="background-position: -220px -20px;"></span></li><li class="wmd-spacer wmd-spacer-max"></li><li class="wmd-button wmd-help-button active-help" id="wmd-help-button" title="Markdown Editing Help" style="right: 0px;"><span style="background-position: -240px 0px;"></span></li></ul></div><div id="mdhelp" class="mdhelp" style="">
+    <ul id="mdhelp-tabs" class="mdhelp-tabs">
+        <li data-tab="mdhelp-links" data-buttons="link">Links</li>
+        <li data-tab="mdhelp-images" data-buttons="image">Images</li>
+        <li data-tab="mdhelp-styles" data-buttons="bold,italic,heading">Styling/Headers</li>
+        <li data-tab="mdhelp-lists" data-buttons="olist,ulist">Lists</li>
+        <li data-tab="mdhelp-blockquotes" data-buttons="quote">Blockquotes</li>
+        <li data-tab="mdhelp-code" data-buttons="code">Code</li>
+        <li data-tab="mdhelp-html"> HTML </li>
+        <li style="float:right"><a href="https://stackoverflow.com/editing-help" target="_blank">advanced help »</a></li>
+    </ul>
+    
+    <div class="mdhelp-tab" id="mdhelp-links"><div class="mdhelp-tab--content">
+            <p>
+                In most cases, a plain URL will be recognized as such and automatically linked:
+            </p>
+            <pre>Visit https://area51.stackexchange.com/ regularly!
+Use angle brackets to force linking: Have you seen &lt;https://superuser.com&gt;?
+</pre>
+            <p>
+                To create fancier links, use Markdown:
+            </p>
+                <pre>Here's [a link](http://www.example.com/)! And a reference-style link to [a panda][1].
+References don't have to be [numbers][question].
+
+ [1]: https://notfound.stackexchange.com/
+ [question]: https://english.stackexchange.com/questions/11481
+</pre>
+                <p>You can add tooltips to links:</p>
+<pre>Click [here](https://diy.stackexchange.com<span class="spaces">&nbsp;</span>"this text appears when you mouse over")!
+This works with [reference links][blog] as well.
+
+ [blog]: https://stackoverflow.blog/<span class="spaces">&nbsp;</span>"click here for updates"
+</pre>
+    </div></div>
+
+    <div class="mdhelp-tab" id="mdhelp-images"><div class="mdhelp-tab--content">
+        <p>Images are exactly like links, but they have an exclamation point in front of them:</p>
+        <pre>![a busy cat](https://cdn.sstatic.net/Sites/stackoverflow/img/error-lolcat-problemz.jpg)
+![two muppets][1]
+
+ [1]: https://i.imgur.com/I5DFV.jpg "tooltip"
+</pre>
+        <p>
+            The word in square brackets is the alt text, which gets displayed if the browser
+ can't show the image. Be sure to include meaningful alt text for screen-reading
+ software.
+        </p>
+   
+    </div></div>
+    <div class="mdhelp-tab" id="mdhelp-styles"><div class="mdhelp-tab--content">
+        <div class="col1">
+            <p>Be sure to use text styling sparingly; only where it helps readability.</p>
+                <pre>*This is italicized*, and so
+is _this_.
+
+**This is bold**, just like __this__.
+
+You can ***combine*** them
+if you ___really have to___.
+</pre>
+        
+        </div>
+        <div class="col2">
+            <p>
+                To break your text into sections, you can use headers:
+            </p>
+                <pre>A Large Header
+==============
+
+Smaller Subheader
+-----------------
+</pre>
+            <p>
+                Use hash marks if you need several levels of headers:</p>
+    <pre># Header 1 #
+## Header 2 ##
+### Header 3 ###
+</pre>
+        </div>
+
+    </div></div>
+    <div class="mdhelp-tab" id="mdhelp-lists"><div class="mdhelp-tab--content">
+        <p>Both bulleted and numbered lists are possible:</p>
+        <div class="col1">
+<pre>-<span class="spaces">&nbsp;</span>Use a minus sign for a bullet
++<span class="spaces">&nbsp;</span>Or plus sign
+*<span class="spaces">&nbsp;</span>Or an asterisk
+
+1.<span class="spaces">&nbsp;</span>Numbered lists are easy
+2.<span class="spaces">&nbsp;</span>Markdown keeps track of
+   the numbers for you
+7.<span class="spaces">&nbsp;</span>So this will be item 3.
+</pre>
+        </div>
+        <div class="col2">
+<pre>1.<span class="spaces">&nbsp;</span>Lists in a list item:
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>-<span class="spaces">&nbsp;</span>Indented four spaces.
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>*<span class="spaces">&nbsp;</span>indented eight spaces.
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>-<span class="spaces">&nbsp;</span>Four spaces again.
+2.<span class="spaces">&nbsp;&nbsp;</span>You can have multiple
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>paragraphs in a list items.
+<span class="spaces">&nbsp;</span>
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>Just be sure to indent.
+</pre>        
+        </div>
+    </div></div>
+
+    <div class="mdhelp-tab" id="mdhelp-blockquotes"><div class="mdhelp-tab--content">
+        <div class="col1">
+            <pre>&gt; Create a blockquote by
+&gt; prepending “&gt;” to each line.
+&gt;
+&gt; Other formatting also works here, e.g.
+&gt;
+&gt; 1. Lists or
+&gt; 2. Headings:
+&gt;
+&gt; ## Quoted Heading ##
+</pre>
+        </div>
+        <div class="col2">
+                <p>
+                    You can even put blockquotes in blockquotes:
+                </p>
+                <pre>&gt; A standard blockquote is indented
+&gt; &gt; A nested blockquote is indented more
+&gt; &gt; &gt; &gt; You can nest to any depth.
+</pre>
+        </div>
+    </div></div>
+
+    <div class="mdhelp-tab" id="mdhelp-code"><div class="mdhelp-tab--content">
+        <p>
+            To create code blocks or other preformatted text, indent by four spaces:
+        </p>
+        <pre><span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>This will be displayed in a monospaced font. The first four spaces
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>will be stripped off, but all other whitespace will be preserved.
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>Markdown and HTML are turned off in code blocks:
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;</span>&lt;i&gt;This is not italic&lt;/i&gt;, and [this is not a link](https://example.com)
+</pre>
+        <p>
+            To create not a block, but an inline code span, use backticks:
+        </p>
+        <pre>The `$` character is just a shortcut for `window.jQuery`.
+</pre>
+        <p>
+            If you want to have a preformatted block within a list, indent by eight spaces:
+        </p>
+        <pre>1. This is normal text.
+2. So is this, but now follows a code block:
+<span class="spaces">&nbsp;</span>
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Skip a line and indent eight spaces.
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>That's four spaces for the list
+<span class="spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>and four to trigger the code block.
+</pre>
+    </div></div>
+
+    <div class="mdhelp-tab" id="mdhelp-html"><div class="mdhelp-tab--content">
+        <p>
+            If you need to do something that Markdown can't handle, use HTML. Note that <a href="https://meta.stackexchange.com/questions/1777/what-html-tags-are-allowed" target="_blank">we only support a very strict subset of HTML!</a>
+        </p>
+        <pre>Strikethrough humor is &lt;strike&gt;funny&lt;/strike&gt;.
+</pre>
+        <p>
+            Markdown is smart enough not to mangle your span-level HTML:
+        </p>
+        <pre>&lt;b&gt;Markdown works *fine* in here.&lt;/b&gt;
+</pre>
+        <p>
+            Block-level HTML elements have a few restrictions:
+        </p>
+        <ol>
+            <li>They must be separated from surrounding text by blank lines.</li>
+            <li>The begin and end tags of the outermost block element must not be indented.</li>
+            <li>Markdown can't be used within HTML blocks.</li>
+        </ol>
+        <br>
+        <pre>&lt;pre&gt;
+    You can &lt;em&gt;not&lt;/em&gt; use Markdown in here.
+&lt;/pre&gt;
+</pre>
+    </div></div>
+
+    <div class="cbt"></div>
+</div>
+            <textarea id="wmd-input" class="wmd-input wz-element s-input bar0 processed" name="post-text" cols="92" rows="15" tabindex="101" data-wz-state="8" data-min-length=""></textarea>
+        <div class="grippie" style="margin-right: 0px;"></div></div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="ee1712797467907b201a5f4811501ceb2a7794733c2f8f0db78b12e74d9b5871">
+        <input id="author" name="author" type="text">
+    </div>
+
+
+
+</div>
+
+                            <div style="position: relative;">
+                                
+                                
+                            </div>
+
+                                                            <div class="form-submit cbt grid gsx gs4">
+                                        <button id="submit-button" class="grid--cell s-btn s-btn__primary" type="submit" tabindex="120" autocomplete="off">
+Post Your Answer                                        </button>
+                                        <button class="grid--cell s-btn s-btn__danger discard-answer dno">Discard</button>
+                                                                    </div>
+                        </form>
+
+
+
+                        <h2 class="bottom-notice" data-loc="1">
+Not the answer you're looking for?                            Browse other questions tagged <a href="https://stackoverflow.com/questions/tagged/java" class="post-tag" title="show questions tagged &#39;java&#39;" rel="tag">java</a> <a href="https://stackoverflow.com/questions/tagged/spring" class="post-tag" title="show questions tagged &#39;spring&#39;" rel="tag">spring</a> <a href="https://stackoverflow.com/questions/tagged/model-view-controller" class="post-tag" title="show questions tagged &#39;model-view-controller&#39;" rel="tag">model-view-controller</a> <a href="https://stackoverflow.com/questions/tagged/controller" class="post-tag" title="show questions tagged &#39;controller&#39;" rel="tag">controller</a> <a href="https://stackoverflow.com/questions/tagged/mapping" class="post-tag" title="show questions tagged &#39;mapping&#39;" rel="tag">mapping</a>  or <a href="https://stackoverflow.com/questions/ask">ask your own question</a>.                        </h2>
+            </div>
+        </div>
+                <div id="sidebar" class="show-votes" role="complementary" aria-label="sidebar">
+
+<script>
+    window.showNewUser = false;
+
+</script>
+
+<div class="module newuser newuser-greeting" id="newuser-box" style="display:none;">
+    <h4>Hello World!</h4>
+    <div>
+        <p>This is a collaboratively edited question and answer site for <b>professional and enthusiast programmers</b>. It's 100% free.</p><p>Got a question about the site itself? <a href="https://meta.stackoverflow.com/">meta</a> is the place to talk about things like what questions are appropriate, what tags we should use, etc.</p>
+        <p class="ar">
+                <a href="https://stackoverflow.com/tour?mnu=1">about »</a>&nbsp;&nbsp;&nbsp;
+            <a href="https://stackoverflow.com/help?mnu=1">help »</a>
+                &nbsp; <a href="https://meta.stackoverflow.com/">meta »</a>
+        </p>
+    </div>
+</div>
+    <script>
+    if (showNewUser) {
+        document.getElementById('newuser-box').style.display = '';
+    }
+    </script>                            <div class="module question-stats">
+                    <table id="qinfo">
+                        <tbody><tr>
+                            <td>
+                                <p class="label-key">asked</p>
+                            </td>
+                            <td style="padding-left: 10px">
+                                <p class="label-key" title="2016-04-13 09:48:42Z"><b>2 years, 3 months ago</b></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="label-key">viewed</p>
+                            </td>
+
+                            <td style="padding-left: 10px">
+                                <p class="label-key">
+                                    <b>7,020 times</b>
+                                </p>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td>
+                                    <p class="label-key">active</p>
+                                </td>
+                                <td style="padding-left: 10px">
+                                    <p class="label-key"><b><a href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers?lastactivity" class="lastactivity-link" title="2018-05-31 04:03:44Z">2 months ago</a></b></p>
+                                </td>
+                            </tr>
+                    </tbody></table>
+                </div>
+            <div class="module community-bulletin" data-tracker="cb=1">
+    <div class="related">
+                <div class="bulletin-title">
+                    Featured on Meta
+                </div>
+                <hr>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <a href="https://meta.stackexchange.com/questions/312850/the-second-draft-of-our-code-of-conduct-is-available-for-feedback-and-review?cb=1" class="question-hyperlink" data-ga="[&quot;community bulletin board&quot;,&quot;Featured on Meta&quot;,&quot;https://meta.stackexchange.com/questions/312850/the-second-draft-of-our-code-of-conduct-is-available-for-feedback-and-review&quot;,null,null]">
+<div class="favicon favicon-stackexchangemeta" title="Meta Stack Exchange"></div>                </a>
+        </div>
+        <div class="bulletin-item-content">
+            <a href="https://meta.stackexchange.com/questions/312850/the-second-draft-of-our-code-of-conduct-is-available-for-feedback-and-review?cb=1" class="question-hyperlink" data-ga="[&quot;community bulletin board&quot;,&quot;Featured on Meta&quot;,&quot;https://meta.stackexchange.com/questions/312850/the-second-draft-of-our-code-of-conduct-is-available-for-feedback-and-review&quot;,null,null]">The second draft of our Code of Conduct is available for feedback and review</a>
+        </div>
+        <br class="cbt">
+    </div>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <a href="https://meta.stackexchange.com/questions/313086/welcome-stack-overflow-valued-associate-599-catherine-kuck-aka-catija?cb=1" class="question-hyperlink" data-ga="[&quot;community bulletin board&quot;,&quot;Featured on Meta&quot;,&quot;https://meta.stackexchange.com/questions/313086/welcome-stack-overflow-valued-associate-599-catherine-kuck-aka-catija&quot;,null,null]">
+<div class="favicon favicon-stackexchangemeta" title="Meta Stack Exchange"></div>                </a>
+        </div>
+        <div class="bulletin-item-content">
+            <a href="https://meta.stackexchange.com/questions/313086/welcome-stack-overflow-valued-associate-599-catherine-kuck-aka-catija?cb=1" class="question-hyperlink" data-ga="[&quot;community bulletin board&quot;,&quot;Featured on Meta&quot;,&quot;https://meta.stackexchange.com/questions/313086/welcome-stack-overflow-valued-associate-599-catherine-kuck-aka-catija&quot;,null,null]">Welcome Stack Overflow Valued Associate #599, Catherine Kuck AKA Catija!</a>
+        </div>
+        <br class="cbt">
+    </div>
+                <div class="bulletin-title">
+                    Hot Meta Posts
+                </div>
+                <hr>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <span title="Vote score (upvotes - downvotes)">30</span>
+        </div>
+        <div class="bulletin-item-content">
+            <a href="https://meta.stackoverflow.com/questions/371711/review-suspension-for-an-incorrectly-rejected-edit?cb=1" class="question-hyperlink" data-ga="[&quot;community bulletin board&quot;,&quot;Hot Meta Posts&quot;,&quot;https://meta.stackoverflow.com/questions/371711/review-suspension-for-an-incorrectly-rejected-edit&quot;,null,null]">Review suspension for an incorrectly rejected edit?</a>
+        </div>
+        <br class="cbt">
+    </div>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <span title="Vote score (upvotes - downvotes)">28</span>
+        </div>
+        <div class="bulletin-item-content">
+            <a href="https://meta.stackoverflow.com/questions/371818/milestone-information-overlapping-other-text?cb=1" class="question-hyperlink" data-ga="[&quot;community bulletin board&quot;,&quot;Hot Meta Posts&quot;,&quot;https://meta.stackoverflow.com/questions/371818/milestone-information-overlapping-other-text&quot;,null,null]">Milestone information overlapping other text</a>
+        </div>
+        <br class="cbt">
+    </div>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <span title="Vote score (upvotes - downvotes)">9</span>
+        </div>
+        <div class="bulletin-item-content">
+            <a href="https://meta.stackoverflow.com/questions/371840/new-comment-flagging-dialog-is-unusable-on-firefox?cb=1" class="question-hyperlink" data-ga="[&quot;community bulletin board&quot;,&quot;Hot Meta Posts&quot;,&quot;https://meta.stackoverflow.com/questions/371840/new-comment-flagging-dialog-is-unusable-on-firefox&quot;,null,null]">New comment flagging dialog is unusable on Firefox</a>
+        </div>
+        <br class="cbt">
+    </div>
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <span title="Vote score (upvotes - downvotes)">26</span>
+        </div>
+        <div class="bulletin-item-content">
+            <a href="https://meta.stackoverflow.com/questions/371742/what-would-be-the-appropriate-reason-to-give-if-rejecting-a-suggested-edit-of-a?cb=1" title="What would be the appropriate reason to give if rejecting a Suggested Edit of a question translating it from a non-English language?" class="question-hyperlink" data-ga="[&quot;community bulletin board&quot;,&quot;Hot Meta Posts&quot;,&quot;https://meta.stackoverflow.com/questions/371742/what-would-be-the-appropriate-reason-to-give-if-rejecting-a-suggested-edit-of-a&quot;,null,null]">What would be the appropriate reason to give if rejecting a Suggested Edit of…</a>
+        </div>
+        <br class="cbt">
+    </div>
+    </div>
+</div>
+            
+<div id="dfp-tsb" class="everyonelovesstackoverflow everyoneloves__top-sidebar" style="min-height: auto; height: auto; display: none;" data-google-query-id="CK2o39yDzNwCFQmEmgodLNEATQ" data-clc-ready="true"><div id="google_ads_iframe_/248424177/stackoverflow.com/sb/question-pages_0__container__" style="border: 0pt none; min-height: auto; height: auto; display: none;"><iframe id="google_ads_iframe_/248424177/stackoverflow.com/sb/question-pages_0" title="3rd party ad content" name="google_ads_iframe_/248424177/stackoverflow.com/sb/question-pages_0" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border: 0px; vertical-align: bottom; min-height: auto; height: auto; display: none;" src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/saved_resource(2).html"></iframe></div></div>
+            <div id="hireme" class="orange tagged tex2jax_ignore clc-jobs-multi"><a class="top " href="https://stackoverflow.com/jobs" target="_blank" data-clc-click="https://clc.stackoverflow.com/click?an=4_o4mdNnx_erHrp31wV5MjGxXDm-U3DT9R7mp7O3mLPyfDTNZvzodzvgeCADC0PPBgaGBntGRgaW2Uy7_nJ2_eO--VYEKJ5yYHreDkudVe72jCxZiWWJs5lOTuXY-Ipzw39BPpBsUPQuy16lZKisNNPUHVyTj_L83iIK1rvx-grLs9kG9rOZrs_luPSFc-9kIUkWBpYD-rGHLH1jdaC6GG7L8IWK_tF8_eIVAA&amp;cr=10439&amp;ct=1&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%3Fmed=clc&amp;sig=IihXhoWwAT-HLg"><span>Looking for a job?</span></a><div class="middle"><ul class="jobs"><li class="clc-dismissable"><div class="job-wrap"><a class="job" title="Java Solution Engineer (m/w) für Software-Entwicklungsprojekte at SEVEN PRINCIPLES AG. Click to learn more." href="https://stackoverflow.com/jobs/189926/java-solution-engineer-m-w-f%C3%BCr-software-seven-principles-ag" target="_blank" data-clc-click="https://clc.stackoverflow.com/click?an=4_o4mdNnx_erHrp31wV5MjGxXDm-U3DT9R7mp7O3mLPyfDTNZvzodzvgeCADC0PPBgaGBntGRgaW2Uy7_nJ2_eO--VYEKJ5yYHreDkudVe72jCxZiWWJs5lOTuXY-Ipzw39BPpBsUPQuy16lZKisNNPUHVyTj_L83iIK1rvx-grLs9kG9rOZrs_luPSFc-9kIUkWBpYD-rGHLH1jdaC6GG7L8IWK_tF8_eIVAA&amp;cr=341721&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2F189926%2Fjava-solution-engineer-m-w-f%25C3%25BCr-software-seven-principles-ag%3Fmed=clc&amp;sig=vWa4-FgJr4DP-Q"><div class="title">Java Solution Engineer (m/w) für Software-Entwicklungsprojekte</div><div><span class="company">SEVEN PRINCIPLES AG</span><span class="location"><svg viewBox="0 0 12 12"><path d="M6 5.7c.4 0 .7-.1.9-.4.3-.3.4-.6.4-.9 0-.4-.1-.7-.4-.9-.2-.3-.5-.4-.9-.4s-.7.1-.9.4c-.3.2-.4.5-.4.9s.1.7.4.9c.2.3.5.4.9.4zm0-5c1 0 1.9.4 2.6 1.1.7.7 1.1 1.6 1.1 2.6 0 .5-.1 1.1-.4 1.8s-.5 1.3-.9 1.9c-.4.5-.7 1.1-1.1 1.6-.4.5-.7.9-.9 1.2l-.4.4c-.1-.1-.2-.3-.4-.5s-.5-.6-.9-1.2c-.4-.5-.8-1-1.1-1.6s-.7-1.1-.9-1.8c-.3-.7-.4-1.3-.4-1.8 0-1 .4-1.9 1.1-2.6S5 .7 6 .7z"></path></svg><span>Hamburg, Deutschland</span></span></div><div class="opts"><span class="opt salary"><span>€45k - €70k</span></span><span class="opt remote"><svg viewBox="0 0 12 12"><path d="M6 9.8L3.9 7.7c1.3-.9 3-.9 4.2 0L6 9.8zm3-3a4.81 4.81 0 0 0-6 0L2.2 6c2.2-1.8 5.5-1.8 7.7 0l-.9.8zm1.7-1.7a7.27 7.27 0 0 0-9.4 0l-.9-.8c3.2-2.8 7.9-2.8 11.1 0l-.8.8z"></path></svg><span>Remote</span></span></div><span class="post-tag highlight">java</span><span class="post-tag">javascript</span><div></div></a></div><a class="clc-dismiss" data-clc-click="https://clc.stackoverflow.com/click?an=4_o4mdNnx_erHrp31wV5MjGxXDm-U3DT9R7mp7O3mLPyfDTNZvzodzvgeCADC0PPBgaGBntGRgaW2Uy7_nJ2_eO--VYEKJ5yYHreDkudVe72jCxZiWWJs5lOTuXY-Ipzw39BPpBsUPQuy16lZKisNNPUHVyTj_L83iIK1rvx-grLs9kG9rOZrs_luPSFc-9kIUkWBpYD-rGHLH1jdaC6GG7L8IWK_tF8_eIVAA&amp;cr=341721&amp;ct=-1&amp;sig=ecKc8Cu8uCLFAw" data-clc-meta-target="-1"><svg viewBox="0 0 13.6 13.6"><path d="M11.4 2.3C8.9-.2 4.8-.2 2.3 2.3s-2.5 6.6 0 9.1 6.6 2.5 9.1 0 2.5-6.6 0-9.1zM8.6 9.5L6.8 7.7 5 9.5l-.9-.9 1.8-1.8L4.1 5l.9-.9 1.8 1.8 1.8-1.8.9.9-1.8 1.8 1.8 1.8-.9.9z"></path></svg><span class="clc-tooltip above-left">dismiss this job</span></a></li><li class="clc-dismissable"><div class="job-wrap"><a class="job" title="Java/Spring Developer To Work on Articles at Baeldung. Click to learn more." href="https://stackoverflow.com/jobs/157697/java-spring-developer-to-work-on-articles-baeldung" target="_blank" data-clc-click="https://clc.stackoverflow.com/click?an=4_o4mdNnx_erHrp31wV5MjGxXDm-U3DT9R7mp7O3mLPyfDTNZvzodzvgeCADC0PPBgaGBntGRgaW2Uy7_nJ2_eO--VYEKJ5yYHreDkudVe72jCxZiWWJs5lOTuXY-Ipzw39BPpBsUPQuy16lZKisNNPUHVyTj_L83iIK1rvx-grLs9kG9rOZrs_luPSFc-9kIUkWBpYD-rGHLH1jdaC6GG7L8IWK_tF8_eIVAA&amp;cr=294832&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2F157697%2Fjava-spring-developer-to-work-on-articles-baeldung%3Fmed=clc&amp;sig=_MEWIANUNEcKnA"><div class="title">Java/Spring Developer To Work on Articles</div><div><span class="company">Baeldung</span><span class="location"><svg viewBox="0 0 12 12"><path d="M6 5.7c.4 0 .7-.1.9-.4.3-.3.4-.6.4-.9 0-.4-.1-.7-.4-.9-.2-.3-.5-.4-.9-.4s-.7.1-.9.4c-.3.2-.4.5-.4.9s.1.7.4.9c.2.3.5.4.9.4zm0-5c1 0 1.9.4 2.6 1.1.7.7 1.1 1.6 1.1 2.6 0 .5-.1 1.1-.4 1.8s-.5 1.3-.9 1.9c-.4.5-.7 1.1-1.1 1.6-.4.5-.7.9-.9 1.2l-.4.4c-.1-.1-.2-.3-.4-.5s-.5-.6-.9-1.2c-.4-.5-.8-1-1.1-1.6s-.7-1.1-.9-1.8c-.3-.7-.4-1.3-.4-1.8 0-1 .4-1.9 1.1-2.6S5 .7 6 .7z"></path></svg><span>No office location</span></span></div><div class="opts"><span class="opt remote"><svg viewBox="0 0 12 12"><path d="M6 9.8L3.9 7.7c1.3-.9 3-.9 4.2 0L6 9.8zm3-3a4.81 4.81 0 0 0-6 0L2.2 6c2.2-1.8 5.5-1.8 7.7 0l-.9.8zm1.7-1.7a7.27 7.27 0 0 0-9.4 0l-.9-.8c3.2-2.8 7.9-2.8 11.1 0l-.8.8z"></path></svg><span>Remote</span></span></div><span class="post-tag highlight">java</span><span class="post-tag">spring</span><div></div></a></div><a class="clc-dismiss" data-clc-click="https://clc.stackoverflow.com/click?an=4_o4mdNnx_erHrp31wV5MjGxXDm-U3DT9R7mp7O3mLPyfDTNZvzodzvgeCADC0PPBgaGBntGRgaW2Uy7_nJ2_eO--VYEKJ5yYHreDkudVe72jCxZiWWJs5lOTuXY-Ipzw39BPpBsUPQuy16lZKisNNPUHVyTj_L83iIK1rvx-grLs9kG9rOZrs_luPSFc-9kIUkWBpYD-rGHLH1jdaC6GG7L8IWK_tF8_eIVAA&amp;cr=294832&amp;ct=-1&amp;sig=Y7dm5e2JFq4iGg" data-clc-meta-target="-1"><svg viewBox="0 0 13.6 13.6"><path d="M11.4 2.3C8.9-.2 4.8-.2 2.3 2.3s-2.5 6.6 0 9.1 6.6 2.5 9.1 0 2.5-6.6 0-9.1zM8.6 9.5L6.8 7.7 5 9.5l-.9-.9 1.8-1.8L4.1 5l.9-.9 1.8 1.8 1.8-1.8.9.9-1.8 1.8 1.8 1.8-.9.9z"></path></svg><span class="clc-tooltip above-left">dismiss this job</span></a></li><li class="clc-dismissable"><div class="job-wrap"><a class="job" title="Software Engineer - San Francisco OR Remote - USA at HelloSign. Click to learn more." href="https://stackoverflow.com/jobs/197849/software-engineer-san-francisco-or-remote-usa-hellosign" target="_blank" data-clc-click="https://clc.stackoverflow.com/click?an=4_o4mdNnx_erHrp31wV5MjGxXDm-U3DT9R7mp7O3mLPyfDTNZvzodzvgeCADC0PPBgaGBntGRgaW2Uy7_nJ2_eO--VYEKJ5yYHreDkudVe72jCxZiWWJs5lOTuXY-Ipzw39BPpBsUPQuy16lZKisNNPUHVyTj_L83iIK1rvx-grLs9kG9rOZrs_luPSFc-9kIUkWBpYD-rGHLH1jdaC6GG7L8IWK_tF8_eIVAA&amp;cr=350843&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2F197849%2Fsoftware-engineer-san-francisco-or-remote-usa-hellosign%3Fmed=clc&amp;sig=DDlyHJw6gVSADQ"><div class="title">Software Engineer - San Francisco OR Remote - USA</div><div><span class="company">HelloSign</span><span class="location"><svg viewBox="0 0 12 12"><path d="M6 5.7c.4 0 .7-.1.9-.4.3-.3.4-.6.4-.9 0-.4-.1-.7-.4-.9-.2-.3-.5-.4-.9-.4s-.7.1-.9.4c-.3.2-.4.5-.4.9s.1.7.4.9c.2.3.5.4.9.4zm0-5c1 0 1.9.4 2.6 1.1.7.7 1.1 1.6 1.1 2.6 0 .5-.1 1.1-.4 1.8s-.5 1.3-.9 1.9c-.4.5-.7 1.1-1.1 1.6-.4.5-.7.9-.9 1.2l-.4.4c-.1-.1-.2-.3-.4-.5s-.5-.6-.9-1.2c-.4-.5-.8-1-1.1-1.6s-.7-1.1-.9-1.8c-.3-.7-.4-1.3-.4-1.8 0-1 .4-1.9 1.1-2.6S5 .7 6 .7z"></path></svg><span>San Francisco, CA</span></span></div><div class="opts"><span class="opt salary"><span>$125k - $200k</span></span><span class="opt remote"><svg viewBox="0 0 12 12"><path d="M6 9.8L3.9 7.7c1.3-.9 3-.9 4.2 0L6 9.8zm3-3a4.81 4.81 0 0 0-6 0L2.2 6c2.2-1.8 5.5-1.8 7.7 0l-.9.8zm1.7-1.7a7.27 7.27 0 0 0-9.4 0l-.9-.8c3.2-2.8 7.9-2.8 11.1 0l-.8.8z"></path></svg><span>Remote</span></span></div><span class="post-tag">php</span><span class="post-tag">web-services</span><div></div></a></div><a class="clc-dismiss" data-clc-click="https://clc.stackoverflow.com/click?an=4_o4mdNnx_erHrp31wV5MjGxXDm-U3DT9R7mp7O3mLPyfDTNZvzodzvgeCADC0PPBgaGBntGRgaW2Uy7_nJ2_eO--VYEKJ5yYHreDkudVe72jCxZiWWJs5lOTuXY-Ipzw39BPpBsUPQuy16lZKisNNPUHVyTj_L83iIK1rvx-grLs9kG9rOZrs_luPSFc-9kIUkWBpYD-rGHLH1jdaC6GG7L8IWK_tF8_eIVAA&amp;cr=350843&amp;ct=-1&amp;sig=t9zq3e9DY4oPlA" data-clc-meta-target="-1"><svg viewBox="0 0 13.6 13.6"><path d="M11.4 2.3C8.9-.2 4.8-.2 2.3 2.3s-2.5 6.6 0 9.1 6.6 2.5 9.1 0 2.5-6.6 0-9.1zM8.6 9.5L6.8 7.7 5 9.5l-.9-.9 1.8-1.8L4.1 5l.9-.9 1.8 1.8 1.8-1.8.9.9-1.8 1.8 1.8 1.8-.9.9z"></path></svg><span class="clc-tooltip above-left">dismiss this job</span></a></li><li class="clc-dismissable"><div class="job-wrap"><a class="job" title="برنامه نویس ‌‌‌تمام وقت at روان ارتباط عصر. Click to learn more." href="https://stackoverflow.com/jobs/105027/%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D9%87-%D9%86%D9%88%DB%8C%D8%B3-%D8%AA%D9%85%D8%A7%D9%85-%D9%88%D9%82%D8%AA-%D8%B1%D9%88%D8%A7%D9%86-%D8%A7%D8%B1%D8%AA%D8%A8%D8%A7%D8%B7-%D8%B9%D8%B5%D8%B1" target="_blank" data-clc-click="https://clc.stackoverflow.com/click?an=4_o4mdNnx_erHrp31wV5MjGxXDm-U3DT9R7mp7O3mLPyfDTNZvzodzvgeCADC0PPBgaGBntGRgaW2Uy7_nJ2_eO--VYEKJ5yYHreDkudVe72jCxZiWWJs5lOTuXY-Ipzw39BPpBsUPQuy16lZKisNNPUHVyTj_L83iIK1rvx-grLs9kG9rOZrs_luPSFc-9kIUkWBpYD-rGHLH1jdaC6GG7L8IWK_tF8_eIVAA&amp;cr=297405&amp;ct=0&amp;url=https%3A%2F%2Fstackoverflow.com%2Fjobs%2F105027%2F%25D8%25A8%25D8%25B1%25D9%2586%25D8%25A7%25D9%2585%25D9%2587-%25D9%2586%25D9%2588%25DB%258C%25D8%25B3-%25D8%25AA%25D9%2585%25D8%25A7%25D9%2585-%25D9%2588%25D9%2582%25D8%25AA-%25D8%25B1%25D9%2588%25D8%25A7%25D9%2586-%25D8%25A7%25D8%25B1%25D8%25AA%25D8%25A8%25D8%25A7%25D8%25B7-%25D8%25B9%25D8%25B5%25D8%25B1%3Fmed=clc&amp;sig=F2DCLtF72z-LAQ"><div class="title">برنامه نویس ‌‌‌تمام وقت</div><div><span class="company">روان ارتباط عصر</span><span class="location"><svg viewBox="0 0 12 12"><path d="M6 5.7c.4 0 .7-.1.9-.4.3-.3.4-.6.4-.9 0-.4-.1-.7-.4-.9-.2-.3-.5-.4-.9-.4s-.7.1-.9.4c-.3.2-.4.5-.4.9s.1.7.4.9c.2.3.5.4.9.4zm0-5c1 0 1.9.4 2.6 1.1.7.7 1.1 1.6 1.1 2.6 0 .5-.1 1.1-.4 1.8s-.5 1.3-.9 1.9c-.4.5-.7 1.1-1.1 1.6-.4.5-.7.9-.9 1.2l-.4.4c-.1-.1-.2-.3-.4-.5s-.5-.6-.9-1.2c-.4-.5-.8-1-1.1-1.6s-.7-1.1-.9-1.8c-.3-.7-.4-1.3-.4-1.8 0-1 .4-1.9 1.1-2.6S5 .7 6 .7z"></path></svg><span>Tehran, Iran</span></span></div><span class="post-tag highlight">java</span><span class="post-tag">javascript</span><div></div></a></div><a class="clc-dismiss" data-clc-click="https://clc.stackoverflow.com/click?an=4_o4mdNnx_erHrp31wV5MjGxXDm-U3DT9R7mp7O3mLPyfDTNZvzodzvgeCADC0PPBgaGBntGRgaW2Uy7_nJ2_eO--VYEKJ5yYHreDkudVe72jCxZiWWJs5lOTuXY-Ipzw39BPpBsUPQuy16lZKisNNPUHVyTj_L83iIK1rvx-grLs9kG9rOZrs_luPSFc-9kIUkWBpYD-rGHLH1jdaC6GG7L8IWK_tF8_eIVAA&amp;cr=297405&amp;ct=-1&amp;sig=XUfn1irp79-3FA" data-clc-meta-target="-1"><svg viewBox="0 0 13.6 13.6"><path d="M11.4 2.3C8.9-.2 4.8-.2 2.3 2.3s-2.5 6.6 0 9.1 6.6 2.5 9.1 0 2.5-6.6 0-9.1zM8.6 9.5L6.8 7.7 5 9.5l-.9-.9 1.8-1.8L4.1 5l.9-.9 1.8 1.8 1.8-1.8.9.9-1.8 1.8 1.8 1.8-.9.9z"></path></svg><span class="clc-tooltip above-left">dismiss this job</span></a></li></ul></div><img src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/impression.gif" class="impression" style="display: none;"></div>
+<script>;try{(function(a){function b(a){return'string'==typeof a?document.getElementById(a):a}function c(a){return a=b(a),!!a&&'none'===getComputedStyle(a).display}function d(a){return!c(a)}function e(a){return!!a}function f(a){return /^\s*$/.test(b(a).innerHTML)}function g(a){var b=a.style;b.height=b.maxHeight=b.minHeight='auto',b.display='none',[].forEach.call(a.children,g)}function h(a,b){var c;return function(){return a&&(c=a.call(b||this,arguments),a=null),c}}function i(a){var b=document.createElement('script');b.src=a,document.body.appendChild(b)}function j(a){return k([],a)}function k(a,b){return a.push=function(a){return b(),delete this.push,this.push(a)},a}function l(){try{return!new Function('return async()=>{};')}catch(a){return!0}}function m(){return'undefined'!=typeof googletag&&!!googletag.apiReady}function n(){m()||(googletag={cmd:j(A)})}function o(){var a=document.createElement('div');a.className='adsbox',a.id='clc-abd',a.style.position='absolute',a.style.pointerEvents='none',a.innerHTML='&nbsp;',document.body.appendChild(a)}function p(a){var b=a.serviceName,c=a.slot,d=a.lineItemId;try{var e=c.getSlotElementId(),f=[];e||f.push('id=0');var h=document.getElementById(e);if(!e||h?h.hasAttribute('data-clc-stalled')&&f.push('st=1'):f.push('el=0'),0!==f.length)return void B(f.join('&'));-1===x.dh.indexOf(d)?h.setAttribute('data-clc-prefilled','true'):g(h),h.setAttribute('data-clc-ready','true')}catch(a){var i=document.querySelector('#dfp-tsb, #dfp-isb, #clc-tsb');i&&i.setAttribute('data-clc-ready','true'),B('e=1')}}function q(){return Object.keys(F.ids)}function r(a){var b=F.ids[a],c=F.slots[b];'function'==typeof c&&(c=c(a));return{path:'/'+C+'/'+E+'/'+b+'/'+D,sizes:c,zone:b}}function s(a){return!(clc.collapse&&void 0!==clc.collapse[a])||!!clc.collapse[a]}function t(a,b){'dfp-isb'===a&&b.setTargeting('Sidebar',['Inline']),'dfp-tsb'===a&&b.setTargeting('Sidebar',['Right']);var c=r(a),d=c.path,e=c.sizes,f=c.zone,g=googletag.defineSlot(d,e,a);s(f)&&g.setCollapseEmptyDiv(!0,!0),g.addService(b),!1}function u(b){var c=a.dfp&&a.dfp.targeting||{};Object.keys(c).forEach(function(a){b.setTargeting(a,c[a])})}function v(a){var g=a.map(b).filter(e);return{eligible:g.filter(f).filter(d).map(function(a){return a.id}),ineligible:g.filter(c)}}function w(b){if(void 0===b&&(b=q()),!m())return n(),void googletag.cmd.push(function(){return w(b)});var c=v(b),d=c.eligible,e=c.ineligible;if(e.forEach(g),0!==d.length){o(),googletag.destroySlots();var f=googletag.pubads();f.enableSingleRequest(),a.sreEvent||(f.addEventListener('slotRenderEnded',p),a.sreEvent=!0),u(f),d.forEach(function(a){return t(a,f)}),googletag.enableServices(),d.forEach(function(a){googletag.display(a)})}}var x=function(a){for(var b=[],c=1;c<arguments.length;c++)b[c-1]=arguments[c];for(var d,e=0,f=b;e<f.length;e++)for(var g in d=f[e],d)a[g]=d[g];return a}({"lib":"https://cdn.sstatic.net/clc/clc.min.js?v=04d772c81312","style":"https://cdn.sstatic.net/clc/styles/clc.min.css?v=f28c677e209b","u":"https://clc.stackoverflow.com/markup.js","wa":true,"kt":2000,"tto":true,"h":"clc.stackoverflow.com","allowed":"^(((talent\\.)?stackoverflow)|(blog\\.codinghorror)|(serverfault|askubuntu)|([^\\.]+\\.stackexchange))\\.com$","wv":true,"al":false,"dh":[4385506061,4386578282,4386579572]},a.options||{}),y=h(function(){i(l()?x.lib.replace(/(\.min)?\.js(\?v=[0-9a-fA-F]+)?$/,'.ie$1.js$2'):x.lib)}),z=a.cmd||[];Array.isArray(z)&&(0<z.length?y():k(z,y));var A=h(function(){i('https://www.googletagservices.com/tag/js/gpt.js')}),B=function(a){new Image().src='https://'+x.h+'/stalled.gif?'+a},C='248424177',D=/^\/tags\//.test(location.pathname)||/^\/questions\/tagged\//.test(location.pathname)?'tag-pages':'question-pages',E=location.hostname;var F={slots:{lb:[[728,90]],mlb:[[728,90]],sb:function(a){return'dfp-tsb'===a?[[300,250],[300,600]]:[[300,250]]},"tag-sponsorship":[[730,135]],"mobile-below-question":[[320,50],[300,250]]},ids:{"dfp-tlb":'lb',"dfp-mlb":'mlb',"dfp-tsb":'sb',"dfp-isb":'sb',"dfp-tag":'tag-sponsorship',"dfp-m-aq":'mobile-below-question',"clc-tlb":'lb',"clc-mlb":'mlb',"clc-tsb":'sb'}};(function(){x.al&&z.push(function(){return a.load()})})(),n();a.cmd=z,a.dfp={load:w},a.options=x})(this.clc=this.clc||{})}catch(a){window.console.error(a)}</script>            <script>
+                var clc = clc || {};
+                clc.collapse = { sb: !0,'tag-sponsorship':!0,lb:!1,mlb:!1,'mobile-below-question':!0};
+                clc.cmd = clc.cmd || [];
+                clc.cmd.push(function () { window.clc_request='Akk4sUyv99UIsitjANRjLgICAAAAAgAAAAM2AAAAfGphdmF8c3ByaW5nfG1vZGVsLXZpZXctY29udHJvbGxlcnxjb250cm9sbGVyfG1hcHBpbmd8AGagx___dwTE2EA'; clc.load(); });
+                                clc.dfp = clc.dfp || {};
+                clc.dfp.targeting = {Registered:['true'],'so-tag':['java','spring','model-view-controller','controller','mapping']};
+                
+                var googletag = googletag || {};
+                googletag.cmd = googletag.cmd || [];
+                googletag.cmd.push(function () { clc.dfp.load(); });
+            </script>
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/7276989?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted large">143</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/7276989/how-to-set-the-context-path-of-a-web-application-in-tomcat-7-0?noredirect=1&amp;lq=1" class="question-hyperlink">How to set the context path of a web application in Tomcat 7.0</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/16813609?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">0</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/16813609/default-handler-mapping-for-annotation-based-spring-project?noredirect=1&amp;lq=1" class="question-hyperlink">Default handler mapping for annotation based spring project</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/43725728?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">0</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/43725728/spring-boot-catchall-view-controllers?noredirect=1&amp;lq=1" class="question-hyperlink">Spring Boot Catchall View Controllers</a>
+</div>
+<div class="spacer">
+	<a href="https://stackoverflow.com/q/49776938?lq=1" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">0</div>
+	</a>
+	<a href="https://stackoverflow.com/questions/49776938/how-to-make-a-partial-proxy-using-spring-boot?noredirect=1&amp;lq=1" class="question-hyperlink">How to make a partial proxy using Spring Boot</a>
+</div>			</div>
+</div>
+
+                <div class="module sidebar-related">
+                    <h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/2543752?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">2</div></a><a href="https://stackoverflow.com/questions/2543752/can-i-have-a-catch-all-not-matched-requests-using-spring-dispatcherservlet?rq=1" class="question-hyperlink">Can I have a catch all not matched requests using Spring DispatcherServlet</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/2793150?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted extra-large">1758</div></a><a href="https://stackoverflow.com/questions/2793150/how-to-use-java-net-urlconnection-to-fire-and-handle-http-requests?rq=1" class="question-hyperlink">How to use java.net.URLConnection to fire and handle HTTP requests</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/7312436?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes large">132</div></a><a href="https://stackoverflow.com/questions/7312436/spring-mvc-how-to-get-all-request-params-in-a-map-in-spring-controller?rq=1" class="question-hyperlink">Spring MVC - How to get all request params in a map in Spring controller?</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/7842293?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted large">268</div></a><a href="https://stackoverflow.com/questions/7842293/multiple-types-were-found-that-match-the-controller-named-home?rq=1" class="question-hyperlink">Multiple types were found that match the controller named 'Home'</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/11112608?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted large">335</div></a><a href="https://stackoverflow.com/questions/11112608/where-to-put-model-data-and-behaviour-tl-dr-use-services?rq=1" class="question-hyperlink">Where to put model data and behaviour? [tl; dr; Use Services]</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/12647605?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">3</div></a><a href="https://stackoverflow.com/questions/12647605/spring-controller-requestmapping-to-jsp?rq=1" class="question-hyperlink">Spring: Controller @RequestMapping to jsp</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/14856149?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="https://stackoverflow.com/questions/14856149/spring-request-mapping-matching-with-url-pattern?rq=1" class="question-hyperlink">Spring request mapping: Matching with url pattern</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/28902374?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted large">121</div></a><a href="https://stackoverflow.com/questions/28902374/spring-boot-rest-service-exception-handling?rq=1" class="question-hyperlink">Spring Boot REST service exception handling</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/29541380?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">1</div></a><a href="https://stackoverflow.com/questions/29541380/two-spring-controllers-matching-to-the-same-url-result-in-wrong-controller-call?rq=1" class="question-hyperlink">Two Spring Controllers matching to the same URL result in wrong controller call</a></div><div class="spacer js-gps-track"><a href="https://stackoverflow.com/q/36595240?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="https://stackoverflow.com/questions/36595240/multiple-return-types-from-single-spring-mvc-controller?rq=1" class="question-hyperlink">Multiple Return Types From Single Spring MVC Controller</a></div>
+                    </div>
+                </div>
+
+<div id="hot-network-questions" class="module tex2jax_ignore">
+    <h4>
+        <a href="https://stackexchange.com/questions?tab=hot" class="js-gps-track" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li>
+                <div class="favicon favicon-travel" title="Travel Stack Exchange"></div><a href="https://travel.stackexchange.com/questions/119675/travelling-to-areas-affected-by-wildfires" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:273 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Travelling to areas affected by wildfires
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href="https://academia.stackexchange.com/questions/114481/why-do-americans-care-so-much-about-recommendation-letters" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why do Americans care so much about recommendation letters?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-interpersonal" title="Interpersonal Skills Stack Exchange"></div><a href="https://interpersonal.stackexchange.com/questions/17147/complimenting-a-female-co-worker-without-coming-across-as-flirting" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:680 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Complimenting a female co-worker without coming across as flirting?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-aviation" title="Aviation Stack Exchange"></div><a href="https://aviation.stackexchange.com/questions/53972/why-would-a-flight-from-north-america-to-asia-sometimes-fly-over-the-atlantic" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:528 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why would a flight from North America to Asia sometimes fly over the Atlantic?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-security" title="Information Security Stack Exchange"></div><a href="https://security.stackexchange.com/questions/190558/what-makes-random-number-generators-so-fragile" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What makes Random Number Generators so fragile?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-unix" title="Unix &amp; Linux Stack Exchange"></div><a href="https://unix.stackexchange.com/questions/459805/how-to-retrieve-values-from-json-object-using-awk-or-sed" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:106 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to retrieve values from json object using awk or sed
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-ux" title="User Experience Stack Exchange"></div><a href="https://ux.stackexchange.com/questions/119898/where-should-a-newly-added-item-go-in-table" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:102 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Where should a newly added item go in table?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-tex" title="TeX - LaTeX Stack Exchange"></div><a href="https://tex.stackexchange.com/questions/444038/merge-double-subscripts-in-macro-with-second-subscript-passed-as-argument" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:85 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Merge double subscripts in macro with second subscript passed as argument
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-apple" title="Ask Different"></div><a href="https://apple.stackexchange.com/questions/332615/how-to-make-sure-apps-remain-available-after-upgrading-macos" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:118 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to make sure apps remain available after upgrading macOS?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a href="https://stackoverflow.com/questions/51615421/why-is-an-if-statement-working-but-not-a-switch-statement" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why is an if statement working but not a switch statement
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a href="https://english.stackexchange.com/questions/458239/why-were-slum-kids-called-urchins" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why were slum kids called “urchins”?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-boardgames" title="Board &amp; Card Games Stack Exchange"></div><a href="https://boardgames.stackexchange.com/questions/43018/mtg-graveyard-casting-with-x-costs" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:147 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    MTG Graveyard casting with 'X' costs
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-travel" title="Travel Stack Exchange"></div><a href="https://travel.stackexchange.com/questions/119686/is-54-minutes-enough-to-transfer-from-domestic-to-international-in-houston" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:273 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is 54 minutes enough to transfer from domestic to international in Houston?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-electronics" title="Electrical Engineering Stack Exchange"></div><a href="https://electronics.stackexchange.com/questions/388806/c-struct-v-union-in-embedded-programming-why" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:135 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    C struct v union in embedded programming - why?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="https://scifi.stackexchange.com/questions/192134/did-macready-pull-the-trigger-on-childs" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Did Macready pull the trigger on Childs?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-physics" title="Physics Stack Exchange"></div><a href="https://physics.stackexchange.com/questions/420288/why-do-physicists-assume-that-dark-matter-is-weakly-interacting" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:151 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why do physicists assume that dark matter is weakly interacting?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-dba" title="Database Administrators Stack Exchange"></div><a href="https://dba.stackexchange.com/questions/213693/stored-procedure-asking-for-input-while-processing" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:182 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Stored Procedure Asking for Input While Processing
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href="https://worldbuilding.stackexchange.com/questions/119721/what-is-a-good-excuse-for-why-an-early-1900s-like-fantasy-world-has-not-yet-inv" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What is a good excuse for why an early 1900's-like fantasy world has not yet invented rifles / guns of any sort?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href="https://worldbuilding.stackexchange.com/questions/119564/are-midas-swords-useless-for-warfare" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Are "Midas" swords useless for warfare?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-codereview" title="Code Review Stack Exchange"></div><a href="https://codereview.stackexchange.com/questions/200634/program-to-check-if-a-date-is-valid-or-not" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:196 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Program to check if a date is valid or not
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-graphicdesign" title="Graphic Design Stack Exchange"></div><a href="https://graphicdesign.stackexchange.com/questions/113275/how-to-handle-a-request-for-handing-over-6-years-of-working-files" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:174 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to handle a request for handing over 6 years of working files?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-german" title="German Language Stack Exchange"></div><a href="https://german.stackexchange.com/questions/46226/using-gender-specific-pronouns-for-inanimate-objects" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:253 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Using gender specific pronouns for inanimate objects
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-gis" title="Geographic Information Systems Stack Exchange"></div><a href="https://gis.stackexchange.com/questions/291309/manually-set-qgis-vertex-coordinate-in-lat-long-format" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:79 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Manually set QGIS vertex coordinate in lat-long format
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="https://codegolf.stackexchange.com/questions/169677/beware-of-the-matrix-tornado" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Beware of the matrix tornado!
+                </a>
+
+            </li>
+    </ul>
+
+        <a href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#" class="show-more js-show-more js-gps-track" data-gps-track="posts_hot_network.click({ item_type:3, location:11 })">
+            more hot questions
+        </a>
+</div>
+
+<div id="feed-link">
+    <a href="https://stackoverflow.com/feeds/question/36594644" title="feed of this question and its answers">
+        <svg aria-hidden="true" class="svg-icon fc-orange-400 iconRss" width="18" height="18" viewBox="0 0 18 18"><path d="M1 3c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3zm14.5 12C15.5 8.1 9.9 2.5 3 2.5V5a10 10 0 0 1 10 10h2.5zm-5 0A7.5 7.5 0 0 0 3 7.5V10a5 5 0 0 1 5 5h2.5zm-5 0A2.5 2.5 0 0 0 3 12.5V15h2.5z"></path></svg>
+        question feed
+    </a>
+</div>
+        </div>
+    </div>
+<script>StackExchange.ready(function(){$.get('/posts/36594644/ivc/7f6d');});</script>
+<noscript><div><img src="/posts/36594644/ivc/7f6d" class="dno" alt="" width="0" height="0"></div></noscript><div style="display:none" id="prettify-lang">lang-java</div></div>
+
+    <script>
+        $('#wmd-input').one("keypress", function() {
+            $.ajax({
+                url: '/accounts/email-settings-form',
+                cache: false,
+                success: function(data) {
+                    $('#submit-button').parent().prepend(data);
+                }
+            });
+        });
+
+    </script>
+
+        </div>
+    </div><script src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/clc.min.js.download"></script><script src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/gpt.js.download"></script>
+
+    <footer id="footer" class="site-footer js-footer" role="contentinfo">
+        <div class="site-footer--container">
+                <div class="site-footer--logo">
+
+                    
+                    <a href="https://stackoverflow.com/"><svg aria-hidden="true" class="svg-icon native iconLogoGlyphMd" width="32" height="37" viewBox="0 0 32 37"><g><path fill="#BCBBBB" d="M26 33v-9h4v13H0V24h4v9z"></path><path d="M23.1 25.99l.68-2.95-16.1-3.35L7 23l16.1 2.99zM9.1 15.2l15 7 1.4-3-15-7-1.4 3zm4.2-7.4L26 18.4l2.1-2.5L15.4 5.3l-2.1 2.5zM21.5 0l-2.7 2 9.9 13.3 2.7-2L21.5 0zM7 30h16v-3H7v3z" fill="#F48024"></path></g></svg></a>
+                </div>
+            
+            <nav class="site-footer--nav">
+                    <div class="site-footer--col site-footer--col__visible js-footer-col" data-name="default">
+                        <h5 class="-title"><a href="https://stackoverflow.com/" class="js-gps-track" data-gps-track="footer.click({ location: 2, link: 15})">Stack Overflow</a></h5>
+                        <ul class="-list js-primary-footer-links">
+                            <li class="-item"><a href="https://stackoverflow.com/questions" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 16})">Questions</a></li>
+                                <li class="-item"><a href="https://stackoverflow.com/jobs" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 17})">Jobs</a></li>
+                                <li class="-item"><a href="https://stackoverflow.com/jobs/directory/developer-jobs" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 11})">Developer Jobs Directory</a></li>
+                                     <li class="-item"><a href="https://stackoverflow.com/jobs/salary" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 28})">Salary Calculator</a></li>
+                                                            <li class="-item"><a href="https://stackoverflow.com/help" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 3 })">Help</a></li>
+                                <li class="-item"><a onclick="StackExchange.switchMobile(&quot;on&quot;)" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 12 })">Mobile</a></li>
+                        <li class="-item"><a class="-link" role="button">Disable Responsiveness</a></li></ul>
+                    </div>
+                    <div class="site-footer--col site-footer--col__visible js-footer-col" data-name="default">
+                        <h5 class="-title"><a href="https://www.stackoverflowbusiness.com/" class="js-gps-track" data-gps-track="footer.click({ location: 2, link: 19 })">Products</a></h5>
+                        <ul class="-list">
+                            <li class="-item"><a href="https://stackoverflow.com/teams" class="js-gps-track -link" data-ga="[&quot;teams traffic&quot;,&quot;footer - site nav&quot;,&quot;stackoverflow.com/teams&quot;,null,{&quot;dimension4&quot;:&quot;teams&quot;}]" data-gps-track="footer.click({ location: 2, link: 29 })">Teams</a></li>
+                            <li class="-item"><a href="https://www.stackoverflowbusiness.com/talent" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 20 })">Talent</a></li>
+                            <li class="-item"><a href="https://www.stackoverflowbusiness.com/advertise" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 21 })">Engagement</a></li>
+                            <li class="-item"><a href="https://stackoverflow.com/enterprise" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 22 })">Enterprise</a></li>
+                        </ul>
+                    </div>
+                <div class="site-footer--col site-footer--col__visible js-footer-col" data-name="default">
+                    <h5 class="-title"><a class="js-gps-track" data-gps-track="footer.click({ location: 2, link: 1 })" href="https://stackoverflow.com/company/about">Company</a></h5>
+                    <ul class="-list">
+                            <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 1 })" href="https://stackoverflow.com/company/about">About</a></li>
+                                                <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 27 })" href="https://stackoverflow.com/company/press">Press</a></li>
+                            <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 9 })" href="https://stackoverflow.com/company/work-here">Work Here</a></li>
+                        <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 7 })" href="https://stackoverflow.com/legal">Legal</a></li>
+                        <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 8 })" href="https://stackoverflow.com/legal/privacy-policy">Privacy Policy</a></li>
+                            <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 13 })" href="https://stackoverflow.com/company/contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="site-footer--col site-footer--categories-nav site-footer--col__visible">
+                    <a href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#" class="site-footer--back js-footer-back"><svg aria-hidden="true" class="svg-icon iconArrowLeftAlt" width="18" height="18" viewBox="0 0 18 18"><path d="M10.58 16L12 14.59 6.4 9 12 3.41 10.57 2l-7 7z"></path></svg></a>
+                    <div>
+                        <h5 class="-title"><a href="https://stackexchange.com/">Stack Exchange<br> Network</a></h5>
+                        <ul class="-list">
+                            <li class="-item"><a href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#" class="-link _expandable js-footer-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Technology">Technology</a></li>
+                            <li class="-item"><a href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#" class="-link _expandable js-footer-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Life / Arts">Life / Arts</a></li>
+                            <li class="-item"><a href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#" class="-link _expandable js-footer-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Culture / Recreation">Culture / Recreation</a></li>
+                            <li class="-item"><a href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#" class="-link _expandable js-footer-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Science">Science</a></li>
+                            <li class="-item"><a href="https://stackoverflow.com/questions/36594644/spring-controller-to-handle-all-requests-not-matched-by-other-controllers#" class="-link _expandable js-footer-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Other">Other</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="site-footer--categories">
+                    <div class="site-footer--col site-footer--category js-footer-col" data-name="Technology">
+        <ul class="-list">
+                <li class="-item"><a href="https://stackoverflow.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                <li class="-item"><a href="https://serverfault.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="system and network administrators">Server Fault</a></li>
+                <li class="-item"><a href="https://superuser.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="computer enthusiasts and power users">Super User</a></li>
+                <li class="-item"><a href="https://webapps.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="power users of web applications">Web Applications</a></li>
+                <li class="-item"><a href="https://askubuntu.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                <li class="-item"><a href="https://webmasters.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="pro webmasters">Webmasters</a></li>
+                <li class="-item"><a href="https://gamedev.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional and independent game developers">Game Development</a></li>
+                    </ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://tex.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                <li class="-item"><a href="https://softwareengineering.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professionals, academics, and students working within the systems development life cycle">Software Engineering</a></li>
+                <li class="-item"><a href="https://unix.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of Linux, FreeBSD and other Un*x-like operating systems">Unix &amp; Linux</a></li>
+                <li class="-item"><a href="https://apple.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                <li class="-item"><a href="https://wordpress.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="WordPress developers and administrators">WordPress Development</a></li>
+                <li class="-item"><a href="https://gis.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                <li class="-item"><a href="https://electronics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                    </ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://android.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                <li class="-item"><a href="https://security.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="information security professionals">Information Security</a></li>
+                <li class="-item"><a href="https://dba.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                <li class="-item"><a href="https://drupal.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Drupal developers and administrators">Drupal Answers</a></li>
+                <li class="-item"><a href="https://sharepoint.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="SharePoint enthusiasts">SharePoint</a></li>
+                <li class="-item"><a href="https://ux.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="user experience researchers and experts">User Experience</a></li>
+                <li class="-item"><a href="https://mathematica.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of Wolfram Mathematica">Mathematica</a></li>
+                    </ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://salesforce.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                <li class="-item"><a href="https://expressionengine.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="administrators, end users, developers and designers for ExpressionEngine® CMS">ExpressionEngine® Answers</a></li>
+                <li class="-item"><a href="https://pt.stackoverflow.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="programadores profissionais e entusiastas">Stack Overflow em Português</a></li>
+                <li class="-item"><a href="https://blender.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people who use Blender to create 3D graphics, animations, or games">Blender</a></li>
+                <li class="-item"><a href="https://networkengineering.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="network engineers">Network Engineering</a></li>
+                <li class="-item"><a href="https://crypto.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="software developers, mathematicians and others interested in cryptography">Cryptography</a></li>
+                <li class="-item"><a href="https://codereview.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="peer programmer code reviews">Code Review</a></li>
+                    </ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://magento.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of the Magento e-Commerce platform">Magento</a></li>
+                <li class="-item"><a href="https://softwarerecs.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people seeking specific software recommendations">Software Recommendations</a></li>
+                <li class="-item"><a href="https://dsp.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="practitioners of the art and science of signal, image and video processing">Signal Processing</a></li>
+                <li class="-item"><a href="https://emacs.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those using, extending or developing Emacs">Emacs</a></li>
+                <li class="-item"><a href="https://raspberrypi.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users and developers of hardware and software for Raspberry Pi">Raspberry Pi</a></li>
+                <li class="-item"><a href="https://ru.stackoverflow.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="программистов">Stack Overflow на русском</a></li>
+                <li class="-item"><a href="https://codegolf.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="programming puzzle enthusiasts and code golfers">Programming Puzzles &amp; Code Golf</a></li>
+                    </ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://es.stackoverflow.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="programadores y profesionales de la informática">Stack Overflow en español</a></li>
+                <li class="-item"><a href="https://ethereum.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of Ethereum, the decentralized application platform and smart contract enabled blockchain">Ethereum</a></li>
+                <li class="-item"><a href="https://datascience.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Data science professionals, Machine Learning specialists, and those interested in learning more about the field">Data Science</a></li>
+                <li class="-item"><a href="https://arduino.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="developers of open-source hardware and software that is compatible with Arduino">Arduino</a></li>
+                <li class="-item"><a href="https://bitcoin.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Bitcoin crypto-currency enthusiasts">Bitcoin</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#technology" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+                            more (30)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </div>
+    <div class="site-footer--col site-footer--category js-footer-col" data-name="Life / Arts">
+        <ul class="-list">
+                <li class="-item"><a href="https://photo.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                <li class="-item"><a href="https://scifi.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                <li class="-item"><a href="https://graphicdesign.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                <li class="-item"><a href="https://movies.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="movie and tv enthusiasts">Movies &amp; TV</a></li>
+                <li class="-item"><a href="https://music.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="musicians, students, and enthusiasts">Music: Practice &amp; Theory</a></li>
+                <li class="-item"><a href="https://worldbuilding.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="writers/artists using science, geography and culture to construct imaginary worlds and settings">Worldbuilding</a></li>
+                <li class="-item"><a href="https://cooking.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                    </ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Life / Arts"><ul class="-list">
+                <li class="-item"><a href="https://diy.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="contractors and serious DIYers">Home Improvement</a></li>
+                <li class="-item"><a href="https://money.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                <li class="-item"><a href="https://academia.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="academics and those enrolled in higher education">Academia</a></li>
+                <li class="-item"><a href="https://law.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="legal professionals, students, and others with experience or interest in law">Law</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#lifearts" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+                            more (15)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </div>
+    <div class="site-footer--col site-footer--category js-footer-col" data-name="Culture / Recreation">
+        <ul class="-list">
+                <li class="-item"><a href="https://english.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                <li class="-item"><a href="https://skeptics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="scientific skepticism">Skeptics</a></li>
+                <li class="-item"><a href="https://judaism.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                <li class="-item"><a href="https://travel.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="road warriors and seasoned travelers">Travel</a></li>
+                <li class="-item"><a href="https://christianity.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                <li class="-item"><a href="https://ell.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="speakers of other languages learning English">English Language Learners</a></li>
+                <li class="-item"><a href="https://japanese.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="students, teachers, and linguists wanting to discuss the finer points of the Japanese language">Japanese Language</a></li>
+                    </ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Culture / Recreation"><ul class="-list">
+                <li class="-item"><a href="https://gaming.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                <li class="-item"><a href="https://bicycles.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                <li class="-item"><a href="https://rpg.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                <li class="-item"><a href="https://anime.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="anime and manga fans">Anime &amp; Manga</a></li>
+                <li class="-item"><a href="https://puzzling.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those who create, solve, and study puzzles">Puzzling</a></li>
+                <li class="-item"><a href="https://mechanics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="mechanics and DIY enthusiast owners of cars, trucks, and motorcycles">Motor Vehicle Maintenance &amp; Repair</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#culturerecreation" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+                            more (33)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </div>
+    <div class="site-footer--col site-footer--category js-footer-col" data-name="Science">
+        <ul class="-list">
+                <li class="-item"><a href="https://mathoverflow.net/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional mathematicians">MathOverflow</a></li>
+                <li class="-item"><a href="https://math.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                <li class="-item"><a href="https://stats.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                <li class="-item"><a href="https://cstheory.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                <li class="-item"><a href="https://physics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="active researchers, academics and students of physics">Physics</a></li>
+                <li class="-item"><a href="https://chemistry.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="scientists, academics, teachers, and students in the field of chemistry">Chemistry</a></li>
+                <li class="-item"><a href="https://biology.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="biology researchers, academics, and students">Biology</a></li>
+                    </ul></div><div class="site-footer--col site-footer--category js-footer-col" data-name="Science"><ul class="-list">
+                <li class="-item"><a href="https://cs.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="students, researchers and practitioners of computer science">Computer Science</a></li>
+                <li class="-item"><a href="https://philosophy.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those interested in the study of the fundamental nature of knowledge, reality, and existence">Philosophy</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#science" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+                            more (10)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </div>
+    <div class="site-footer--col site-footer--category js-footer-col" data-name="Other">
+        <ul class="-list">
+                <li class="-item"><a href="https://meta.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                <li class="-item"><a href="https://stackapps.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                <li class="-item"><a href="https://api.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="programmatic interaction with Stack Exchange sites">API</a></li>
+                <li class="-item"><a href="https://data.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="querying Stack Exchange data using SQL">Data</a></li>
+                <li class="-item"><a href="https://area51.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                    </ul>
+    </div>
+                </div>
+            </nav>
+            <div class="site-footer--copyright fs-fine">
+                <ul class="-list">
+                    <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link:4 })" href="https://stackoverflow.blog/?blb=1">Blog</a></li>
+                    <li class="-item"><a href="https://www.facebook.com/officialstackoverflow/" class="-link">Facebook</a></li>
+                    <li class="-item"><a href="https://twitter.com/stackoverflow" class="-link">Twitter</a></li>
+                    <li class="-item"><a href="https://linkedin.com/company/stack-overflow" class="-link">LinkedIn</a></li>
+                </ul>
+
+                <p class="mt-auto mb24">
+site design / logo © 2018 Stack Exchange Inc; user contributions licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc by-sa 3.0</a>
+                            with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" rel="license">attribution required</a>.
+                    <span id="svnrev">rev&nbsp;2018.7.31.31221</span>
+                </p>
+            </div>
+        </div>
+
+            </footer>
+            <script>StackExchange.ready(function () { StackExchange.responsiveness.addSwitcher(); })</script>
+    <noscript>
+        <div id="noscript-warning">Stack Overflow works best with JavaScript enabled
+            <img src="https://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno">
+        </div>
+    </noscript>
+
+<script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function() { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            StackExchange.ready(function () {
+
+                StackExchange.ga.init({
+                    sendTitles: true,
+                    tracker: window.ga,
+                    trackingCodes: [
+                        'UA-108242619-1'
+                    ]
+                });
+
+                    StackExchange.ga.setDimension('dimension1', '6499250');
+
+                    StackExchange.ga.setDimension('dimension10', 'PassivelyLooking');
+
+                    StackExchange.ga.setDimension('dimension2', '|java|spring|model-view-controller|controller|mapping|');
+
+                    StackExchange.ga.setDimension('dimension3', 'Questions/Show');
+
+
+                StackExchange.ga.trackPageView();
+            });
+            
+/**/
+            
+            var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+            (function() {
+                var ssl = 'https:' == document.location.protocol,
+                    s = document.getElementsByTagName('script')[0],
+                    qc = document.createElement('script');
+                 qc.async = true;
+                    qc.src = (ssl ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+                    s.parentNode.insertBefore(qc, s);
+                    _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+/**/
+                 var sc = document.createElement('script');
+                    sc.async = true;
+                    sc.src = (ssl ? 'https://sb' : 'http://b') + '.scorecardresearch.com/beacon.js';
+                    s.parentNode.insertBefore(sc, s);
+                    _comscore.push({ c1: "2", c2: "17440561" });
+            })();
+            
+
+</script>
+            
+    
+    
+<div class="adsbox" id="clc-abd" style="position: absolute; pointer-events: none;">&nbsp;</div><script src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/markup.js.download"></script><iframe id="google_osd_static_frame_6560171168009" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;" src="./java - Spring Controller to handle all requests not matched by other Controllers - Stack Overflow_files/saved_resource(3).html"></iframe></body></html>

@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)https://www.novixys.com/blog/read-file-resources-folder-java/ -->
+<html lang="en-US" prefix="og: http://ogp.me/ns#" class="js jetpack-lazy-images-js"><style type="text/css" id="night-mode-pro-style"></style><link type="text/css" rel="stylesheet" id="night-mode-pro-link"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<link rel="pingback" href="https://www.novixys.com/blog/xmlrpc.php">
+		<script async="" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/analytics.js.download"></script><script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>How to Read a File from Resources Folder in Java | Novixys Software Dev Blog</title>
+
+<!-- This site is optimized with the Yoast SEO plugin v5.7.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="https://www.novixys.com/blog/read-file-resources-folder-java/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Read a File from Resources Folder in Java | Novixys Software Dev Blog">
+<meta property="og:description" content="Contents1. Introduction2. Packaging Resources3. Loading the Resources4. Using Absolute Path of Resource5. Loading from Relative PathsConclusionSee Also 1. Introduction When you build a java project and pack it into a jar (or a war), the files under the resources folder are included into the jar. These files may include configuration files, scripts and other resources needed … Continue reading &quot;How to Read a File from Resources Folder in Java&quot;">
+<meta property="og:url" content="https://www.novixys.com/blog/read-file-resources-folder-java/">
+<meta property="og:site_name" content="Novixys Software Dev Blog">
+<meta property="article:publisher" content="http://www.facebook.com/novixys">
+<meta property="article:section" content="Uncategorized">
+<meta property="article:published_time" content="2017-01-10T09:50:57+00:00">
+<meta property="og:image" content="http://www.novixys.com/blog/wp-content/uploads/2017/01/20170110-1-300x155.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="Contents1. Introduction2. Packaging Resources3. Loading the Resources4. Using Absolute Path of Resource5. Loading from Relative PathsConclusionSee Also 1. Introduction When you build a java project and pack it into a jar (or a war), the files under the resources folder are included into the jar. These files may include configuration files, scripts and other resources needed … Continue reading &quot;How to Read a File from Resources Folder in Java&quot;">
+<meta name="twitter:title" content="How to Read a File from Resources Folder in Java | Novixys Software Dev Blog">
+<meta name="twitter:site" content="@NovixysI">
+<meta name="twitter:image" content="http://www.novixys.com/blog/wp-content/uploads/2017/01/20170110-1-300x155.png">
+<meta name="twitter:creator" content="@NovixysI">
+<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"WebSite","@id":"#website","url":"https:\/\/www.novixys.com\/blog\/","name":"Novixys Software Dev Blog","potentialAction":{"@type":"SearchAction","target":"https:\/\/www.novixys.com\/blog\/?s={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<script type="application/ld+json">{"@context":"http:\/\/schema.org","@type":"Organization","url":"https:\/\/www.novixys.com\/blog\/read-file-resources-folder-java\/","sameAs":["http:\/\/www.facebook.com\/novixys","https:\/\/twitter.com\/NovixysI"],"@id":"#organization","name":"Novixys Software","logo":"http:\/\/www.novixys.com\/blog\/wp-content\/uploads\/2017\/01\/N-94BA65.png"}</script>
+<!-- / Yoast SEO plugin. -->
+
+<link rel="dns-prefetch" href="https://s0.wp.com/">
+<link rel="dns-prefetch" href="https://secure.gravatar.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Novixys Software Dev Blog » Feed" href="https://www.novixys.com/blog/feed/">
+<link rel="alternate" type="application/rss+xml" title="Novixys Software Dev Blog » Comments Feed" href="https://www.novixys.com/blog/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Novixys Software Dev Blog » How to Read a File from Resources Folder in Java Comments Feed" href="https://www.novixys.com/blog/read-file-resources-folder-java/feed/">
+<!-- This site uses the Google Analytics by MonsterInsights plugin v7.1.0 - Using Analytics tracking - https://www.monsterinsights.com/ -->
+<script type="text/javascript" data-cfasync="false">
+	var mi_version         = '7.1.0';
+	var mi_track_user      = true;
+	var mi_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-73153081-1';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+	
+	if ( mi_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+		__gaTracker('create', 'UA-73153081-1', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('send','pageview');
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + mi_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+					})();
+		}
+</script>
+<!-- / Google Analytics by MonsterInsights -->
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.novixys.com\/blog\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7.11"}};
+			!function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/wp-emoji-release.min.js.download" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" id="twentysixteen-jetpack-css" href="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/twentysixteen.css" type="text/css" media="all">
+<link rel="stylesheet" id="dpsp-frontend-style-css" href="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/style-frontend.css" type="text/css" media="all">
+<link rel="stylesheet" id="toc-screen-css" href="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/screen.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="wordpress-popular-posts-css-css" href="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/wpp.css" type="text/css" media="all">
+<link rel="stylesheet" id="dashicons-css" href="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/dashicons.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="twentysixteen-style-css" href="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="child-style-css" href="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/style(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="twentysixteen-fonts-css" href="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="genericons-css" href="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/genericons.css" type="text/css" media="all">
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='https://www.novixys.com/blog/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='https://www.novixys.com/blog/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='https://www.novixys.com/blog/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<link rel="stylesheet" id="jetpack-widget-social-icons-styles-css" href="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/social-icons.css" type="text/css" media="all">
+<link rel="stylesheet" id="bfa-font-awesome-css" href="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/font-awesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="sccss_style-css" href="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/saved_resource" type="text/css" media="all">
+<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://www.novixys.com/blog/wp-content/plugins/jetpack/modules/carousel/jetpack-carousel-ie8fix.css?ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<link rel="stylesheet" id="jetpack_css-css" href="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/jetpack.css" type="text/css" media="all">
+<link rel="stylesheet" id="core3.0-css" href="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/shCore.css" type="text/css" media="all">
+<link rel="stylesheet" id="core-Default3.0-css" href="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/shCoreDefault.css" type="text/css" media="all">
+<link rel="stylesheet" id="theme-Default3.0-css" href="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/shThemeDefault.css" type="text/css" media="all">
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/jquery.js.download"></script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/jquery-migrate.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/related-posts.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","is_debug_mode":"false","download_extensions":"doc,exe,js,pdf,ppt,tgz,zip,xls","inbound_paths":"","home_url":"https:\/\/www.novixys.com\/blog","track_download_as":"event","internal_label":"int","hash_tracking":"false"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/frontend.min.js.download"></script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/ai-jquery.js.download"></script>
+<script type="text/javascript">
+/*
+ http://www.gnu.org/licenses/gpl.html [GNU General Public License]
+ @param {jQuery} {base64Encode:function(input))
+ @param {jQuery} {base64Decode:function(input))
+ @return string
+*/
+function ai_insert(insertion,selector,insertion_code){jQuery(selector).each(function(index,element){var ai_debug=typeof ai_debugging!=="undefined";if(typeof jQuery(this).attr("id")!="undefined")selector_string="#"+jQuery(this).attr("id");else if(typeof jQuery(this).attr("class")!="undefined")selector_string="."+jQuery(this).attr("class").replace(" ",".");else selector_string="";var insertion_function=insertion;var ai_code=jQuery(insertion_code);jQuery(".ai-selector-counter",ai_code).text(index+1);
+jQuery(".ai-debug-name.ai-main",ai_code).text(insertion.toUpperCase()+" "+jQuery(this).prop("tagName").toLowerCase()+selector_string);jQuery(this)[insertion_function](ai_code);if(ai_debug)console.log("AI INSERT",insertion,selector)})}
+function ai_insert_viewport(element){var ai_debug=typeof ai_debugging!=="undefined";if(ai_debug)console.log("AI VIEWPORT INSERTION: class",element.attr("class"));var visible=element.is(":visible");var block=element.data("block");if(visible){var insertion_code=element.data("code");var insertion_type=element.data("insertion");var selector=element.data("selector");if(typeof insertion_code!="undefined")if(typeof insertion_type!="undefined"&&typeof selector!="undefined"){var selector_exists=jQuery(selector).length;
+if(ai_debug)console.log("AI VIEWPORT VISIBLE: block",block,insertion_type,selector,selector_exists?"":"NOT FOUND");ai_insert(insertion_type,selector,jQuery.base64Decode(insertion_code));if(selector_exists)element.removeClass("ai-viewports")}else{if(ai_debug)console.log("AI VIEWPORT VISIBLE: block",block);var ai_code=jQuery(jQuery.base64Decode(insertion_code));element.after(ai_code);element.removeClass("ai-viewports")}}else{if(ai_debug)console.log("AI VIEWPORT NOT VISIBLE: block",block);var debug_bar=
+element.prev();if(debug_bar.hasClass("ai-debug-bar")&&debug_bar.hasClass("ai-debug-script")){debug_bar.removeClass("ai-debug-script");debug_bar.addClass("ai-debug-viewport-invisible")}}}(function($){$(document).ready(function(){$(".ai-viewports").each(function(index,element){ai_insert_viewport($(this))})})})(jQuery);(function($){$(document).ready(function(){$(".ai-viewports").each(function(index,element){ai_insert_viewport($(this))})})})(jQuery);
+(function($){var keyString="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";var uTF8Encode=function(string){string=string.replace(/\x0d\x0a/g,"\n");var output="";for(var n=0;n<string.length;n++){var c=string.charCodeAt(n);if(c<128)output+=String.fromCharCode(c);else if(c>127&&c<2048){output+=String.fromCharCode(c>>6|192);output+=String.fromCharCode(c&63|128)}else{output+=String.fromCharCode(c>>12|224);output+=String.fromCharCode(c>>6&63|128);output+=String.fromCharCode(c&63|128)}}return output};
+var uTF8Decode=function(input){var string="";var i=0;var c=c1=c2=0;while(i<input.length){c=input.charCodeAt(i);if(c<128){string+=String.fromCharCode(c);i++}else if(c>191&&c<224){c2=input.charCodeAt(i+1);string+=String.fromCharCode((c&31)<<6|c2&63);i+=2}else{c2=input.charCodeAt(i+1);c3=input.charCodeAt(i+2);string+=String.fromCharCode((c&15)<<12|(c2&63)<<6|c3&63);i+=3}}return string};$.extend({base64Encode:function(input){var output="";var chr1,chr2,chr3,enc1,enc2,enc3,enc4;var i=0;input=uTF8Encode(input);
+while(i<input.length){chr1=input.charCodeAt(i++);chr2=input.charCodeAt(i++);chr3=input.charCodeAt(i++);enc1=chr1>>2;enc2=(chr1&3)<<4|chr2>>4;enc3=(chr2&15)<<2|chr3>>6;enc4=chr3&63;if(isNaN(chr2))enc3=enc4=64;else if(isNaN(chr3))enc4=64;output=output+keyString.charAt(enc1)+keyString.charAt(enc2)+keyString.charAt(enc3)+keyString.charAt(enc4)}return output},base64Decode:function(input){var output="";var chr1,chr2,chr3;var enc1,enc2,enc3,enc4;var i=0;input=input.replace(/[^A-Za-z0-9\+\/=]/g,"");while(i<
+input.length){enc1=keyString.indexOf(input.charAt(i++));enc2=keyString.indexOf(input.charAt(i++));enc3=keyString.indexOf(input.charAt(i++));enc4=keyString.indexOf(input.charAt(i++));chr1=enc1<<2|enc2>>4;chr2=(enc2&15)<<4|enc3>>2;chr3=(enc3&3)<<6|enc4;output=output+String.fromCharCode(chr1);if(enc3!=64)output=output+String.fromCharCode(chr2);if(enc4!=64)output=output+String.fromCharCode(chr3)}output=uTF8Decode(output);return output}})})(jQuery);
+</script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/front-end.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var wpp_params = {"rest_api":"1","sampling_active":"0","sampling_rate":"100","ajax_url":"https:\/\/www.novixys.com\/blog\/wp-json\/wordpress-popular-posts\/v1\/popular-posts\/","action":"update_views_ajax","ID":"163","token":"5596b7365a","debug":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/wpp-4.1.0.min.js.download"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.novixys.com/blog/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/spin.min.js.download"></script><style type="text/css"></style>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/jquery.spin.min.js.download"></script>
+<link rel="https://api.w.org/" href="https://www.novixys.com/blog/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.novixys.com/blog/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.novixys.com/blog/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 4.7.11">
+<link rel="shortlink" href="https://wp.me/p8tQsS-2D">
+<link rel="alternate" type="application/json+oembed" href="https://www.novixys.com/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.novixys.com%2Fblog%2Fread-file-resources-folder-java%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://www.novixys.com/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.novixys.com%2Fblog%2Fread-file-resources-folder-java%2F&amp;format=xml">
+<style type="text/css" data-source="Social Pug">
+					@media screen and ( max-width : 720px ) {
+						#dpsp-floating-sidebar.dpsp-hide-on-mobile { display: none !important; }
+					}
+				</style><meta name="twitter:card" content="summary_large_image"><meta property="og:url" content="https://www.novixys.com/blog/read-file-resources-folder-java/"><meta property="og:type" content="article"><meta property="og:title" content="How to Read a File from Resources Folder in Java"><meta property="og:description" content="1. Introduction When you build a java project and pack it into a jar (or"><meta property="og:image" content="">
+<link rel="dns-prefetch" href="https://v0.wordpress.com/">
+<link rel="dns-prefetch" href="https://i0.wp.com/">
+<link rel="dns-prefetch" href="https://i1.wp.com/">
+<link rel="dns-prefetch" href="https://i2.wp.com/">
+<style type="text/css">img#wpstats{display:none}</style>			<style type="text/css">
+				.jetpack-lazy-image {
+					display: none;
+				}
+				.jetpack-lazy-images-js .jetpack-lazy-image {
+					display: inline-block;
+				}
+			</style>
+			<script>
+				document.documentElement.classList.add(
+					'jetpack-lazy-images-js'
+				);
+			</script>
+		 <link rel="stylesheet" type="text/css" id="gravatar-card-css" href="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/services.css"></head><body class="post-template-default single single-post postid-163 single-format-audio group-blog">&lt; !-- Awin verification 001 --&gt;<link rel="icon" href="https://i2.wp.com/www.novixys.com/blog/wp-content/uploads/2016/12/cropped-35325036_m.jpg?fit=32%2C32&amp;ssl=1" sizes="32x32">
+<link rel="icon" href="https://i2.wp.com/www.novixys.com/blog/wp-content/uploads/2016/12/cropped-35325036_m.jpg?fit=192%2C192&amp;ssl=1" sizes="192x192">
+<link rel="apple-touch-icon-precomposed" href="https://i2.wp.com/www.novixys.com/blog/wp-content/uploads/2016/12/cropped-35325036_m.jpg?fit=180%2C180&amp;ssl=1">
+<meta name="msapplication-TileImage" content="https://i2.wp.com/www.novixys.com/blog/wp-content/uploads/2016/12/cropped-35325036_m.jpg?fit=270%2C270&amp;ssl=1">
+			<style type="text/css" id="wp-custom-css">
+				/*
+You can add your own CSS here.
+
+Click the help icon above to learn more.
+*/
+			</style>
+		
+
+
+
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="https://www.novixys.com/blog/read-file-resources-folder-java/#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="https://www.novixys.com/blog/" rel="home">Novixys Software Dev Blog</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-joe-container"><ul id="menu-joe" class="primary-menu"><li id="menu-item-39" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-39"><a href="http://www.novixys.com/">Home</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-163" class="post-163 post type-post status-publish format-audio hentry category-uncategorized post_format-post-format-audio">
+	<header class="entry-header">
+		<h1 class="entry-title">How to Read a File from Resources Folder in Java</h1>	</header><!-- .entry-header -->
+
+	
+	
+	<div class="entry-content">
+		<div id="toc_container" class="toc_light_blue no_bullets"><p class="toc_title">Contents <span class="toc_toggle">[<a href="https://www.novixys.com/blog/read-file-resources-folder-java/#">hide</a>]</span></p><ul class="toc_list"><li><a href="https://www.novixys.com/blog/read-file-resources-folder-java/#1_Introduction">1. Introduction</a></li><li><a href="https://www.novixys.com/blog/read-file-resources-folder-java/#2Packaging_Resources">2.&nbsp;Packaging Resources</a></li><li><a href="https://www.novixys.com/blog/read-file-resources-folder-java/#3_Loading_the_Resources">3. Loading the Resources</a></li><li><a href="https://www.novixys.com/blog/read-file-resources-folder-java/#4_Using_Absolute_Path_of_Resource">4. Using Absolute Path of Resource</a></li><li><a href="https://www.novixys.com/blog/read-file-resources-folder-java/#5_Loading_from_Relative_Paths">5. Loading from Relative Paths</a></li><li><a href="https://www.novixys.com/blog/read-file-resources-folder-java/#Conclusion">Conclusion</a><ul><li><a href="https://www.novixys.com/blog/read-file-resources-folder-java/#See_Also">See Also</a></li></ul></li></ul></div>
+<h2><span id="1_Introduction">1. Introduction</span></h2>
+<p>When you build a java project and pack it into a jar (or a war), the files under the resources folder are included into the jar. These files may include configuration files, scripts and other resources needed during run time. When the software is executed, it may need to load the contents of these files for some kind of processing — may be properties, sql statements, etc. In this article, we show you how to load these resources when the program is running.</p>
+<h2><span id="2Packaging_Resources">2.&nbsp;Packaging Resources</span></h2>
+<p>Check out the directory hierarchy below:</p>
+<p><img data-attachment-id="164" data-permalink="https://www.novixys.com/blog/read-file-resources-folder-java/20170110-1/" data-orig-file="https://i0.wp.com/www.novixys.com/blog/wp-content/uploads/2017/01/20170110-1.png?fit=510%2C263&amp;ssl=1" data-orig-size="510,263" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="20170110-1" data-image-description="" data-medium-file="https://i0.wp.com/www.novixys.com/blog/wp-content/uploads/2017/01/20170110-1.png?fit=300%2C155&amp;ssl=1" data-large-file="https://i0.wp.com/www.novixys.com/blog/wp-content/uploads/2017/01/20170110-1.png?fit=510%2C263&amp;ssl=1" class="alignnone size-medium wp-image-164 jetpack-lazy-image jetpack-lazy-image--handled" src="https://i0.wp.com/www.novixys.com/blog/wp-content/uploads/2017/01/20170110-1.png?resize=300%2C155" alt="" width="300" height="155" data-recalc-dims="1" data-lazy-loaded="1" srcset="https://i0.wp.com/www.novixys.com/blog/wp-content/uploads/2017/01/20170110-1.png?resize=300%2C155&amp;ssl=1 300w, https://i0.wp.com/www.novixys.com/blog/wp-content/uploads/2017/01/20170110-1.png?w=510&amp;ssl=1 510w" sizes="(max-width: 300px) 85vw, 300px"><noscript><img data-attachment-id="164" data-permalink="https://www.novixys.com/blog/read-file-resources-folder-java/20170110-1/" data-orig-file="https://i0.wp.com/www.novixys.com/blog/wp-content/uploads/2017/01/20170110-1.png?fit=510%2C263&amp;ssl=1" data-orig-size="510,263" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="20170110-1" data-image-description="" data-medium-file="https://i0.wp.com/www.novixys.com/blog/wp-content/uploads/2017/01/20170110-1.png?fit=300%2C155&amp;ssl=1" data-large-file="https://i0.wp.com/www.novixys.com/blog/wp-content/uploads/2017/01/20170110-1.png?fit=510%2C263&amp;ssl=1" class="alignnone size-medium wp-image-164" src="https://i0.wp.com/www.novixys.com/blog/wp-content/uploads/2017/01/20170110-1.png?resize=300%2C155" alt="" width="300" height="155" srcset="https://i0.wp.com/www.novixys.com/blog/wp-content/uploads/2017/01/20170110-1.png?resize=300%2C155&amp;ssl=1 300w, https://i0.wp.com/www.novixys.com/blog/wp-content/uploads/2017/01/20170110-1.png?w=510&amp;ssl=1 510w" sizes="(max-width: 300px) 85vw, 300px" data-recalc-dims="1" /></noscript></p>
+<p>Maven packs all the files and folders under <code>main/resources</code> into the jar file at the&nbsp;the root. You can access these files and folders from your java code as shown below.</p>
+<h2><span id="3_Loading_the_Resources">3. Loading the Resources</span></h2>
+<p>The following code snippet shows how to load resources packed thus into the jar or war file:</p>
+<pre class="gutter: true java hljs"><code class="hljs">String respath = <span class="hljs-string">"/poems/Frost.txt"</span>;
+InputStream in = sample2.class.getResourceAsStream(respath);
+<span class="hljs-keyword">if</span> ( in == <span class="hljs-keyword">null</span> )
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Exception(<span class="hljs-string">"resource not found: "</span> + respath);</code></pre>
+<p>Using the method <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Class.html#getResourceAsStream(java.lang.String)"><em>Class.getResourceAsStream(String)</em></a>, you can get an <em>InputStream</em> to read the resource. The method returns <code>null</code> if the resource cannot be found or loaded.</p>
+<p>To read binary resources, you can use directly use the InputStream instance. For reading a text resource, you can convert it to a Reader instance, possibly specifying the character encoding:</p>
+<pre class="gutter: true java hljs"><code class="hljs">InputStreamReader inr = <span class="hljs-keyword">new</span> InputStreamReader(in, <span class="hljs-string">"UTF-8"</span>);
+<span class="hljs-keyword">int</span> len;
+<span class="hljs-keyword">char</span> cbuf[] = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[<span class="hljs-number">2048</span>];
+<span class="hljs-keyword">while</span> ((len = inr.read(cbuf, <span class="hljs-number">0</span>, cbuf.length)) != -<span class="hljs-number">1</span>) {
+    <span class="hljs-comment">// do something with cbuf</span>
+}</code></pre>
+<h2><span id="4_Using_Absolute_Path_of_Resource">4. Using Absolute Path of Resource</span></h2>
+<p>To load a resource whose full path from the root of the jar file is known, use the full path starting with a “<code>/</code>“.</p>
+<pre class="gutter: true actionscript3 hljs python"><code class="hljs">InputStream <span class="hljs-keyword">in</span> = sample1.<span class="hljs-keyword">class</span>.getResourceAsStream(<span class="hljs-string">"/poems/Frost.txt"</span>);</code></pre>
+<h2><span id="5_Loading_from_Relative_Paths">5. Loading from Relative Paths</span></h2>
+<p>When you use a relative path (not starting with a “<code>/</code>“) to load a resource, it loaded relative to the class from which <em>getResourceAsStream()</em> is invoked. For example, to load “<code>app.properties</code>” relative to the invoking class, do not start the path with a “<code>/</code>“.</p>
+<pre class="gutter: true actionscript3 hljs python"><code class="hljs">InputStream <span class="hljs-keyword">in</span> = sample1.<span class="hljs-keyword">class</span>.getResourceAsStream(<span class="hljs-string">"app.properties"</span>);</code></pre>
+<h2><span id="Conclusion">Conclusion</span></h2>
+<p>In this article, we demonstrated how to use the <em>Class.getResourceAsStream()</em> method to load resources from the jar file or war file. An absolute resource path&nbsp;is resolved from the root of the jar file while a relative paths&nbsp;is resolved with respect to the loading class.</p>
+
+<div id="jp-relatedposts" class="jp-relatedposts" style="display: block;">
+	<h3 class="jp-relatedposts-headline"><span id="See_Also"><em>See Also</em></span></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-visual jp-relatedposts-grid "><div class="jp-relatedposts-post jp-relatedposts-post0 jp-relatedposts-post-nothumbs" data-post-id="176" data-post-format="false"><a class="jp-relatedposts-post-a jp-relatedposts-post-aoverlay" href="https://www.novixys.com/blog/parse-xml-in-java-dom/" title="How to Parse XML in Java using a DOM Parser
+
+1. Introduction Let us learn how parse XML in Java using a DOM parser. DOM stands for Document Object Model. Parsing an XML file using a DOM Parser refers to obtaining a DOM Object from the XML data. The DOM object can then be queries for various XML artifacts like…" rel="nofollow" data-origin="163" data-position="0"></a><h4 class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://www.novixys.com/blog/parse-xml-in-java-dom/" title="How to Parse XML in Java using a DOM Parser
+
+1. Introduction Let us learn how parse XML in Java using a DOM parser. DOM stands for Document Object Model. Parsing an XML file using a DOM Parser refers to obtaining a DOM Object from the XML data. The DOM object can then be queries for various XML artifacts like…" rel="nofollow" data-origin="163" data-position="0">How to Parse XML in Java using a DOM Parser</a></h4><p class="jp-relatedposts-post-excerpt" style="max-height: 8.07692em;">1. Introduction Let us learn how parse XML in Java using a DOM parser. DOM stands for Document Object Model. Parsing an XML file using a DOM Parser refers to obtaining a DOM Object from the XML data. The DOM object can then be queries for various XML artifacts like…</p></div><div class="jp-relatedposts-post jp-relatedposts-post1 jp-relatedposts-post-thumbs" data-post-id="1766" data-post-format="false"><a class="jp-relatedposts-post-a" href="https://www.novixys.com/blog/updating-file-multiple-threads-python/" title="Updating a File from Multiple Threads in Python
+
+Use locking to properly share resources across multiple threads" rel="nofollow" data-origin="163" data-position="1"><img class="jp-relatedposts-post-img" src="https://i2.wp.com/www.novixys.com/blog/wp-content/uploads/2018/01/3100820288_f2fc02dbed_700.jpg?fit=700%2C400&amp;ssl=1&amp;resize=350%2C200" width="350" alt="Updating a File from Multiple Threads in Python"></a><h4 class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://www.novixys.com/blog/updating-file-multiple-threads-python/" title="Updating a File from Multiple Threads in Python
+
+Use locking to properly share resources across multiple threads" rel="nofollow" data-origin="163" data-position="1">Updating a File from Multiple Threads in Python</a></h4><p class="jp-relatedposts-post-excerpt">Use locking to properly share resources across multiple threads</p></div><div class="jp-relatedposts-post jp-relatedposts-post2 jp-relatedposts-post-thumbs" data-post-id="1602" data-post-format="false"><a class="jp-relatedposts-post-a" href="https://www.novixys.com/blog/java-path-api-tutorial/" title="Java Path API Tutorial
+
+Learn the intricacies of using the Java Path API in this tutorial" rel="nofollow" data-origin="163" data-position="2"><img class="jp-relatedposts-post-img" src="https://i0.wp.com/www.novixys.com/blog/wp-content/uploads/2017/08/5924747397_27d89f3e99_700.jpg?fit=700%2C400&amp;ssl=1&amp;resize=350%2C200" width="350" alt="Java Path API Tutorial"></a><h4 class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://www.novixys.com/blog/java-path-api-tutorial/" title="Java Path API Tutorial
+
+Learn the intricacies of using the Java Path API in this tutorial" rel="nofollow" data-origin="163" data-position="2">Java Path API Tutorial</a></h4><p class="jp-relatedposts-post-excerpt">Learn the intricacies of using the Java Path API in this tutorial</p></div></div></div>	</div><!-- .entry-content -->
+
+	<footer class="entry-footer">
+		<span class="byline"><span class="author vcard"><img alt="" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/f94fe516e834bbce06d887618c60871f.jpeg" class="avatar avatar-49 photo jetpack-lazy-image jetpack-lazy-image--handled" height="49" width="49" data-lazy-loaded="1" srcset="https://secure.gravatar.com/avatar/f94fe516e834bbce06d887618c60871f?s=98&amp;d=mm&amp;r=g 2x"><noscript><img alt='' src='https://secure.gravatar.com/avatar/f94fe516e834bbce06d887618c60871f?s=49&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/f94fe516e834bbce06d887618c60871f?s=98&amp;d=mm&amp;r=g 2x' class='avatar avatar-49 photo' height='49' width='49' /></noscript><span class="screen-reader-text">Author </span> <a class="url fn n" href="https://www.novixys.com/blog/author/admin/">Jay Sridhar</a></span></span><span class="posted-on"><span class="screen-reader-text">Posted on </span><a href="https://www.novixys.com/blog/read-file-resources-folder-java/" rel="bookmark"><time class="entry-date published updated" datetime="2017-01-10T09:50:57+00:00">January 10, 2017</time></a></span><span class="entry-format"><span class="screen-reader-text">Format </span><a href="https://www.novixys.com/blog/type/audio/">Audio</a></span><span class="cat-links"><span class="screen-reader-text">Categories </span><a href="https://www.novixys.com/blog/category/uncategorized/" rel="category tag">Uncategorized</a></span>			</footer><!-- .entry-footer -->
+</article><!-- #post-## -->
+	
+	<!-- Here we load disqus comments -->
+	<div class="dcl-disqus-thread" id="comments">
+	<div id="disqus_thread">
+		</div>
+	</div>
+	
+		
+			<script type="text/javascript">
+	/* <![CDATA[ */
+		var disqus_url = 'https://www.novixys.com/blog/read-file-resources-folder-java/';
+		var disqus_identifier = '163 http://www.novixys.com/blog/?p=163';
+		var disqus_container_id = 'disqus_thread';
+		var disqus_domain = 'disqus.com';
+		var disqus_shortname = 'novixys';
+		var disqus_title = "How to Read a File from Resources Folder in Java";
+		var disqus_config = function () {
+			var config = this; // Access to the config object
+			config.language = '';
+
+			/* Add the ability to add javascript callbacks */
+			
+			/*
+			   All currently supported events:
+				* preData — fires just before we request for initial data
+				* preInit - fires after we get initial data but before we load any dependencies
+				* onInit  - fires when all dependencies are resolved but before dtpl template is rendered
+				* afterRender - fires when template is rendered but before we show it
+				* onReady - everything is done
+			 */
+
+			config.callbacks.preData.push(function() {
+				// clear out the container (its filled for SEO/legacy purposes)
+				document.getElementById(disqus_container_id).innerHTML = '';
+			});
+						config.callbacks.onReady.push(function() {
+				// sync comments in the background so we don't block the page
+				var script = document.createElement('script');
+				script.async = true;
+				script.src = '?cf_action=sync_comments&post_id=163';
+
+				var firstScript = document.getElementsByTagName( "script" )[0];
+				firstScript.parentNode.insertBefore(script, firstScript);
+			});
+								};
+	/* ]]> */
+	</script>
+	
+		
+	<script type="text/javascript">
+	/* <![CDATA[ */
+		var DsqLocal = {
+			'trackbacks': [
+				],
+			'trackback_url': "https:\/\/www.novixys.com\/blog\/read-file-resources-folder-java\/trackback\/"		};
+	/* ]]> */
+	</script>
+			
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://www.novixys.com/blog/convert-utf-16-text-file-utf-8-java/" rel="prev"><span class="meta-nav" aria-hidden="true">Previous</span> <span class="screen-reader-text">Previous post:</span> <span class="post-title">How to Convert UTF-16 Text File to UTF-8 in Java?</span></a></div><div class="nav-next"><a href="https://www.novixys.com/blog/parse-xml-in-java-dom/" rel="next"><span class="meta-nav" aria-hidden="true">Next</span> <span class="screen-reader-text">Next post:</span> <span class="post-title">How to Parse XML in Java using a DOM Parser</span></a></div></div>
+	</nav>
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="top-posts-3" class="widget widget_top-posts"><h2 class="widget-title">POPULAR</h2><ul class="widgets-list-layout no-grav">
+					<li>
+												<a href="https://www.novixys.com/blog/read-file-resources-folder-java/" title="How to Read a File from Resources Folder in Java" class="bump-view" data-bump-view="tp">
+							<img width="40" height="40" src="https://i1.wp.com/www.novixys.com/blog/wp-content/uploads/2017/01/20170110-1-300x155.png?resize=40%2C40" class="widgets-list-layout-blavatar" alt="How to Read a File from Resources Folder in Java" data-pin-nopin="true">
+						</a>
+						<div class="widgets-list-layout-links">
+							<a href="https://www.novixys.com/blog/read-file-resources-folder-java/" class="bump-view" data-bump-view="tp">
+								How to Read a File from Resources Folder in Java							</a>
+						</div>
+											</li>
+									<li>
+												<a href="https://www.novixys.com/blog/pandas-tutorial-select-dataframe/" title="Pandas Tutorial - Selecting Rows From a DataFrame" class="bump-view" data-bump-view="tp">
+							<img width="40" height="40" src="https://i1.wp.com/www.novixys.com/blog/wp-content/uploads/2017/04/5989301021_abf2173a1d_b.jpg?fit=700%2C400&amp;ssl=1&amp;resize=40%2C40" class="widgets-list-layout-blavatar" alt="Pandas Tutorial - Selecting Rows From a DataFrame" data-pin-nopin="true">
+						</a>
+						<div class="widgets-list-layout-links">
+							<a href="https://www.novixys.com/blog/pandas-tutorial-select-dataframe/" class="bump-view" data-bump-view="tp">
+								Pandas Tutorial - Selecting Rows From a DataFrame							</a>
+						</div>
+											</li>
+									<li>
+												<a href="https://www.novixys.com/blog/jackson-json-serialization/" title="Using Jackson for JSON Serialization and Deserialization" class="bump-view" data-bump-view="tp">
+							<img width="40" height="40" src="https://i0.wp.com/www.novixys.com/blog/wp-content/uploads/2017/01/3014159211_7dbda3e6af_700.jpg?fit=700%2C400&amp;ssl=1&amp;resize=40%2C40" class="widgets-list-layout-blavatar" alt="Using Jackson for JSON Serialization and Deserialization" data-pin-nopin="true">
+						</a>
+						<div class="widgets-list-layout-links">
+							<a href="https://www.novixys.com/blog/jackson-json-serialization/" class="bump-view" data-bump-view="tp">
+								Using Jackson for JSON Serialization and Deserialization							</a>
+						</div>
+											</li>
+									<li>
+												<a href="https://www.novixys.com/blog/java-string-format-examples/" title="Java String Format Examples" class="bump-view" data-bump-view="tp">
+							<img width="40" height="40" src="https://i2.wp.com/www.novixys.com/blog/wp-content/uploads/2016/12/cropped-35325036_m.jpg?fit=40%2C40&amp;ssl=1" class="widgets-list-layout-blavatar" alt="Java String Format Examples" data-pin-nopin="true">
+						</a>
+						<div class="widgets-list-layout-links">
+							<a href="https://www.novixys.com/blog/java-string-format-examples/" class="bump-view" data-bump-view="tp">
+								Java String Format Examples							</a>
+						</div>
+											</li>
+									<li>
+												<a href="https://www.novixys.com/blog/convert-xml-json/" title="Converting Between XML and JSON Using JAXB and Jackson" class="bump-view" data-bump-view="tp">
+							<img width="40" height="40" src="https://i0.wp.com/www.novixys.com/blog/wp-content/uploads/2017/12/7185560283_102f6b753d_700.jpg?fit=700%2C400&amp;ssl=1&amp;resize=40%2C40" class="widgets-list-layout-blavatar" alt="Converting Between XML and JSON Using JAXB and Jackson" data-pin-nopin="true">
+						</a>
+						<div class="widgets-list-layout-links">
+							<a href="https://www.novixys.com/blog/convert-xml-json/" class="bump-view" data-bump-view="tp">
+								Converting Between XML and JSON Using JAXB and Jackson							</a>
+						</div>
+											</li>
+									<li>
+												<a href="https://www.novixys.com/blog/how-to-generate-rsa-keys-java/" title="How to Generate RSA Keys in Java" class="bump-view" data-bump-view="tp">
+							<img width="40" height="40" src="https://i2.wp.com/www.novixys.com/blog/wp-content/uploads/2017/01/8253443979_fe2b4117e2_700.jpg?fit=700%2C400&amp;ssl=1&amp;resize=40%2C40" class="widgets-list-layout-blavatar" alt="How to Generate RSA Keys in Java" data-pin-nopin="true">
+						</a>
+						<div class="widgets-list-layout-links">
+							<a href="https://www.novixys.com/blog/how-to-generate-rsa-keys-java/" class="bump-view" data-bump-view="tp">
+								How to Generate RSA Keys in Java							</a>
+						</div>
+											</li>
+									<li>
+												<a href="https://www.novixys.com/blog/how-to-extract-data-from-xml-in-java/" title="How to Extract Data from XML in Java" class="bump-view" data-bump-view="tp">
+							<img width="40" height="40" src="https://i2.wp.com/www.novixys.com/blog/wp-content/uploads/2016/12/cropped-35325036_m.jpg?fit=40%2C40&amp;ssl=1" class="widgets-list-layout-blavatar" alt="How to Extract Data from XML in Java" data-pin-nopin="true">
+						</a>
+						<div class="widgets-list-layout-links">
+							<a href="https://www.novixys.com/blog/how-to-extract-data-from-xml-in-java/" class="bump-view" data-bump-view="tp">
+								How to Extract Data from XML in Java							</a>
+						</div>
+											</li>
+									<li>
+												<a href="https://www.novixys.com/blog/java-aes-example/" title="How to Use AES for Encryption and Decryption in Java" class="bump-view" data-bump-view="tp">
+							<img width="40" height="40" src="https://i1.wp.com/www.novixys.com/blog/wp-content/uploads/2017/10/11334584353_b9f4b89a00_700.png?fit=700%2C400&amp;ssl=1&amp;resize=40%2C40" class="widgets-list-layout-blavatar" alt="How to Use AES for Encryption and Decryption in Java" data-pin-nopin="true">
+						</a>
+						<div class="widgets-list-layout-links">
+							<a href="https://www.novixys.com/blog/java-aes-example/" class="bump-view" data-bump-view="tp">
+								How to Use AES for Encryption and Decryption in Java							</a>
+						</div>
+											</li>
+									<li>
+												<a href="https://www.novixys.com/blog/convert-csv-json-java/" title="How to Convert CSV to JSON in Java" class="bump-view" data-bump-view="tp">
+							<img width="40" height="40" src="https://i1.wp.com/www.novixys.com/blog/wp-content/uploads/2017/02/financial-report_600.jpg?fit=600%2C400&amp;ssl=1&amp;resize=40%2C40" class="widgets-list-layout-blavatar" alt="How to Convert CSV to JSON in Java" data-pin-nopin="true">
+						</a>
+						<div class="widgets-list-layout-links">
+							<a href="https://www.novixys.com/blog/convert-csv-json-java/" class="bump-view" data-bump-view="tp">
+								How to Convert CSV to JSON in Java							</a>
+						</div>
+											</li>
+									<li>
+												<a href="https://www.novixys.com/blog/java-reading-large-file-efficiently/" title="Java - Reading a Large File Efficiently" class="bump-view" data-bump-view="tp">
+							<img width="40" height="40" src="https://i1.wp.com/www.novixys.com/blog/wp-content/uploads/2017/08/36218786721_2cd4396eaa_700.jpg?fit=700%2C400&amp;ssl=1&amp;resize=40%2C40" class="widgets-list-layout-blavatar" alt="Java - Reading a Large File Efficiently" data-pin-nopin="true">
+						</a>
+						<div class="widgets-list-layout-links">
+							<a href="https://www.novixys.com/blog/java-reading-large-file-efficiently/" class="bump-view" data-bump-view="tp">
+								Java - Reading a Large File Efficiently							</a>
+						</div>
+											</li>
+				</ul>
+</section>		<section id="recent-posts-2" class="widget widget_recent_entries">		<h2 class="widget-title">Latest</h2>		<ul>
+					<li>
+				<a href="https://www.novixys.com/blog/java-9-modules-tutorial-getting-started/">Java 9 Modules Tutorial – Getting Started</a>
+						</li>
+					<li>
+				<a href="https://www.novixys.com/blog/generate-bitcoin-addresses-java/">How to Generate Bitcoin Addresses in Java</a>
+						</li>
+					<li>
+				<a href="https://www.novixys.com/blog/use-docker-deploy-jupyter-nginx/">How to use Docker to Deploy Jupyter with Nginx</a>
+						</li>
+					<li>
+				<a href="https://www.novixys.com/blog/python-web-application-docker-nginx-uwsgi/">Run Python Web Application in Docker using Nginx and uWsgi</a>
+						</li>
+					<li>
+				<a href="https://www.novixys.com/blog/nginx-docker-website-root/">Nginx Inside Docker – Website Root Configuration</a>
+						</li>
+					<li>
+				<a href="https://www.novixys.com/blog/nginx-inside-docker-ubuntu-howto/">Nginx Inside Docker with Ubuntu 16.04 HOWTO</a>
+						</li>
+					<li>
+				<a href="https://www.novixys.com/blog/python-regular-expressions-tutorial-part-2/">Python Regular Expressions Tutorial – Part 2</a>
+						</li>
+					<li>
+				<a href="https://www.novixys.com/blog/python-regular-expression-tutorial-part-1/">Python Regular Expressions Tutorial – Part 1</a>
+						</li>
+					<li>
+				<a href="https://www.novixys.com/blog/python-crypto-basics-building-blockchain/">Python Crypto Basics for Building a Blockchain</a>
+						</li>
+					<li>
+				<a href="https://www.novixys.com/blog/howto-ssl-secure-tomcat-https/">Using SSL to Secure Tomcat with HTTPS</a>
+						</li>
+				</ul>
+		</section>			</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-joe-container"><ul id="menu-joe-1" class="primary-menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-39"><a href="http://www.novixys.com/">Home</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="https://www.novixys.com/blog/" rel="home">Novixys Software Dev Blog</a></span>
+				<a href="https://wordpress.org/">Proudly powered by WordPress</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<div id="dpsp-floating-sidebar" class="dpsp-bottom-spacing dpsp-position-left dpsp-shape-rectangular  dpsp-hide-on-mobile dpsp-button-style-1 dpsp-has-button-background " style="top: 200px;"><ul class="dpsp-networks-btns-wrapper dpsp-networks-btns-sidebar "><li><a rel="nofollow" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.novixys.com%2Fblog%2Fread-file-resources-folder-java%2F&amp;t=How+to+Read+a+File+from+Resources+Folder+in+Java" class="dpsp-network-btn dpsp-facebook dpsp-no-label dpsp-first"><span class="dpsp-network-icon"></span><span class="dpsp-network-label-wrapper"></span></a></li><li><a rel="nofollow" href="https://twitter.com/intent/tweet?text=How+to+Read+a+File+from+Resources+Folder+in+Java&amp;url=https%3A%2F%2Fwww.novixys.com%2Fblog%2Fread-file-resources-folder-java%2F" class="dpsp-network-btn dpsp-twitter dpsp-no-label"><span class="dpsp-network-icon"></span><span class="dpsp-network-label-wrapper"></span></a></li><li><a rel="nofollow" href="https://plus.google.com/share?url=https%3A%2F%2Fwww.novixys.com%2Fblog%2Fread-file-resources-folder-java%2F" class="dpsp-network-btn dpsp-google-plus dpsp-no-label dpsp-last"><span class="dpsp-network-icon"></span><span class="dpsp-network-label-wrapper"></span></a></li></ul></div>
+<!-- WP SyntaxHighlighter Ver.1.7.3 Begin -->
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/shCore.js.download"></script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/shAutoloader.js.download"></script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/shBrushXml.js.download"></script>
+<script type="text/javascript">//<![CDATA[
+	SyntaxHighlighter.autoloader(
+	"applescript	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushAppleScript.js?ver=3.0"
+	,"as3 actionscript3	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushAS3.js?ver=3.0"
+	,"bash shell	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushBash.js?ver=3.0"
+	,"cf coldfusion	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushColdFusion.js?ver=3.0"
+	,"cpp c	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCpp.js?ver=3.0"
+	,"c# c-sharp csharp	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCSharp.js?ver=3.0"
+	,"css	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCss.js?ver=3.0"
+	,"delphi pas pascal	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushDelphi.js?ver=3.0"
+	,"diff patch	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushDiff.js?ver=3.0"
+	,"erl erlang	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushErlang.js?ver=3.0"
+	,"groovy	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushGroovy.js?ver=3.0"
+	,"java	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJava.js?ver=3.0"
+	,"jfx javafx	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJavaFX.js?ver=3.0"
+	,"js jscript javascript	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJScript.js?ver=3.0"
+	,"perl pl	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPerl.js?ver=3.0"
+	,"php	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0"
+	,"plain text	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPlain.js?ver=3.0"
+	,"ps powershell	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPowerShell.js?ver=3.0"
+	,"py python	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPython.js?ver=3.0"
+	,"rails ror ruby rb	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushRuby.js?ver=3.0"
+	,"sass scss	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushSass.js?ver=3.0"
+	,"scala	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushScala.js?ver=3.0"
+	,"sql	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushSql.js?ver=3.0"
+	,"vb vbnet	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushVb.js?ver=3.0"
+	,"xml xhtml xslt html	https://www.novixys.com/blog/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/scripts/shBrushXml.js?ver=3.0"
+	);
+	SyntaxHighlighter.defaults['auto-links'] = true;
+	SyntaxHighlighter.defaults['quick-code'] = true;
+	SyntaxHighlighter.defaults['title'] = '';
+	SyntaxHighlighter.defaults['class-name'] = 'notranslate';
+	SyntaxHighlighter.defaults['collapse'] = false;
+	SyntaxHighlighter.defaults['first-line'] = 1;
+	SyntaxHighlighter.defaults['gutter'] = true;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['smart-tabs'] = true;
+	SyntaxHighlighter.defaults['tab-size'] = 4;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = "Can't find brush for: ";
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = "Brush wasn't configured for html-script option: ";
+	SyntaxHighlighter.all();
+	
+//]]></script>
+<!-- WP SyntaxHighlighter Ver.1.7.3 End -->
+	<div style="display:none">
+	<div class="grofile-hash-map-f94fe516e834bbce06d887618c60871f">
+	</div>
+	</div>
+<link rel="stylesheet" id="hljstheme-css" href="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/tomorrow-night.css" type="text/css" media="all">
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/photon.min.js.download"></script>
+<script type="text/javascript" src="https://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201833"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var tocplus = {"visibility_show":"show","visibility_hide":"hide","width":"Auto"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/front.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var thirsty_global_vars = {"home_url":"\/\/www.novixys.com\/blog","ajax_url":"https:\/\/www.novixys.com\/blog\/wp-admin\/admin-ajax.php","link_fixer_enabled":"yes","link_prefix":"link","link_prefixes":{"0":"recommends","1":"suggests","3":"link"},"post_id":"163","enable_record_stats":"yes","enable_js_redirect":"","disable_thirstylink_class":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/ta.js.download"></script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/gprofiles.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/wpgroho.js.download"></script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/skip-link-focus-fix.js.download"></script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/comment-reply.min.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/functions.js.download"></script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/q2w3-fixed-widget.min.js.download"></script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/lazy-images.min.js.download"></script>
+<script type="text/javascript">
+jQuery( document.body ).on( 'jetpack-lazy-loaded-image', function () { jQuery( window ).trigger( 'resize' ); } );
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/www.novixys.com\/blog\/wp-admin\/admin-ajax.php","nonce":"714fb53063","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/www.novixys.com\/blog\/wp-login.php?redirect_to=https%3A%2F%2Fwww.novixys.com%2Fblog%2Fread-file-resources-folder-java%2F","blog_id":"1","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/jetpack-carousel.min.js.download"></script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/wp-embed.min.js.download"></script>
+<script type="text/javascript" src="./How to Read a File from Resources Folder in Java _ Novixys Software Dev Blog_files/highlight.common.pack.js.download"></script>
+    <style>pre.hljs {padding: 5px;}
+pre.hljs code {}</style>
+    <script type="text/javascript">
+    (function($, window) {
+        var init_fn_flag = false;
+        var init_fn = (function() {
+            if (init_fn_flag)
+                return;
+            init_fn_flag = true;
+             hljs.configure({"tabReplace":"    "});
+            $('pre code').each(function(i, block) {
+                hljs.highlightBlock(block);
+            });
+            $('pre:not(:has(code))').each(function(i, block){
+                var class_desc = $(block).attr("class") || "";
+                var reg_mat = class_desc.match(/brush\s*:\s*([\w\d]+)/i);
+                if(!reg_mat || reg_mat.length < 2)
+                    return;
+                var code_content = $(block).removeClass("brush:").removeClass("ruler:").removeClass("first-line:").removeClass("highlight:")
+                    .removeClass("brush:" + reg_mat[1] + ";").removeClass(reg_mat[1] + ";").removeClass("true;").removeClass("false;").html();
+                $(block).empty().append($("<code class='hljs'></code>").html(code_content)).addClass(reg_mat[1]);
+                hljs.highlightBlock(block);
+            });
+        });
+        $(document).ready(init_fn);
+        $(window).on("load", init_fn);
+    })(jQuery, window);
+    </script>
+<script type="text/javascript">
+
+    var disqus_shortname = "novixys";
+    if (typeof ds_loaded == "undefined") {
+        var ds_loaded = false;
+    }
+    function loadDisqus() {
+        var disqus_div = document.getElementById("disqus_thread");
+        var top = disqus_div.offsetTop;
+        var disqus_data = disqus_div.dataset;
+        if ( !ds_loaded && ( window.scrollY || window.pageYOffset ) + window.innerHeight > top ) {
+            ds_loaded = true;
+            for (var key in disqus_data) {
+                if (key.substr(0,6) == "disqus") {
+                    window["disqus_" + key.replace("disqus","").toLowerCase()] = disqus_data[key];
+								}
+                }
+                var dsq = document.createElement("script");
+                dsq.type = "text/javascript";
+                dsq.async = true;
+                dsq.src = "https://" + window.disqus_shortname + ".disqus.com/embed.js";
+                if(document.getElementById("dcl-hidden-div")) {
+                    document.getElementById("dcl-hidden-div").innerHTML = "Loading...";
+                }
+                (document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]).appendChild(dsq);
+            }
+        }
+					var disqus_div_new = document.getElementById("disqus_thread");
+		var divExists = disqus_div_new != null;
+                if(document.body.scrollHeight < window.innerHeight){
+                    loadDisqus();
+                } else if(divExists) {
+                    window.onscroll = function() { loadDisqus(); }
+                }
+	</script><script type="text/javascript">
+                /* <![CDATA[ */
+                var hash = window.location.hash;
+                var disqus_shortname = 'novixys';
+                if(hash!==''){
+                    var ds_loaded = true;
+                    var dcl_loaded = 1;
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+                        dsq.async = true;
+                        dsq.src = '//' + disqus_shortname + '.' + 'disqus.com' + '/' + 'embed' + '.js' + '?pname=wordpress&pver=2.84';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();}
+                /* ]]> */
+            </script><script type="text/javascript" src="https://stats.wp.com/e-201833.js" async="async" defer="defer"></script>
+<script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:6.3.3',blog:'125323878',post:'163',tz:'0',srv:'www.novixys.com'} ]);
+	_stq.push([ 'clickTrackerInit', '125323878', '163' ]);
+</script>
+
+
+
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.w3-edge.com/products/
+
+
+Served from: www.novixys.com @ 2018-08-15 07:40:08 by W3 Total Cache
+--></body></html>
