@@ -26,7 +26,7 @@ public class AppStringResources {
 
     public static final String rr_actions = "/actions";
 
-    public static final String rr_rules1 = "/rules1";
+    public static final String rr_rules1 = "/rules";
     public static final String rr_rules2 = "/RULES";
     public static final String rr_rules3 = "/Rules";
 

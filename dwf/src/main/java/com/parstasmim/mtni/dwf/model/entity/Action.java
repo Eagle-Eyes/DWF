@@ -18,7 +18,7 @@ import java.util.List;
 //})
 public class Action extends BaseEntity {
 
-//    private boolean needAuthentication;
+    //    private boolean needAuthentication;
     private boolean accessibility;
     private String url;
     private String requestType;
@@ -113,13 +113,13 @@ public class Action extends BaseEntity {
     }
 
     public List<String> urlsArray() {
-        List<String> urls = Arrays.asList(getUrl().replace("[", "").replace("]", "").split(","));
+        List<String> urls = Arrays.asList(getUrl().replace(" ", "").replace("[", "").replace("]", "").split(","));
 
         return urls;
     }
 
     public List<String> requestTypesArray() {
-        List<String> urls = Arrays.asList(getRequestType().replace("[", "").replace("]", "").split(","));
+        List<String> urls = Arrays.asList(getRequestType().replace(" ", "").replace("[", "").replace("]", "").split(","));
 
         return urls;
     }

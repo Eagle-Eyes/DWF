@@ -14,10 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = {})
@@ -43,6 +41,10 @@ public class indexController {
         }
 
         indexMap.put("Application Name", "Data Warehouse Feeder");
+        indexMap.put("Page", "Index");
+        indexMap.put("getMaxInactiveInterval", httpRequest.getSession().getMaxInactiveInterval());
+        indexMap.put("getCreationTime", new SimpleDateFormat("yy/MM/dd HH:mm:ss").format(new Date(httpRequest.getSession().getCreationTime())));
+        indexMap.put("getLastAccessedTime", new SimpleDateFormat("yy/MM/dd HH:mm:ss").format(new Date(httpRequest.getSession().getLastAccessedTime())));
         indexMap.put("Error", httpRequest.getParameter("error"));
         indexMap.put("Message", httpRequest.getParameter("message"));
         indexMap.put("HttpSession", sessionMap);
@@ -88,6 +90,6 @@ public class indexController {
 
         httpSession.removeAttribute(AppStringResources.sessionLogonUser);
         httpResponse.sendRedirect("?message=Successfully logged out");
-        logger.info(String.format("sessionMap:\n%s" + httpSession.getAttribute(AppStringResources.sessionLogonUser)));
+        logger.info(String.format("sessionMap:\n%s", httpSession.getAttribute(AppStringResources.sessionLogonUser)));
     }
 }

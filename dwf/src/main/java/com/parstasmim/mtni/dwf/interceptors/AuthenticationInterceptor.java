@@ -31,6 +31,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
 
+        logger.info(String.format("URI: %s, Method: %s", request.getRequestURI(), request.getMethod()));
         boolean auth = authenticateBySession(request);
         logger.info(String.format("Authentication Status: %b", auth));
 
@@ -58,10 +59,8 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 
     //========================================================================================================
     private boolean authenticateBySession(HttpServletRequest request) {
-        String uri = request.getRequestURI();
-        String method = request.getMethod();
 
-        logger.info(String.format("\nURI: %s, Method: %s\n", uri, method));
+        logger.info(String.format("Session ID: %s", request.getSession().getId()));
 
         Map logonUserMap = (Map) request.getSession().getAttribute("logonUser");
         logger.info(String.format("preHandle: %s", logonUserMap));

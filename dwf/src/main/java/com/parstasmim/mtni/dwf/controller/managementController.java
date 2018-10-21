@@ -40,7 +40,7 @@ public class managementController {
             sessionMap.put(sa, httpSession.getAttribute(sa));
         }
 
-        indexMap.put("Application Name", "Data Warehouse Feeder");
+        indexMap.put("Page", "Home");
         indexMap.put("Error", httpRequest.getParameter("error"));
         indexMap.put("Message", httpRequest.getParameter("message"));
         indexMap.put("HttpSession", sessionMap);

@@ -32,6 +32,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
+        logger.info(String.format("URI: %s, Method: %s", request.getRequestURI(), request.getMethod()));
         boolean auth = authorizePerAction(request);
         logger.info(String.format("Authorization Status: %b", auth));
 
@@ -63,18 +64,26 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
     //========================================================================================================
     private boolean authorizePerAction(HttpServletRequest request) {
 
-        String uri = request.getRequestURI();
-        String method = request.getMethod();
-
-        logger.info(String.format("\nURI: %s, Method: %s\n", uri, method));
-
         String userName = (String) ((Map) request.getSession().getAttribute(AppStringResources.sessionLogonUser)).get(AppStringResources.sessionLogonUserId);
 
-        logger.info(String.format("User Name: %s", userName));
+        logger.trace(String.format("User Name: %s", userName));
         User logonUser = managementService.getUserBy(userName);
 
         for (Action userAction : logonUser.getActions()) {
-            if (userAction.urlsArray().contains(uri) && userAction.requestTypesArray().contains(method)) {
+            boolean hasActionAccess = userAction.urlsArray().contains(request.getRequestURI()) && userAction.requestTypesArray().contains(request.getMethod());
+            String x = "";
+            for (String s : userAction.urlsArray()) {
+                x += s + "-";
+            }
+            String y = "";
+            for (String s : userAction.requestTypesArray()) {
+                y += s + "-";
+            }
+
+            logger.trace(String.format("User action: %s, %b", userAction.getDisplayName(), hasActionAccess));
+            logger.trace(String.format("URLs: %s", x));
+            logger.trace(String.format("ReqTypes: %s", y));
+            if (hasActionAccess) {
                 return true;
             }
         }

@@ -2,6 +2,7 @@ package com.parstasmim.mtni.dwf.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 @Configuration
 @EnableJpaRepositories(basePackages = {"com.parstasmim.mtni.dwf.model"})
@@ -40,24 +42,5 @@ class AppConfiguration implements WebMvcConfigurer {
         registry.addInterceptor(authenticationInterceptor).order(Ordered.HIGHEST_PRECEDENCE).excludePathPatterns(public_paths);
         registry.addInterceptor(authorizationInterceptor).order(Ordered.LOWEST_PRECEDENCE).excludePathPatterns(public_paths);
     }
-
-    // ========================================================================================================
-//    @Bean
-//    public HandlerInterceptor authenticationInterceptor() {
-//        return new AuthenticationInterceptor();
-//    }
-
-    //
-//    //========================================================================================================
-//    @Bean
-//    public HandlerInterceptor authorizationInterceptor() {
-//        return new AuthorizationInterceptor();
-//    }
-//
-//    //========================================================================================================
-//    @Bean
-//    public RequestMappingHandlerMapping requestMappingHandlerMapping() {
-//        return new RequestMappingHandlerMapping();
-//    }
 
 }
